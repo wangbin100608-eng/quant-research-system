@@ -747,3 +747,4 @@
 2026-11-22 06:40:59,836 [INFO] quant: TimeGuardReader inject.parquet: 1 -> 0 (future=1, unknown=0)
 2026-11-22 06:41:18,973 [INFO] quant: TimeGuardReader inject.parquet: 1 -> 0 (future=1, unknown=0)
 2026-11-22 06:42:13,075 [INFO] quant: TimeGuardReader inject.parquet: 1 -> 0 (future=1, unknown=0)
+2026-11-22 06:43:54,988 [INFO] quant: TimeGuardReader sample.parquet: 5000 -> 2500 (future=2500, unknown=0)

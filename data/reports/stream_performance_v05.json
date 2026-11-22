@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-11-22T06:44:23.918719+00:00",
+  "version": "v0.5.0",
+  "rows": 1000000,
+  "data_generation_seconds": 1.25,
+  "disk_mb": 2.74,
+  "baseline": {
+    "rows_out": 500000,
+    "elapsed_seconds": 3.387,
+    "mem_peak_mb": 84.6,
+    "rss_mb": 373.36,
+    "rss_delta_mb": 226.88
+  },
+  "stream": {
+    "rows_out": 500000,
+    "batches": 16,
+    "elapsed_seconds": 8.7725,
+    "mem_peak_mb": 10.46,
+    "rss_mb": 373.36,
+    "rss_delta_mb": 0.0
+  },
+  "consistency": true,
+  "note": "stream 不构建全量 Python 列表；结果行数须与 baseline 一致。1000万/5000万行受本机1GB内存限制未测试。"
+}

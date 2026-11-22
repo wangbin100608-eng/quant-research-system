@@ -111,6 +111,53 @@ class TimeGuardReader:
                  audit.dropped_future, audit.dropped_unknown)
         return out, audit
 
+    def stream_parquet(self, path: str | Path, spec: PredictionSpec | datetime,
+                       columns: list[str] | None = None,
+                       market_tz: str | None = None,
+                       batch_size: int = 65536):
+        """v0.5 P2：分批流式读取 + 分批时间过滤（低内存）。
+
+        yield (RecordBatch, ReadAudit)；不将整列转 Python list，不构建大型索引列表。
+        """
+        p = Path(path)
+        if not p.exists():
+            raise TimeGuardReadError(f"file not found: {p}")
+        cutoff = self._spec_cutoff(spec)
+        pf = pq.ParquetFile(str(p))
+        available_cols = set(pf.schema_arrow.names)
+        av_col = next((c for c in (FIELD_AVAILABLE, "available_time") if c in available_cols), None)
+        if av_col is None and self.strict:
+            raise TimeGuardReadError(f"no available time column in {p}")
+        select_cols = columns or (list(available_cols) if av_col is None else None)
+        rows_in = rows_out = dropped_future = dropped_unknown = 0
+        for batch in pf.iter_batches(batch_size=batch_size, columns=select_cols):
+            rows_in += batch.num_rows
+            if av_col is None:
+                yield batch, ReadAudit(path=str(p), cutoff=iso_utc(cutoff),
+                                       columns=batch.schema.names, rows_in=batch.num_rows,
+                                       rows_out=batch.num_rows)
+                continue
+            av_values = batch.column(av_col).to_pylist()  # 仅当前批次，非整列
+            keep = []
+            for i, v in enumerate(av_values):
+                dt = to_utc(v, market_tz)
+                if dt is None:
+                    dropped_unknown += 1
+                    if self.strict:
+                        raise TimeGuardReadError(f"unknown_availability batch row {i} in {p}")
+                    continue
+                if dt <= cutoff:
+                    keep.append(i)
+                else:
+                    dropped_future += 1
+            filtered = batch.take(pa.array(keep, type=pa.int64())) if keep else batch.slice(0, 0)
+            rows_out += filtered.num_rows
+            yield filtered, ReadAudit(path=str(p), cutoff=iso_utc(cutoff),
+                                      columns=batch.schema.names, rows_in=batch.num_rows,
+                                      rows_out=filtered.num_rows,
+                                      dropped_future=dropped_future,
+                                      dropped_unknown=dropped_unknown)
+
     def filter_rows(self, rows: Iterable[dict[str, Any]],
                     spec: PredictionSpec | datetime,
                     market_tz: str | None = None) -> list[dict[str, Any]]:
