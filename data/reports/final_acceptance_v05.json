@@ -5,8 +5,8 @@
   "environment": {
     "python": "3.12.3",
     "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
-    "commit": "4de82eac4013c20ff5cbdce5cb6c64ef8f309eb3",
-    "started_at": "2026-11-22T06:45:45.074653+00:00"
+    "commit": "a2f8a023eccb07a0379bec41451ef7867c282d7e",
+    "started_at": "2026-11-22T06:54:53.497881+00:00"
   },
   "checks": [
     {
@@ -15,11 +15,11 @@
       "description": "pytest 真实执行",
       "input": "python/tests",
       "execution": "subprocess",
-      "started_at": "2026-11-22T06:45:45.074823+00:00",
+      "started_at": "2026-11-22T06:54:53.498099+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T06:45:51.672715+00:00",
-      "duration_seconds": 6.598
+      "finished_at": "2026-11-22T06:54:59.989169+00:00",
+      "duration_seconds": 6.491
     },
     {
       "id": "02",
@@ -27,11 +27,11 @@
       "description": "模块删除→FAIL→恢复→PASS",
       "input": "quant/timeguard_reader.py",
       "execution": "隔离目录真实删除/恢复",
-      "started_at": "2026-11-22T06:45:51.672750+00:00",
+      "started_at": "2026-11-22T06:54:59.989212+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T06:45:51.686034+00:00",
-      "duration_seconds": 0.013
+      "finished_at": "2026-11-22T06:55:00.007574+00:00",
+      "duration_seconds": 0.018
     },
     {
       "id": "03",
@@ -39,10 +39,10 @@
       "description": "报告四类篡改检测",
       "input": "test_report_v03.json",
       "execution": "生成篡改副本并验证",
-      "started_at": "2026-11-22T06:45:51.686056+00:00",
+      "started_at": "2026-11-22T06:55:00.007604+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T06:45:51.700065+00:00",
+      "finished_at": "2026-11-22T06:55:00.022013+00:00",
       "duration_seconds": 0.014
     },
     {
@@ -51,11 +51,11 @@
       "description": "三接口未来数据注入",
       "input": "Parquet/DuckDB/KB",
       "execution": "注入未来行并查询",
-      "started_at": "2026-11-22T06:45:51.700082+00:00",
+      "started_at": "2026-11-22T06:55:00.022040+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T06:45:52.416266+00:00",
-      "duration_seconds": 0.716
+      "finished_at": "2026-11-22T06:55:00.674767+00:00",
+      "duration_seconds": 0.653
     }
   ],
   "actual_passed": 94,

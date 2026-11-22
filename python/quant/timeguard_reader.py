@@ -166,3 +166,44 @@ class TimeGuardReader:
             if self.validate_row(r, spec, market_tz):
                 out.append(r)
         return out
+
+
+    # ---------- v0.4.1 P1-6：SQL 时间门禁 ----------
+    def query_sql(self, sql: str, spec_or_cutoff,
+                  conn=None, params: list | None = None) -> list[dict[str, Any]]:
+        """执行 SQL 并强制时间门禁。
+
+        要求：SQL 结果必须包含 available_at（或 available_time）列；
+        所有行 available_at <= cutoff（UTC）；否则严格模式拒绝。
+        防止子查询绕过：无论内部 SQL 如何，外层统一按结果列过滤。
+        """
+        import duckdb
+        cutoff = self._spec_cutoff(spec_or_cutoff)
+        own = conn is None
+        con = conn or duckdb.connect()
+        try:
+            rows = con.execute(sql, params or []).fetchall()
+            cols = [d[0] for d in con.description] if con.description else []
+        finally:
+            if own:
+                con.close()
+        if not cols:
+            if self.strict:
+                raise TimeGuardReadError("query_sql: no result columns")
+            return []
+        av_idx = next((i for i, c in enumerate(cols)
+                       if c in (FIELD_AVAILABLE, "available_time")), None)
+        if av_idx is None and self.strict:
+            raise TimeGuardReadError("query_sql: no available_at column (strict mode)")
+        out = []
+        for r in rows:
+            if av_idx is not None:
+                dt = to_utc(r[av_idx])
+                if dt is None:
+                    if self.strict:
+                        raise TimeGuardReadError("query_sql: unknown_availability")
+                    continue
+                if dt > cutoff:
+                    continue
+            out.append(dict(zip(cols, r)))
+        return out

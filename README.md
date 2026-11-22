@@ -12,7 +12,7 @@
 - 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 94 项测试全部通过。
 - 严格模式下，宏观数据 `time_basis` 为 `estimated` / `unknown` / `imputed` 的记录禁止使用。
 - 统一 `TimeGuardReader` 强制所有历史数据读取经过时间门禁；UTC 时间内核统一 `published_at / available_at / ingested_at`，旧字段仅迁移兼容。
-- 可信验收 `final_acceptance_v04.py` 真实执行测试并做篡改报告、模块缺失、未来数据注入等负向测试；任一 P0 失败整体 FAIL。
+- 可信验收 `final_acceptance_v05.py` 真实执行测试并做篡改报告、模块缺失、未来数据注入等负向测试；任一 P0 失败整体 FAIL。
 
 ## 技术架构
 
@@ -20,7 +20,7 @@
 |---|---|---|
 | 时间隔离引擎 | **Rust** | 流式全量审计、文件哈希、UTC 时间解析、高性能门禁 |
 | 统一时间内核 | **Python** (`timestamps_v04` / `timeguard_reader`) | UTC 时间戳、市场时区转换、强制 available_at ≤ cutoff |
-| 可信验收 | **Python** (`final_acceptance_v04`) | 结构化判定、真实执行 pytest、负向测试、任一 P0 失败整体 FAIL |
+| 可信验收 | **Python** (`final_acceptance_v05`) | 结构化判定、真实执行 pytest、负向测试、任一 P0 失败整体 FAIL |
 | ML / 统计 | **Python** (scikit-learn, LightGBM, XGBoost, CatBoost, PyTorch) | 基准模型、结构化预测、多模型对比 |
 | 列式存储 | **Parquet + Apache Arrow (pyarrow)** | 分区存储、列投影 |
 | 分析查询 | **DuckDB** | 本地分析 |
@@ -70,7 +70,7 @@ PYTHONPATH=python python3 python/scripts/run.py run --start 2002 --end 2004 --ra
 PYTHONPATH=python python3 python/scripts/validation_report.py
 PYTHONPATH=python python3 python/scripts/perf_v03.py
 PYTHONPATH=python python3 -m pytest python/tests -q
-PYTHONPATH=python python3 python/scripts/final_acceptance_v04.py
+PYTHONPATH=python python3 python/scripts/final_acceptance_v05.py
 PYTHONPATH=python python3 -m coverage run --source=python/quant -m pytest python/tests -q
 PYTHONPATH=python python3 -m coverage report
 python3 python/scripts/build_dashboard.py
