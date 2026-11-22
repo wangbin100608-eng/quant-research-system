@@ -102,7 +102,7 @@ class Acceptance05:
         from quant.report_verifier_v041 import ReportVerifierV041, compute_report_sha
         rp = ROOT / "data/reports/test_report_v03.json"
         if not rp.exists():
-            return True, "无历史报告（跳过不算 FAIL）"
+            return False, "历史报告缺失：报告篡改测试无法验证，必须 FAIL"
         base = json.loads(rp.read_text())
         # 用实际执行结果构造有效基线报告，交给真实验证器
         valid = {
@@ -153,16 +153,27 @@ class Acceptance05:
         bad = self.tmp / "inject.parquet"
         pq.write_table(pa.table({"symbol": ["X"], "available_at": ["2099-01-01T00:00:00Z"],
                                  "v": [1.0]}), str(bad))
+        from quant.timeguard_reader import TimeGuardReadError
         try:
             out, audit = TimeGuardReader().read_parquet(bad, cutoff)
             results["parquet"] = out.num_rows == 0 and audit.dropped_future == 1
-        except Exception:
-            results["parquet"] = True
-        # DuckDB 接口：用 TimeGuardReader 审计逻辑等价的 cutoff 比较
-        con = duckdb.connect()
-        n = con.execute(f"SELECT count(*) FROM read_parquet('{bad}') WHERE available_at <= '2001-12-31T23:59:59+00:00'").fetchone()[0]
-        con.close()
-        results["duckdb"] = n == 0
+        except TimeGuardReadError as e:
+            # 明确拒绝访问（门禁生效）视为通过；其他异常一律 FAIL
+            results["parquet"] = ("future" in str(e).lower()
+                                  or "unknown" in str(e).lower())
+        except Exception as e:
+            results["parquet"] = False
+            results["parquet_error"] = f"unexpected: {type(e).__name__}: {e}"
+        # DuckDB 接口：必须走真实统一 SQL 门禁（不允许手写 WHERE 代替）
+        try:
+            sql_rows = TimeGuardReader().query_sql(
+                f"SELECT * FROM read_parquet('{bad}')", cutoff)
+            results["duckdb"] = len(sql_rows) == 0
+        except TimeGuardReadError:
+            results["duckdb"] = True  # 门禁拒绝 = 安全
+        except Exception as e:
+            results["duckdb"] = False
+            results["duckdb_error"] = f"unexpected: {type(e).__name__}: {e}"
         # KB 接口：写入未来文档后，2001 cutoff 查询不可见
         ks = KnowledgeSystemV03()
         ks.add_document("v05_future_probe", "asof_2001", "probe", "2099-01-01",

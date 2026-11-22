@@ -1,0 +1,117 @@
+{
+  "generated_at": "2026-11-22T08:14:51.759248+00:00",
+  "version": "v0.6.0",
+  "data_origin": "real",
+  "rows": 44021,
+  "quality_score": 77.8,
+  "dimensions": {
+    "completeness": 100.0,
+    "accuracy": 100.0,
+    "consistency": 33.33333333333333
+  },
+  "universe": {
+    "2000": {
+      "symbols": 1,
+      "cutoff": "1999-12-31T23:59:59+00:00",
+      "status": "PARTIAL",
+      "source_stats": {
+        "delisted": 1
+      }
+    },
+    "2001": {
+      "symbols": 747,
+      "cutoff": "2000-12-31T23:59:59+00:00",
+      "status": "BLOCKED",
+      "source_stats": {
+        "index_member_reference": 850,
+        "delisted": 1,
+        "industry_reference": 31
+      }
+    },
+    "2002": {
+      "symbols": 751,
+      "cutoff": "2001-12-31T23:59:59+00:00",
+      "status": "BLOCKED",
+      "source_stats": {
+        "index_member_reference": 850,
+        "delisted": 6,
+        "industry_reference": 31
+      }
+    },
+    "2003": {
+      "symbols": 759,
+      "cutoff": "2002-12-31T23:59:59+00:00",
+      "status": "BLOCKED",
+      "source_stats": {
+        "index_member_reference": 850,
+        "delisted": 14,
+        "industry_reference": 31
+      }
+    },
+    "2004": {
+      "symbols": 763,
+      "cutoff": "2003-12-31T23:59:59+00:00",
+      "status": "BLOCKED",
+      "source_stats": {
+        "index_member_reference": 850,
+        "delisted": 18,
+        "industry_reference": 31
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "missing_time",
+      "count": 0,
+      "pass": true
+    },
+    {
+      "name": "duplicate_rows",
+      "count": 11072,
+      "pass": false
+    },
+    {
+      "name": "abnormal_price",
+      "count": 0,
+      "pass": true
+    },
+    {
+      "name": "abnormal_volume",
+      "count": 0,
+      "pass": true
+    },
+    {
+      "name": "missing_source",
+      "count": 0,
+      "pass": true
+    },
+    {
+      "name": "time_order",
+      "count": 676,
+      "pass": false
+    },
+    {
+      "name": "nan_values",
+      "count": 0,
+      "pass": true
+    },
+    {
+      "name": "infinity_values",
+      "count": 0,
+      "pass": true
+    },
+    {
+      "name": "ohlc_consistency",
+      "count": 0,
+      "pass": true
+    }
+  ],
+  "synthetic_rows": 0,
+  "estimated_time_rows": 0,
+  "blocked": [
+    "A股个股真实日线(东财限流)",
+    "沪深300/中证500/中证1000 2000-2004(发布较晚)",
+    "历史指数成分/行业版本"
+  ],
+  "note": "真实数据与估算/合成严格区分；未用合成数据补齐缺口"
+}

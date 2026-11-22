@@ -1,0 +1,26 @@
+{
+  "version": "v0.6.0",
+  "generated_at": "2026-11-22T08:16:13.604980+00:00",
+  "results": {
+    "1000000": {
+      "rows_out": 500000,
+      "elapsed_s": 13.5069,
+      "rss_mb": 208.1,
+      "rss_delta_mb": 58.68,
+      "mem_peak_mb": 20.32,
+      "disk_mb": 2.68
+    },
+    "5000000": {
+      "rows_out": 2500000,
+      "elapsed_s": 53.788,
+      "rss_mb": 208.1,
+      "rss_delta_mb": 0.0,
+      "mem_peak_mb": 20.28,
+      "disk_mb": 13.38
+    }
+  },
+  "blocked": [
+    "10M/50M: 本机1GB内存限制"
+  ],
+  "note": "RSS为ru_maxrss真实进程峰值"
+}

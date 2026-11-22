@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS prediction_freeze_v05 (
     prediction_cutoff TEXT,
     frozen_at TEXT,
     prediction_hash TEXT,
+    input_hash TEXT,
+    key_version TEXT,
     hmac_sig TEXT,
     prev_sig TEXT,
     amend_reason TEXT,
@@ -77,7 +79,17 @@ class FreezeV05:
     def save_freeze(self, prediction_id: str, prediction_year: int,
                     data_snapshot_id: str, model_version: str, feature_version: str,
                     training_max_available_at: str, prediction_cutoff: str,
-                    prediction_result: dict, amend_reason: str | None = None) -> dict[str, Any]:
+                    prediction_result: dict, amend_reason: str | None = None,
+                    prediction_input: dict | None = None,
+                    key_version: str | None = None) -> dict[str, Any]:
+        # v0.6 必需字段校验（不得缺失）
+        required = {"prediction_id": prediction_id, "data_snapshot_id": data_snapshot_id,
+                    "model_version": model_version, "feature_version": feature_version,
+                    "training_max_available_at": training_max_available_at,
+                    "prediction_cutoff": prediction_cutoff}
+        missing = [k for k, v in required.items() if not v]
+        if missing:
+            raise ValueError(f"missing required freeze fields: {missing}")
         rows = self.meta.query("SELECT * FROM prediction_freeze_v05 ORDER BY frozen_at DESC LIMIT 1")
         prev = rows[0]["hmac_sig"] if rows else "0" * 64
         is_amend = 1 if amend_reason else 0
@@ -91,6 +103,9 @@ class FreezeV05:
             "prediction_cutoff": prediction_cutoff, "frozen_at": _now(),
             "prediction_hash": hashlib.sha256(
                 json.dumps(prediction_result, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
+            "input_hash": hashlib.sha256(
+                json.dumps(prediction_input or {}, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
+            "key_version": key_version or "v1",
             "amend_reason": amend_reason, "is_amendment": is_amend,
         }
         sig = self._sign(freeze_id, rec, prev)
@@ -99,8 +114,8 @@ class FreezeV05:
         cols = ["freeze_id", "prediction_id", "prediction_year", "data_snapshot_id",
                 "model_version", "feature_version", "code_commit",
                 "training_max_available_at", "prediction_cutoff", "frozen_at",
-                "prediction_hash", "hmac_sig", "prev_sig", "amend_reason",
-                "is_amendment"]
+                "prediction_hash", "input_hash", "key_version",
+                "hmac_sig", "prev_sig", "amend_reason", "is_amendment"]
         self.meta.execute(
             f"INSERT INTO prediction_freeze_v05 ({','.join(cols)}) "
             f"VALUES ({','.join('?' for _ in cols)})",

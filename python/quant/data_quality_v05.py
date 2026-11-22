@@ -41,37 +41,69 @@ class HistoricalUniverse:
                                   "available_time": av, "source": src, "payload": payload})
 
     def build_snapshots(self, start_year: int = 2000, end_year: int = 2004) -> dict[int, dict]:
+        """P0 point-in-time 股票池：每年 cutoff=Y-1-12-31，仅用此前真实可得记录。
+
+        * 退市记录：同时检查记录 available_time（信息发布时间）与真实上市/退市日期；
+          未来才公布的退市信息不得反向修正早期快照。
+        * 指数成分/行业：当前名单只作参考并标 BLOCKED，不冒充历史版本。
+        """
+        from quant.timestamps_v04 import cutoff_for_year
         snapshots = {}
         for y in range(start_year, end_year + 1):
+            cutoff = cutoff_for_year(y)  # Y 年初股票池截止 = Y-1 年末 23:59:59Z
             members: dict[str, dict] = {}
+            source_stats: dict[str, int] = {}
             for r in self.rows:
+                av = r.get("available_time")
+                if not av:
+                    continue  # unknown 不进严格快照
+                try:
+                    av_dt = datetime.fromisoformat(str(av).replace("Z", "+00:00"))
+                    if av_dt.tzinfo is None:
+                        av_dt = av_dt.replace(tzinfo=timezone.utc)
+                except Exception:
+                    continue
+                if av_dt > cutoff:
+                    continue  # 未来才可获得的信息，禁止进入早期快照
                 pl = r["payload"]
-                # 退市股：按真实上市/退市日期判断当年是否在池
                 if r["domain"] == "delisted":
                     ld = str(pl.get("list_date", ""))[:4]
                     dd = str(pl.get("delist_date", ""))[:4]
                     if ld.isdigit() and int(ld) <= y and (not dd.isdigit() or int(dd) >= y):
-                        members[r["symbol"]] = {"status": "listed", "basis": "real_delisting_record",
+                        members[r["symbol"]] = {"status": "listed",
+                                                "basis": "real_delisting_record",
+                                                "available_time": av,
                                                 "delist_date": pl.get("delist_date")}
                     elif dd.isdigit() and int(dd) < y:
-                        members.setdefault(r["symbol"], {"status": "delisted",
-                                                         "basis": "real_delisting_record",
-                                                         "delist_date": pl.get("delist_date")})
-                # 指数成分（当前名单，标注 current_members；仅作参考，不冒充历史）
+                        members.setdefault(r["symbol"], {
+                            "status": "delisted", "basis": "real_delisting_record",
+                            "available_time": av, "delist_date": pl.get("delist_date")})
+                    source_stats["delisted"] = source_stats.get("delisted", 0) + 1
                 elif r["domain"] == "index_member":
-                    members.setdefault(r["symbol"], {"status": "member_reference",
-                                                     "basis": "current_members"})
-                # 行业（当前分类）
+                    # 当前名单仅作参考，历史成分不可验证 → BLOCKED
+                    members.setdefault(r["symbol"], {
+                        "status": "member_reference", "basis": "current_members",
+                        "available_time": av, "status_note": "BLOCKED: no historical member version"})
+                    source_stats["index_member_reference"] = source_stats.get(
+                        "index_member_reference", 0) + 1
                 elif r["domain"] == "industry":
-                    members.setdefault(r["symbol"], {"status": "industry_reference",
-                                                     "basis": "current_classification"})
+                    members.setdefault(r["symbol"], {
+                        "status": "industry_reference", "basis": "current_classification",
+                        "available_time": av, "status_note": "BLOCKED: no historical industry version"})
+                    source_stats["industry_reference"] = source_stats.get("industry_reference", 0) + 1
             snapshots[y] = {
-                "year": y, "symbols": len(members),
+                "year": y, "cutoff": cutoff.isoformat(), "symbols": len(members),
                 "delisted_count": sum(1 for v in members.values() if v["status"] == "delisted"),
-                "current_member_references": sum(1 for v in members.values()
-                                                 if v["basis"] == "current_members"),
+                "current_member_references": sum(
+                    1 for v in members.values() if v["basis"] == "current_members"),
+                "source_stats": source_stats,
                 "members": members,
-                "note": "退市股使用真实上市/退市日期；指数成分与行业仅为当前版本参考，不替代历史版本",
+                "time_audit": {"cutoff": cutoff.isoformat(),
+                               "records_considered": len(self.rows),
+                               "records_admitted": sum(source_stats.values())},
+                "status": "BLOCKED" if source_stats.get("index_member_reference") else "PARTIAL",
+                "note": ("PIT cutoff applied; 退市股双时间校验; 指数成分/行业仅为当前版本参考"
+                         "（BLOCKED，不冒充历史版本）"),
             }
         return snapshots
 
@@ -81,43 +113,60 @@ class DataQuality:
         self.raw = resolve(str(raw_path))
         self.checks: list[dict[str, Any]] = []
 
-    def run(self) -> dict[str, Any]:
-        t = pq.read_table(str(self.raw))
-        rows = t.num_rows
-        syms = t.column("symbol").to_pylist()
-        doms = t.column("domain").to_pylist()
-        times = t.column("available_time").to_pylist()
-        pays = t.column("payload").to_pylist()
-        srcs = t.column("source").to_pylist()
-        # 缺失时间
-        miss_time = sum(1 for v in times if not v)
-        # 重复（symbol+domain+available_time+payload）
-        keys = list(zip(syms, doms, times, pays))
-        dup = rows - len(set(keys))
-        # 异常价格/成交量
-        bad_price = bad_volume = 0
-        for p in pays:
-            try:
-                d = json.loads(p or "{}")
-            except Exception:
-                continue
-            c = d.get("close")
-            v = d.get("volume")
-            if c is not None and (not isinstance(c, (int, float)) or c <= 0):
-                bad_price += 1
-            if v is not None and (not isinstance(v, (int, float)) or v < 0):
-                bad_volume += 1
-        # 来源完整性
-        miss_source = sum(1 for s in srcs if not s)
-        # 时间顺序（同 domain 的时间是否单调，按出现顺序简单检查）
-        out_of_order = 0
-        last = {}
-        for d, tm in zip(doms, times):
-            if not tm:
-                continue
-            if d in last and tm < last[d]:
-                out_of_order += 1
-            last[d] = tm
+    def run(self, batch_size: int = 65536) -> dict[str, Any]:
+        """v0.6 P3/P4：Arrow RecordBatch 分批处理（不全表读取/不构建完整 keys 列表）。"""
+        import math
+        pf = pq.ParquetFile(str(self.raw))
+        cols = [c for c in ("symbol", "domain", "available_time", "payload", "source")
+                if c in pf.schema_arrow.names]
+        miss_time = miss_source = dup = bad_price = bad_volume = 0
+        nan_count = inf_count = ohlc_bad = out_of_order = 0
+        seen: set[tuple] = set()
+        last_time: dict[str, str] = {}
+        rows = 0
+        for batch in pf.iter_batches(batch_size=batch_size, columns=cols):
+            d = {c: batch.column(c).to_pylist() for c in cols}
+            n = batch.num_rows
+            rows += n
+            for i in range(n):
+                av = d.get("available_time", [None] * n)[i]
+                sym = d.get("symbol", [""] * n)[i]
+                dom = d.get("domain", [""] * n)[i]
+                src = d.get("source", [""] * n)[i]
+                pay = d.get("payload", [""] * n)[i]
+                if not av:
+                    miss_time += 1
+                if not src:
+                    miss_source += 1
+                key = (sym, dom, av, pay)
+                if key in seen:
+                    dup += 1
+                else:
+                    seen.add(key)
+                if av and dom:
+                    grp = f"{dom}|{sym}"
+                    if grp in last_time and av < last_time[grp]:
+                        out_of_order += 1
+                    last_time[grp] = av
+                try:
+                    obj = json.loads(pay or "{}")
+                except Exception:
+                    continue
+                c = obj.get("close")
+                v = obj.get("volume")
+                for x in (c, v, obj.get("open"), obj.get("high"), obj.get("low")):
+                    if isinstance(x, float) and math.isnan(x):
+                        nan_count += 1
+                    elif isinstance(x, float) and math.isinf(x):
+                        inf_count += 1
+                if c is not None and (not isinstance(c, (int, float)) or c <= 0):
+                    bad_price += 1
+                if v is not None and (not isinstance(v, (int, float)) or v < 0):
+                    bad_volume += 1
+                hi, lo, op, cl = (obj.get("high"), obj.get("low"),
+                                  obj.get("open"), obj.get("close"))
+                if None not in (hi, lo, op, cl) and (hi < lo or not (lo <= op <= hi) or not (lo <= cl <= hi)):
+                    ohlc_bad += 1
         checks = [
             {"name": "missing_time", "count": miss_time, "pass": miss_time == 0},
             {"name": "duplicate_rows", "count": dup, "pass": dup == 0},
@@ -125,8 +174,17 @@ class DataQuality:
             {"name": "abnormal_volume", "count": bad_volume, "pass": bad_volume == 0},
             {"name": "missing_source", "count": miss_source, "pass": miss_source == 0},
             {"name": "time_order", "count": out_of_order, "pass": out_of_order == 0},
+            {"name": "nan_values", "count": nan_count, "pass": nan_count == 0},
+            {"name": "infinity_values", "count": inf_count, "pass": inf_count == 0},
+            {"name": "ohlc_consistency", "count": ohlc_bad, "pass": ohlc_bad == 0},
         ]
+        dims = {
+            "completeness": sum(1 for c in checks if c["name"] in ("missing_time", "missing_source") and c["pass"]) / 2 * 100,
+            "accuracy": sum(1 for c in checks if c["name"] in ("abnormal_price", "abnormal_volume", "nan_values", "infinity_values") and c["pass"]) / 4 * 100,
+            "consistency": sum(1 for c in checks if c["name"] in ("duplicate_rows", "time_order", "ohlc_consistency") and c["pass"]) / 3 * 100,
+        }
         score = round(sum(1 for c in checks if c["pass"]) / len(checks) * 100, 1)
         return {"generated_at": datetime.now(timezone.utc).isoformat(),
                 "rows": rows, "checks": checks, "quality_score": score,
-                "note": "评分不代替逐项检查结果；指数成分/行业当前版本不作为历史版本验证依据"}
+                "dimensions": dims, "batch_size": batch_size,
+                "note": "P3/P4: Arrow分批; 维度评分不掩盖关键字段缺失; 评分不代替逐项检查"}

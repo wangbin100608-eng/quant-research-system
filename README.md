@@ -1,7 +1,7 @@
 # A股与美股量化研究系统
 
-> 当前交付：v0.5.0 全链路防未来数据泄漏与高性能数据引擎 + v0.4.1 修复（HEAD `4ffef79`）
-> 测试结果：**100 passed** ｜ 覆盖率：**39%** ｜ 远端分支：`main`
+> 当前交付：v0.6.0 可信量化研究系统（P0-P6：PIT 股票池、列投影门禁、强制溯源、分批数据质量、统计可信度）
+> 测试结果：**121 passed** ｜ 远端分支：`main`（v0.6.0 开发中，分支 `feat/v060-p0-pit`）
 
 一套**严格点位时间隔离**、可持续进行历史模拟预测、误差分析与知识迭代的量化研究系统。**不连接真实证券账户，不执行真实交易。**
 
@@ -12,7 +12,7 @@
 - 每次预测前，Rust `TimeGuard` 对整个快照做全量流式扫描，未来数据或时点未知数据立即中止预测。
 - 知识库按 `asof_YYYY` 物理分目录，快照冻结（含文件 SHA-256）后不可被后续数据改变。
 - 预测记录使用 HMAC-SHA256 + 链哈希 + append-only 触发器保护，防止双端篡改；v0.5 补充完整溯源（prediction_id、数据快照、模型版本、特征版本、代码 Commit、训练数据最大 available_at、预测 cutoff、frozen_at、修正链）。
-- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 **100 项测试全部通过**。
+- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 **121 项测试全部通过**。
 - 严格模式下，宏观数据 `time_basis` 为 `estimated` / `unknown` / `imputed` 的记录禁止使用。
 - 统一 `TimeGuardReader` 强制所有历史数据读取经过时间门禁；UTC 时间内核统一 `published_at / available_at / ingested_at`，旧字段仅迁移兼容。
 - `query_sql` 强制显式 cutoff，结果必须含 available_at，无时间字段严格拒绝，防子查询绕过；`stream_parquet` 分批流式读取，结果须与全量读取一致。
@@ -83,6 +83,11 @@ PYTHONPATH=python python3 -m coverage run --source=python/quant -m pytest python
 PYTHONPATH=python python3 -m coverage report
 python3 python/scripts/build_dashboard.py
 ```
+
+## v0.6.0 开发（当前分支 feat/v060-p0-pit）
+
+P0 股票池 PIT/列投影门禁/流式审计/验收器修复；P1 Agent/Embedding/模型强制时间门禁与预测冻结强化；P2/P3 数据质量 Arrow 分批与数据现状报告；P4 100万/500万行 RSS 性能基准；P5 Bootstrap CI/Bonferroni 校正/证据等级；P6 交付报告。121 测试通过、验收 6/6 PASS、Rust selftest PASS。
+报告：[docs/V0.6.0_DELIVERY_REPORT.md](docs/V0.6.0_DELIVERY_REPORT.md)
 
 ## 版本交付记录
 
