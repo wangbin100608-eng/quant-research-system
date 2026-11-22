@@ -1,7 +1,7 @@
-# A股与美股量化研究系统 v0.6.0
+# A股与美股量化研究系统 v0.7.0
 
-> 当前交付：v0.6.0 可信量化研究系统 ｜ 远端分支：`main`（HEAD `6e6cfb7`）
-> 测试结果：**121 passed** ｜ 验收：**6/6 PASS** ｜ Rust selftest：**PASS**
+> 当前交付：v0.7.0 Autonomous Quantitative Research Lab（P0-P21 执行闭环，含受限项）｜ 远端分支：`main`
+> 测试结果：**134 passed** ｜ 验收：**6/6 PASS** ｜ Rust selftest：**PASS**
 
 一套**严格点位时间隔离**、可持续进行历史模拟预测、误差分析与知识迭代的量化研究系统。**不连接真实证券账户，不执行真实交易。**
 
@@ -12,7 +12,7 @@
 - 每次预测前，Rust `TimeGuard` 对整个快照做全量流式扫描，未来数据或时点未知数据立即中止预测。
 - 知识库按 `asof_YYYY` 物理分目录，快照冻结（含文件 SHA-256）后不可被后续数据改变。
 - 预测记录使用 HMAC-SHA256 + 链哈希 + append-only 触发器保护；包含 prediction_id、数据快照、模型版本、特征版本、代码 Commit、训练数据最大 available_at、预测 cutoff、frozen_at、输入/输出 SHA-256、密钥版本与修正链。
-- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 **121 项测试全部通过**。
+- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 **134 项测试全部通过**。
 - 严格模式下，宏观数据 `time_basis` 为 `estimated` / `unknown` / `imputed` 的记录禁止使用。
 - 统一 `TimeGuardReader` 强制所有历史数据读取经过时间门禁；无论列投影如何选择，内部自动读取 available_at 过滤后再投影；`query_sql` 强制显式 cutoff、无时间字段严格拒绝、防子查询绕过；`stream_parquet` 分批流式读取并逐批审计，结果与全量一致。
 - 历史股票池按年度 cutoff 构建：退市记录双时间校验（信息发布时间 + 真实退市日期），未来才公布的退市信息不能反向进入早期快照；指数成分/行业当前名单标 BLOCKED，不冒充历史版本。
@@ -88,7 +88,7 @@ PYTHONPATH=python python3 -m coverage report
 python3 python/scripts/build_dashboard.py
 ```
 
-## 当前交付：v0.6.0
+## 当前交付：v0.7.0（P0-P21）
 
 - P0：股票池 PIT 隔离、列投影强制时间门禁、流式分批审计、验收器修复。
 - P1：Agent / Embedding / 模型强制时间门禁，预测冻结必需字段与双哈希。
@@ -96,9 +96,11 @@ python3 python/scripts/build_dashboard.py
 - P4：100 万 / 500 万行 RSS 性能基准（峰值 RSS 208MB，增量 58.68MB / 0MB）。
 - P5：Bootstrap 置信区间、Bonferroni 多重检验校正、统计证据等级。
 - P6：交付报告与文档一致性。
-- 验证：**121 项测试通过**，验收 **6/6 PASS**，Rust selftest **PASS**。
+- P0-P21 逐阶段执行结果总览：[reports/v0.7.0/P21_EXECUTION_SUMMARY.md](reports/v0.7.0/P21_EXECUTION_SUMMARY.md)
+- 验证：**134 项测试通过**，验收 **6/6 PASS**，Rust selftest **PASS**。
+- 受限：P2/P3/P5/P10-P13/P16/P20/P21 含部分项，Tushare/Alpaca 等外部数据源 BLOCKED，高级统计与完整模型基线未全部完成——详见总览，未写成完成。
 
-完整交付报告：[docs/V0.6.0_DELIVERY_REPORT.md](docs/V0.6.0_DELIVERY_REPORT.md)
+v0.6.0 交付报告：[docs/V0.6.0_DELIVERY_REPORT.md](docs/V0.6.0_DELIVERY_REPORT.md)
 
 ## 已知缺口（未用合成数据补齐）
 
@@ -110,7 +112,7 @@ python3 python/scripts/build_dashboard.py
 
 ## 参考文档与可视化
 
-- 当前交付报告：[docs/V0.6.0_DELIVERY_REPORT.md](docs/V0.6.0_DELIVERY_REPORT.md)
+- v0.7.0 执行总览：[reports/v0.7.0/P21_EXECUTION_SUMMARY.md](reports/v0.7.0/P21_EXECUTION_SUMMARY.md)；P0 审计：[reports/v0.7.0/current_architecture.md](reports/v0.7.0/current_architecture.md)
 - 数据现状：[data/reports/data_status_v060.json](data/reports/data_status_v060.json)；大规模性能：[data/reports/scale_performance_v060.json](data/reports/scale_performance_v060.json)
 - 数据覆盖：[docs/REAL_DATA_REPORT.md](docs/REAL_DATA_REPORT.md)；模型对比：[docs/MODEL_COMPARISON_REPORT.md](docs/MODEL_COMPARISON_REPORT.md)；性能：[docs/PERFORMANCE_REPORT.md](docs/PERFORMANCE_REPORT.md)
 - 测试说明：[docs/TESTING.md](docs/TESTING.md)；变更记录：[docs/CHANGELOG.md](docs/CHANGELOG.md)
