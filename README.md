@@ -36,7 +36,7 @@
 
 - A 股：东方财富（基本信息、指数行情接口）、腾讯财经（上证指数/深证成指 2000-2004 真实日线，含成交量与前复权标记）、AKShare（退市股、指数成分股、申万行业、财报披露）。
 - 美股：Yahoo Finance（指数与个股日线，16 标的）、SEC EDGAR（10-K/10-Q/8-K，真实披露时间，覆盖扩大至 20 公司）。
-- 宏观：FRED / ALFRED。ALFRED 适配器获取真实历史版本（vintage），保存每个版本的原始值、发布日期与修订时间；严格模式仅使用 `real_published`，禁止 `estimated` / `unknown`。
+- 宏观：FRED / ALFRED。ALFRED 适配器获取真实历史版本（vintage），保存每个版本的原始值、发布日期、修订时间、`vintage_version` 与 `first_release_date`（估计值明确标记）；严格模式仅使用 `real_published`，禁止 `estimated` / `unknown`。
 - 覆盖率：按市场、年份、数据类别输出覆盖率与缺口，不使用合成数据填补真实缺口。
 
 验证方式：
@@ -64,14 +64,13 @@ knowledge/snapshots/asof_YYYY/ (clean + knowledge + features + models + manifest
 
 ```bash
 cd /root/工作区/股票
-PYTHONPATH=python python3 python/scripts/fetch_v03.py
+python3 python/scripts/fetch_v03.py
+PYTHONPATH=python python3 python/scripts/fetch_v04_indices.py
 PYTHONPATH=python python3 python/scripts/run.py run --start 2002 --end 2004 --raw data/raw/raw_real.parquet
 PYTHONPATH=python python3 python/scripts/validation_report.py
 PYTHONPATH=python python3 python/scripts/perf_v03.py
 PYTHONPATH=python python3 -m pytest python/tests -q
-PYTHONPATH=python python3 python/scripts/test_report_v03.py
 PYTHONPATH=python python3 python/scripts/final_acceptance_v04.py
-PYTHONPATH=python python3 python/scripts/fetch_v04_indices.py
 PYTHONPATH=python python3 -m coverage run --source=python/quant -m pytest python/tests -q
 PYTHONPATH=python python3 -m coverage report
 python3 python/scripts/build_dashboard.py
@@ -79,7 +78,7 @@ python3 python/scripts/build_dashboard.py
 
 ## v0.4.0 P0 重构（已完成）
 
-在 v0.3.0 基础上增量升级，未改动历史报告、data/ 敏感资产与 Git 历史：
+在既有系统基础上增量升级，未改动历史报告、data/ 敏感资产与 Git 历史：
 
 - 可信验收：结构化输出 `{input, execution, result, failure_reason}`；真实执行 pytest；篡改报告、模块缺失、未来数据注入等负向测试；任一 P0 失败整体 FAIL。
 - 统一时间内核：UTC 时间戳与字段迁移（forward/rollback 仅在临时副本验证），cutoff=`Y-1-12-31T23:59:59Z`，市场时区转换，`TimeGuardReader` 强制门禁，Rust/Python 一致测试。
@@ -88,17 +87,6 @@ python3 python/scripts/build_dashboard.py
 - 验收与覆盖率：v0.4 验收 8/8 PASS（overall=PASS），73 项测试全部通过，coverage 已纳入验收（报告 32%）。
 
 完整交付报告：[docs/V0.4.0_DELIVERY_REPORT.md](docs/V0.4.0_DELIVERY_REPORT.md)；审计报告：[docs/V04_AUDIT_REPORT.md](docs/V04_AUDIT_REPORT.md)
-
-### v0.3.0 升级（已完成）
-
-在 v0.2.0 基础上增量升级：
-
-- P0：数据覆盖扩展（真实数据 44,021 行）、ALFRED 宏观历史版本（22,598 条）、7 种预测期限样本、5 种严格验证切分。
-- P1：六库知识系统、8 个 AI 研究智能体、研究假设状态机（失败假设保留）、密钥安全轮换与恢复/篡改测试。
-- P2：性能优化（列投影加速、DuckDB 聚合加速），报告含运行时间、峰值 RSS、磁盘占用与结果一致性。
-- 最终验收：14/14 PASS，59 项测试全部通过。
-
-完整交付报告：[docs/V03_DELIVERY_REPORT.md](docs/V03_DELIVERY_REPORT.md)
 
 ## 已知缺口（未用合成数据补齐）
 
@@ -110,8 +98,11 @@ python3 python/scripts/build_dashboard.py
 
 ## 参考文档与可视化
 
-- 完整交付报告：[docs/V0.4.0_DELIVERY_REPORT.md](docs/V0.4.0_DELIVERY_REPORT.md)（v0.4.0）、[docs/V03_DELIVERY_REPORT.md](docs/V03_DELIVERY_REPORT.md)（v0.3.0）
+- 完整交付报告：[V0.4.0_DELIVERY_REPORT.md](docs/V0.4.0_DELIVERY_REPORT.md)
+- 审计报告：[docs/V04_AUDIT_REPORT.md](docs/V04_AUDIT_REPORT.md)
+- 数据覆盖报告：[docs/REAL_DATA_REPORT.md](docs/REAL_DATA_REPORT.md)
+- 模型对比报告：[docs/MODEL_COMPARISON_REPORT.md](docs/MODEL_COMPARISON_REPORT.md)
+- 性能报告：[docs/PERFORMANCE_REPORT.md](docs/PERFORMANCE_REPORT.md)
 - 部署与恢复：[docs/DEPLOY_RECOVERY_V02.md](docs/DEPLOY_RECOVERY_V02.md)、[部署文档](docs/DEPLOYMENT.md)、[公网部署文档](docs/PUBLIC_DEPLOY.md)
-- 审计报告：[docs/AUDIT_REPORT.md](docs/AUDIT_REPORT.md)
 - 公网仪表盘：https://a.czyz.eu.cc/（Cloudflare Tunnel 常驻服务）
 - 本机 Streamlit（8501）或直接用浏览器打开 `web/dashboard.html`
