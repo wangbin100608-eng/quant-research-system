@@ -1,0 +1,17 @@
+methods: [expanding_window, rolling_window, walk_forward, purged_cv, embargo]
+random_shuffle: forbidden
+final_test_set:
+  isolated: true
+  ai_access: forbidden
+  use_only_in_final_evaluation: true
+purge:
+  label_overlap: true
+  feature_window_crossing: true
+  embargo_days: 5
+metrics: [mae, rmse, pearson_ic, rank_ic, icir, direction_accuracy,
+          interval_coverage, calibration]
+multiple_testing: [benjamini_hochberg, holm]
+significance: {alpha: 0.05, bootstrap: 2000, block_bootstrap: true, hac: true}
+minimum_evidence:
+  sample_size: 30
+  no_single_metric_winner: true

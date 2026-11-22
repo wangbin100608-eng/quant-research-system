@@ -1,0 +1,20 @@
+resource_policy:
+  max_parallel_experiments: 1
+  max_cpu_threads_per_experiment: 2
+  max_memory_fraction: 0.60
+  allow_gpu: false
+  enable_checkpoint: true
+  enable_incremental_compute: true
+  max_experiment_runtime_minutes: 120
+monitoring:
+  memory: true
+  cpu: true
+  disk: true
+  peak_rss_required: true
+data_read_budget:
+  use_column_projection: true
+  use_predicate_pushdown: true
+  no_full_table_load: true
+cache:
+  require_data_version: true
+  require_feature_version: true

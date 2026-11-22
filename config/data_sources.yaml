@@ -1,0 +1,38 @@
+providers:
+  - id: tushare_cn
+    status: BLOCKED
+    reason: "需要 Tushare Pro token 与积分权限，官方文档未核验；未接入"
+    url: https://tushare.pro/
+  - id: alpaca_us
+    status: BLOCKED
+    reason: "需要 Alpaca API key 与订阅等级；IEX/SIP 差异未核验；未接入"
+    url: https://alpaca.markets/
+  - id: sec_edgar
+    status: ACTIVE
+    adapter: python/quant/adapters/sec_v3.py
+  - id: fred_alfred
+    status: ACTIVE
+    adapters: [python/quant/adapters/fred_v2.py, python/quant/adapters/alfred_vintage.py]
+  - id: eastmoney_cn
+    status: ACTIVE
+    adapters: [python/quant/adapters/eastmoney_cn.py, python/quant/adapters/eastmoney_expand.py]
+  - id: tencent_cn
+    status: ACTIVE
+    adapter: python/quant/adapters/tencent_index.py
+  - id: akshare_cn
+    status: ACTIVE
+    adapters: [python/quant/adapters/akshare_cn.py, python/quant/adapters/akshare_extended.py]
+  - id: yahoo_us
+    status: ACTIVE
+    adapter: python/quant/adapters/yahoo_us.py
+  - id: sse_szse_csrc
+    status: BLOCKED
+    reason: "交易所官网适配器未实现，备用源未接入"
+  - id: news_gdelt
+    status: BLOCKED
+    reason: "GDELT 历史新闻覆盖缺口、限流"
+density:
+  minute: BLOCKED
+  daily: ACTIVE
+  weekly: NOT_TESTED
+  monthly: NOT_TESTED

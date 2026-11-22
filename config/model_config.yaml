@@ -1,0 +1,12 @@
+models:
+  baselines: [naive_last, historical_mean, linear, ridge, elasticnet]
+  tree: [lightgbm, catboost, xgboost]
+  ranker: [lightgbm_ranker]
+  dl: {status: NOT_TESTED, note: "时序神经网络后续扩展"}
+market_horizon_groups:
+  CN_A: [1d, 5d, 20d]
+  US: [1d, 5d, 20d]
+model_selection:
+  allowed_inputs: [oof_predictions, out_of_sample_predictions]
+  forbidden_inputs: [training_fit_results, final_test_results]
+checkpoint: true

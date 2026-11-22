@@ -1,0 +1,13 @@
+version: "0.7.0"
+project: quant-research-system
+timezone: Asia/Shanghai
+seed: 20000101
+strict_point_in_time: true
+architecture:
+  source_package: python/quant
+  compatibility_package: src
+  primary_language: python
+  rust: only_when_benchmarked
+resource_ref: config/resource_policy.yaml
+validation_ref: config/validation.yaml
+shadow_mode_ref: config/shadow_mode.yaml

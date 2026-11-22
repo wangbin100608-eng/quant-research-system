@@ -1,0 +1,17 @@
+enabled: false
+trading_account: none
+real_orders: forbidden
+real_funds: forbidden
+prediction_freeze:
+  required_fields: [prediction_id, stock_id, market, prediction_time, horizon,
+                    predicted_return, predicted_rank, confidence_interval,
+                    uncertainty, model_version, feature_version,
+                    data_manifest_hash, created_at]
+  immutable: true
+evaluation:
+  horizons: [1d, 5d, 20d]
+  wait_for_mature_labels: true
+  metrics: [mae, rmse, pearson_ic, rank_ic, icir, interval_coverage]
+drift_monitoring: [feature_drift, prediction_drift, data_quality_drift, performance_drift]
+degradation_action: [alert, preserve_prediction, mark_model_status, create_relearning_task]
+note: "Shadow Mode 只记录与评估预测，不执行真实交易"

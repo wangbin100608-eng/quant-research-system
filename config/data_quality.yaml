@@ -1,0 +1,12 @@
+weights:
+  source_authority: 0.30
+  timestamp_accuracy: 0.25
+  completeness: 0.20
+  revision_traceability: 0.15
+  consistency: 0.10
+strict_mode:
+  unknown_available_at: reject
+  estimated_published_at: reject
+  date_only_on_cutoff_day: reject
+critical_failures: [missing_available_at, future_available_at, source_missing]
+report: data/reports/data_status_v060.json

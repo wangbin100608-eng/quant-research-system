@@ -1,0 +1,10 @@
+# 研究预算权重（非模型参数，非已证明最优）
+horizon_1d: {price: 0.28, volume: 0.22, microstructure: 0.18, cross_sectional: 0.15, company_events: 0.07, financial: 0.04, macro: 0.03, news_events: 0.03}
+horizon_5d: {price: 0.22, volume: 0.18, microstructure: 0.12, cross_sectional: 0.15, company_events: 0.09, financial: 0.13, macro: 0.07, news_events: 0.04}
+horizon_20d: {price: 0.14, volume: 0.08, microstructure: 0.05, cross_sectional: 0.13, company_events: 0.12, financial: 0.27, macro: 0.16, news_events: 0.05}
+weight_types:
+  - research_budget_weight
+  - feature_group_weight
+  - model_learned_weight
+  - data_quality_score
+rule: "禁止直接将 research_budget_weight 当最终模型权重；最终权重由实验确定"
