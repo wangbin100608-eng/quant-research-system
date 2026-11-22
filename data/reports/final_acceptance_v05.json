@@ -1,0 +1,66 @@
+{
+  "version": "v0.5.0",
+  "overall": "PASS",
+  "p0_failed": [],
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
+    "commit": "c5dee4fb010acad61517630d8c5a151fbd7b022f",
+    "started_at": "2026-11-22T06:40:52.918987+00:00"
+  },
+  "checks": [
+    {
+      "id": "01",
+      "p0": true,
+      "description": "pytest 真实执行",
+      "input": "python/tests",
+      "execution": "subprocess",
+      "started_at": "2026-11-22T06:40:52.919174+00:00",
+      "result": "PASS",
+      "failure_reason": "",
+      "finished_at": "2026-11-22T06:40:59.064535+00:00",
+      "duration_seconds": 6.145
+    },
+    {
+      "id": "02",
+      "p0": true,
+      "description": "模块删除→FAIL→恢复→PASS",
+      "input": "quant/timeguard_reader.py",
+      "execution": "隔离目录真实删除/恢复",
+      "started_at": "2026-11-22T06:40:59.064571+00:00",
+      "result": "PASS",
+      "failure_reason": "",
+      "finished_at": "2026-11-22T06:40:59.090240+00:00",
+      "duration_seconds": 0.026
+    },
+    {
+      "id": "03",
+      "p0": true,
+      "description": "报告四类篡改检测",
+      "input": "test_report_v03.json",
+      "execution": "生成篡改副本并验证",
+      "started_at": "2026-11-22T06:40:59.090270+00:00",
+      "result": "PASS",
+      "failure_reason": "",
+      "finished_at": "2026-11-22T06:40:59.107502+00:00",
+      "duration_seconds": 0.017
+    },
+    {
+      "id": "04",
+      "p0": true,
+      "description": "三接口未来数据注入",
+      "input": "Parquet/DuckDB/KB",
+      "execution": "注入未来行并查询",
+      "started_at": "2026-11-22T06:40:59.107531+00:00",
+      "result": "PASS",
+      "failure_reason": "",
+      "finished_at": "2026-11-22T06:41:00.034421+00:00",
+      "duration_seconds": 0.927
+    }
+  ],
+  "actual_passed": 73,
+  "summary": {
+    "total": 4,
+    "passed": 4
+  }
+}
