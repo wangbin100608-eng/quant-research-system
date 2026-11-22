@@ -85,59 +85,59 @@ class Acceptance05:
             return False, f"pytest exit={r.returncode}, passed={self.actual_passed}"
         return True, f"真实执行 {self.actual_passed} passed"
 
-    # ---------- 负向 1.1：真实删除模块 ----------
+    # ---------- 负向 1.1：真实删除模块（调用真实实现）----------
     def module_delete_cycle(self) -> tuple[bool, str]:
-        """复制 quant 包到隔离目录→删除 timeguard_reader.py→导入必须失败→恢复→导入成功。"""
-        import py_compile
-        src = ROOT / "python/quant"
-        iso = self.tmp / "pkg"
-        shutil.copytree(src, iso)
-        target = iso / "timeguard_reader.py"
-        saved = target.read_bytes()
-        # 删除
-        target.unlink()
-        # 真实删除后：文件不存在，导入必然失败
-        deleted_fails = not target.exists()
-        try:
-            importlib.util.spec_from_file_location("iso_timeguard_reader", target).loader.exec_module
-            # spec 即使文件不存在也可能构造成功；用 exists 为准
-        except Exception:
-            pass
-        # 恢复
-        target.write_bytes(saved)
-        restored_ok = target.exists() and target.read_bytes() == saved
-        return ((deleted_fails and restored_ok),
-                f"删除后导入失败={deleted_fails}, 恢复后导入成功={restored_ok}")
+        """完整临时项目副本 + 独立进程 + 多模块真实导入（不使用 find_spec/文件路径）。"""
+        from quant.module_delete_v041 import run_module_delete_test
+        result = run_module_delete_test([
+            "quant.validation", "quant.timeguard_reader",
+            "quant.knowledge_v03", "quant.horizons"])
+        detail = "; ".join(
+            f"{m}: del={v['deleted_exit']}/rest={v['restored_exit']}"
+            for m, v in result["modules"].items())
+        return result["ok"], detail
 
-    # ---------- 负向 1.2：四类报告篡改 ----------
+    # ---------- 负向 1.2：报告篡改交给真实验证器 ----------
     def report_tamper_matrix(self) -> tuple[bool, str]:
+        from quant.report_verifier_v041 import ReportVerifierV041, compute_report_sha
         rp = ROOT / "data/reports/test_report_v03.json"
         if not rp.exists():
             return True, "无历史报告（跳过不算 FAIL）"
         base = json.loads(rp.read_text())
+        # 用实际执行结果构造有效基线报告，交给真实验证器
+        valid = {
+            "version": "v0.4.1",
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "commit": git_commit(),
+            "pytest": {"summary": f"{self.actual_passed} passed"},
+            "summary": {"passed": self.actual_passed, "total": self.actual_passed},
+            "checks": [{"result": "PASS"}] * self.actual_passed,
+        }
+        valid["report_sha256"] = compute_report_sha(valid)
+        vp = self.tmp / "valid_report_v041.json"
+        vp.write_text(json.dumps(valid, ensure_ascii=False))
+        verifier = ReportVerifierV041(
+            expected_version="v0.4.1", expected_commit=git_commit(),
+            expected_counts={"passed": self.actual_passed})
+        ok0, e0 = verifier.verify(vp)
         detected = []
-        for kind in ("passed", "total", "timestamp", "commit"):
-            d = json.loads(json.dumps(base))
+        # 构造四类篡改副本，全部交给真实验证器
+        for kind in ("passed", "result", "commit", "hash"):
+            d = json.loads(json.dumps(valid))
             if kind == "passed":
-                d["pytest"]["summary"] = "9999 passed"
-            elif kind == "total":
-                d["pytest"]["summary"] = "0 passed"
-            elif kind == "timestamp":
-                d["generated_at"] = "2000-01-01T00:00:00+00:00"
-            else:
+                d["summary"]["passed"] = self.actual_passed + 999
+            elif kind == "result":
+                d["checks"][0]["result"] = "FAIL"
+            elif kind == "commit":
                 d["commit"] = "deadbeef"
-            tmp = self.tmp / f"tampered_{kind}.json"
-            tmp.write_text(json.dumps(d, ensure_ascii=False))
-            parsed = json.loads(tmp.read_text())
-            # 验证器：passed 数必须与真实执行一致，时间戳不得早于环境开始，commit 必须匹配
-            sm = re.search(r"(\d+) passed", str(parsed.get("pytest", {}).get("summary", "")))
-            bad = (kind == "passed" and sm and int(sm.group(1)) != self.actual_passed)
-            bad = bad or (kind == "total" and sm and int(sm.group(1)) < self.actual_passed)
-            bad = bad or (kind == "timestamp" and parsed.get("generated_at") < self.env["started_at"][:19])
-            bad = bad or (kind == "commit" and parsed.get("commit") not in (None, git_commit()))
-            detected.append((kind, bad))
-        ok = all(x[1] for x in detected)
-        return ok, f"四类篡改检测: {detected}"
+            else:
+                d["report_sha256"] = "0" * 64
+            tp = self.tmp / f"tampered_{kind}.json"
+            tp.write_text(json.dumps(d, ensure_ascii=False))
+            ok_k, errs_k = verifier.verify(tp)
+            detected.append((kind, not ok_k, errs_k[:1]))
+        ok = ok0 and all(x[1] for x in detected)
+        return ok, f"基线有效={ok0}; 四类篡改检测={[(x[0], x[1]) for x in detected]}"
 
     # ---------- 负向 1.3：三接口未来数据注入 ----------
     def injection_all_interfaces(self) -> tuple[bool, str]:
@@ -174,11 +174,46 @@ class Acceptance05:
         ok = all(results.values())
         return ok, f"三接口注入结果: {results}"
 
+    # ---------- 六库严格检查（接入 strict_kb_v041）----------
+    def six_libraries_strict(self) -> tuple[bool, str]:
+        from quant.knowledge_v03 import KnowledgeSystemV03
+        from quant.strict_kb_v041 import check_six_libraries
+        r = check_six_libraries(KnowledgeSystemV03())
+        detail = "; ".join(f"{k}:{v['count']}" for k, v in sorted(r["details"].items()))
+        return r["ok"], f"六库实名检查={detail}; errors={r['errors'][:2]}"
+
+    # ---------- coverage 真实验证（门槛）----------
+    def coverage_gate(self) -> tuple[bool, str]:
+        import subprocess, sys
+        out = self.tmp / "coverage_run.txt"
+        with open(out, "w") as f:
+            r = subprocess.run([sys.executable, "-m", "coverage", "run",
+                                "--source=python/quant", "-m", "pytest",
+                                str(ROOT / "python/tests"), "-q"],
+                               cwd=str(ROOT), env={**os.environ,
+                                                   "PYTHONPATH": str(ROOT / "python")},
+                               stdout=f, stderr=subprocess.STDOUT, timeout=300)
+        rep = subprocess.run([sys.executable, "-m", "coverage", "report"],
+                             cwd=str(ROOT), capture_output=True, text=True)
+        text = rep.stdout
+        self.coverage_text = text
+        if r.returncode != 0:
+            return False, f"coverage pytest exit={r.returncode}"
+        m = None
+        for line in text.splitlines():
+            if line.strip().startswith("TOTAL"):
+                m = re.search(r"(\d+)%", line)
+        total = int(m.group(1)) if m else 0
+        # 门槛：总体 >= 35%（当前基线）；关键模块单独记录但小样本下不硬 FAIL
+        return total >= 35, f"总体覆盖率={total}%; 门槛>=35%"
+
     def run(self) -> dict[str, Any]:
         self.check("01", True, "pytest 真实执行", "python/tests", "subprocess", self.real_pytest)
         self.check("02", True, "模块删除→FAIL→恢复→PASS", "quant/timeguard_reader.py", "隔离目录真实删除/恢复", self.module_delete_cycle)
         self.check("03", True, "报告四类篡改检测", "test_report_v03.json", "生成篡改副本并验证", self.report_tamper_matrix)
         self.check("04", True, "三接口未来数据注入", "Parquet/DuckDB/KB", "注入未来行并查询", self.injection_all_interfaces)
+        self.check("05", True, "六库严格实名检查", "kb_items + hypotheses", "strict_kb_v041 真实记录与时间范围", self.six_libraries_strict)
+        self.check("06", False, "coverage 真实执行与门槛", "python/quant", "coverage run + report", self.coverage_gate)
         failed = [c["id"] for c in self.checks if c["p0"] and c["result"] != "PASS"]
         report = {"version": "v0.5.0", "overall": "PASS" if not failed else "FAIL",
                   "p0_failed": failed, "environment": self.env, "checks": self.checks,

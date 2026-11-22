@@ -104,3 +104,25 @@ def test_stream_matches_read_v041(tmp_path):
     full, _ = reader.read_parquet(p, cutoff_for_year(2002))
     streamed = [b for b, _ in reader.stream_parquet(p, cutoff_for_year(2002), batch_size=64)]
     assert sum(b.num_rows for b in streamed) == full.num_rows == 500
+
+
+def test_no_fabricated_ingested_at():
+    """v0.4.1：缺少 ingested_at 时不得用当前时间冒充历史采集时间。"""
+    from quant.timestamps_v04 import migrate_record, time_precision
+    r = migrate_record({"available_time": "2001-06-01", "symbol": "X"})
+    assert r["ingested_at"] == "unknown"
+    assert r["field_provenance"]["ingested_at"] == "unknown_no_historical_record"
+    assert r["migration_log"]["policy"] == "unknown_ingested_at_never_fabricated"
+    assert r["time_trust"] == "low"
+    assert time_precision("2001-06-01") == "date_only"
+    assert time_precision("2001-06-01T08:00:00+08:00") == "full_timestamp"
+
+
+def test_date_only_cutoff_day_strict_reject():
+    """截止日当天仅有日期的数据，严格模式必须保守拒绝。"""
+    from quant.timestamps_v04 import available_ok, cutoff_for_year
+    cut = cutoff_for_year(2002)  # 2001-12-31T23:59:59Z
+    assert available_ok("2001-12-31", cut, strict=False) is True
+    assert available_ok("2001-12-31", cut, strict=True) is False
+    assert available_ok("2001-12-30", cut, strict=True) is True
+    assert available_ok("2001-12-31T20:00:00Z", cut, strict=True) is True
