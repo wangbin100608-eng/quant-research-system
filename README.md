@@ -1,4 +1,4 @@
-# A股与美股量化研究系统 v0.4.0
+# A股与美股量化研究系统 v0.5.0
 
 一套**严格点位时间隔离**、可持续进行历史模拟预测、误差分析与知识迭代的量化研究系统。**不连接真实证券账户，不执行真实交易。**
 
@@ -9,7 +9,7 @@
 - 每次预测前，Rust `TimeGuard` 对整个快照做全量流式扫描，未来数据或时点未知数据立即中止预测。
 - 知识库按 `asof_YYYY` 物理分目录，快照冻结（含文件 SHA-256）后不可被后续数据改变。
 - 预测记录使用 HMAC-SHA256 + 链哈希 + append-only 触发器保护，防止双端篡改。
-- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 73 项测试全部通过。
+- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 94 项测试全部通过。
 - 严格模式下，宏观数据 `time_basis` 为 `estimated` / `unknown` / `imputed` 的记录禁止使用。
 - 统一 `TimeGuardReader` 强制所有历史数据读取经过时间门禁；UTC 时间内核统一 `published_at / available_at / ingested_at`，旧字段仅迁移兼容。
 - 可信验收 `final_acceptance_v04.py` 真实执行测试并做篡改报告、模块缺失、未来数据注入等负向测试；任一 P0 失败整体 FAIL。
@@ -75,6 +75,10 @@ PYTHONPATH=python python3 -m coverage run --source=python/quant -m pytest python
 PYTHONPATH=python python3 -m coverage report
 python3 python/scripts/build_dashboard.py
 ```
+
+## v0.5.0 升级（已完成）
+
+全链路防未来数据泄漏与高性能数据引擎：可信验收 v05（真实负向闭环/非零退出码）、预测冻结完整溯源、Embedding/模型/Agent 溯源审计、TimeGuardReader 分批流式读取（100 万行峰值 84.6MB→10.46MB）、历史股票池与数据质量系统。验收 4/4 PASS、94 项测试通过、覆盖率 35%。详见 [docs/V0.5.0_DELIVERY_REPORT.md](docs/V0.5.0_DELIVERY_REPORT.md)。
 
 ## v0.4.0 P0 重构（已完成）
 
