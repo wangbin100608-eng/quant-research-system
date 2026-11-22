@@ -40,6 +40,10 @@ def build_dashboard(out_path: str | Path | None = None) -> Path:
     model_cmp = _load_json("data/reports/model_comparison.json")
     perf_report = _load_json("data/reports/performance_report.json")
     test_report = _load_json("data/reports/test_report.json")
+    cov_v03 = _load_json("data/reports/coverage_report_v03.json")
+    val_v03 = _load_json("data/reports/validation_report_v03.json")
+    perf_v03 = _load_json("data/reports/performance_report_v03.json")
+    final_v03 = _load_json("data/reports/final_acceptance_v03.json")
     integrity = store.verify_all()
 
     # ---- 快照 ----
@@ -141,7 +145,7 @@ def build_dashboard(out_path: str | Path | None = None) -> Path:
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>量化研究系统 v0.2.0 · 监控仪表盘</title>
+<title>量化研究系统 v0.3.0 · 监控仪表盘</title>
 <style>
 :root{{--bg:#0d1420;--card:#151f2e;--line:#26364a;--fg:#e6eef7;--muted:#8fa6bd;--acc:#4f8cff;--ok:#37d39b;--warn:#e3a35b;--bad:#e35b5b}}
 *{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI","PingFang SC",sans-serif}}
@@ -159,7 +163,7 @@ td{{padding:7px;border-bottom:1px solid rgba(38,54,74,.5);color:#cbd9e8}}
 .note{{color:var(--muted);font-size:12px;line-height:1.6}}.hl{{color:var(--warn)}}
 footer{{padding:18px 40px;color:#5f748c;font-size:12px;border-top:1px solid var(--line)}}
 </style></head><body>
-<header><h1>量化研究系统 v0.2.0 · 监控仪表盘
+<header><h1>量化研究系统 v0.3.0 · 监控仪表盘
 <span class="badge {'ok' if integrity['ok'] else 'warn'}">预测完整性 {'正常' if integrity['ok'] else '异常'}</span>
 <span class="badge {'ok' if all_sealed else 'warn'}">快照 {'全部冻结' if all_sealed else '存在未冻结'}</span></h1>
 <div class="sub">A股/美股 · 严格点位时间隔离 · 生成时间 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} · 当前允许截止日期 <b class="hl">{current_cutoff}</b></div></header>
@@ -172,6 +176,15 @@ footer{{padding:18px 40px;color:#5f748c;font-size:12px;border-top:1px solid var(
 <div><b>{len(model_rows)}</b><span>对比模型数</span></div>
 <div><b>{pytest_summary or '16 passed'}</b><span>测试结果</span></div>
 </div><p class="note">真实数据源：{_esc(', '.join(cov_real.get('sources', [])))} ｜ 合成数据仅用于端到端验收，物理隔离于 raw_fixture.parquet</p></div>
+
+<div class="card"><h2>v0.3.0 升级摘要</h2><div class="kpi">
+<div><b>{cov_v03.get('total_rows', 0)}</b><span>v0.3 真实数据行</span></div>
+<div><b>{len(val_v03.get('horizons', {}))}</b><span>预测期限</span></div>
+<div><b>{final_v03.get('passed', 0)}/{final_v03.get('total', 0)}</b><span>最终验收</span></div>
+<div><b>{perf_v03.get('summary', {}).get('column_projection_speedup', '-')}x</b><span>列投影加速</span></div>
+</div><p class="note">新增：ALFRED 真实宏观历史版本（{22598} 条）、6 库知识系统、8 研究 Agent、假设状态机、
+Purged/Embargo 验证、密钥轮换。详见 docs/V03_DELIVERY_REPORT.md。
+最终验收 PASS: <b class="hl">{final_v03.get('PASS')}</b></p></div>
 
 <div class="card"><h2>真实/合成数据状态</h2>{tbl(['数据集','行数','来源','synthetic','说明'],[
   ('raw_real.parquet', real_rows, ', '.join(cov_real.get('sources', [])), str(cov_real.get('synthetic')), '真实公开数据'),
@@ -204,11 +217,11 @@ footer{{padding:18px 40px;color:#5f748c;font-size:12px;border-top:1px solid var(
 <p class="note">tracemalloc 不计量 Arrow/Polars/DuckDB 的 C++ 分配（故部分显示 0.00），进程 RSS 为 ru_maxrss 峰值。</p></div>
 <div class="card"><h2>决策规则</h2>{tbl(['规则ID','状态','市场','样本量'], [(r['rule_id'], r['status'], r['market'], r['sample_size']) for r in meta.query('SELECT * FROM decision_rules')])}</div>
 </div>
-<footer>量化研究系统 v0.2.0 · 完整源代码/数据库结构/覆盖报告/测试报告/模型对比/性能报告见 docs/ · 不连接真实证券账户</footer>
+<footer>量化研究系统 v0.3.0 · 完整源代码/数据库结构/覆盖报告/测试报告/模型对比/性能报告见 docs/ · 不连接真实证券账户</footer>
 </body></html>"""
     out.write_text(html, encoding="utf-8")
     (out.parent / "index.html").write_text(html, encoding="utf-8")
-    print(f"DASHBOARD v0.2.0: {out}")
+    print(f"DASHBOARD v0.3.0: {out}")
     meta.close()
     return out
 

@@ -1,0 +1,6 @@
+{
+  "merge": "skipped",
+  "reason": "raw_all.parquet 中 A股日线全部为 fixture 合成数据；按约束不得合并进真实数据集",
+  "a_share_daily_gap": "东财 kline 接口限流，v0.3 未新增 A股日线；v0.2 的 A股日线为合成，不能充作真实数据",
+  "result": "如实记录缺口，不用合成数据补齐"
+}

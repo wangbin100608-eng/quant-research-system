@@ -20,3 +20,14 @@ rust_core/target/
 
 # CatBoost 训练缓存
 catboost_info/
+
+# v0.3.0 P1-4 安全：密钥/数据库/私有数据不得纳入版本管理
+data/.seal_key
+data/.seal_key.retired
+data/.seal_keys/
+data/*.db
+data/*.duckdb
+data/backups/
+data/raw/
+data/knowledge/snapshots/
+data/features/samples_*.parquet

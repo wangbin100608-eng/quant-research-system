@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-11-22T05:11:50.555099",
+  "version": "v0.3.0",
+  "acceptance": {
+    "1_真实历史数据": true,
+    "2_覆盖率与缺失": true,
+    "3_知识库时间隔离": true,
+    "4_日线与年度预测": true,
+    "5_多年度WalkForward": true,
+    "6_多模型对比": true,
+    "7_误差分析": true,
+    "8_失败假设保留": true,
+    "9_知识库自动更新": true,
+    "10_无未来信息": true,
+    "11_可复现": true,
+    "12_内存稳定": true,
+    "13_八智能体": true,
+    "14_密钥未跟踪": true
+  },
+  "passed": 14,
+  "total": 14,
+  "PASS": true
+}

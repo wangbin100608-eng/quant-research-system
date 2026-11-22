@@ -48,6 +48,22 @@ class TimeTravelEngine:
                 f"future_data_leak: available_time={tf.available_time} "
                 f"> cutoff={spec.cutoff_date} symbol={row.get('symbol')}"
             )
+        # v0.3.0 P0：严格模式下估计/未知发布时间的数据禁止使用
+        if self.strict:
+            payload = row.get("payload")
+            if isinstance(payload, str):
+                try:
+                    payload = json.loads(payload)
+                except Exception:
+                    payload = {}
+            if isinstance(payload, dict):
+                basis = payload.get("time_basis")
+                if basis in ("estimated", "unknown", "imputed"):
+                    raise LeakError(
+                        f"unconfirmed_time_basis: time_basis={basis} "
+                        f"symbol={row.get('symbol')} source={tf.source} "
+                        f"(strict mode requires real published time)"
+                    )
         return True
 
     def filter_rows(self, rows: Iterable[dict[str, Any]],

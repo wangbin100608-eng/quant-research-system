@@ -1,0 +1,620 @@
+{
+  "generated_at": "2026-11-22T05:06:59.252960",
+  "version": "v0.3.0",
+  "data_origin": "real",
+  "synthetic": false,
+  "total_rows": 44021,
+  "synthetic_rows": 0,
+  "matrix": [
+    {
+      "market": "CN_A",
+      "year": "1999",
+      "domain": "delisted",
+      "rows": 1,
+      "symbols": 1,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2000",
+      "domain": "fundamental_disclosure",
+      "rows": 500,
+      "symbols": 500,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2000",
+      "domain": "index_member",
+      "rows": 850,
+      "symbols": 715,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2000",
+      "domain": "industry",
+      "rows": 31,
+      "symbols": 31,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2000",
+      "domain": "info",
+      "rows": 2,
+      "symbols": 2,
+      "sources": [
+        "real:eastmoney"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2001",
+      "domain": "delisted",
+      "rows": 5,
+      "symbols": 4,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2002",
+      "domain": "delisted",
+      "rows": 8,
+      "symbols": 8,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2003",
+      "domain": "delisted",
+      "rows": 4,
+      "symbols": 4,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2004",
+      "domain": "delisted",
+      "rows": 11,
+      "symbols": 11,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2005",
+      "domain": "delisted",
+      "rows": 11,
+      "symbols": 11,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2006",
+      "domain": "delisted",
+      "rows": 12,
+      "symbols": 12,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2007",
+      "domain": "delisted",
+      "rows": 10,
+      "symbols": 10,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2008",
+      "domain": "delisted",
+      "rows": 2,
+      "symbols": 2,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2009",
+      "domain": "delisted",
+      "rows": 6,
+      "symbols": 6,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2010",
+      "domain": "delisted",
+      "rows": 4,
+      "symbols": 4,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2011",
+      "domain": "delisted",
+      "rows": 3,
+      "symbols": 3,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2012",
+      "domain": "delisted",
+      "rows": 4,
+      "symbols": 4,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2013",
+      "domain": "delisted",
+      "rows": 7,
+      "symbols": 7,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2014",
+      "domain": "delisted",
+      "rows": 3,
+      "symbols": 3,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2015",
+      "domain": "delisted",
+      "rows": 10,
+      "symbols": 10,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2016",
+      "domain": "delisted",
+      "rows": 2,
+      "symbols": 2,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2017",
+      "domain": "delisted",
+      "rows": 5,
+      "symbols": 5,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2018",
+      "domain": "delisted",
+      "rows": 6,
+      "symbols": 6,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2019",
+      "domain": "delisted",
+      "rows": 12,
+      "symbols": 11,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2020",
+      "domain": "delisted",
+      "rows": 20,
+      "symbols": 20,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2021",
+      "domain": "delisted",
+      "rows": 23,
+      "symbols": 22,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2022",
+      "domain": "delisted",
+      "rows": 46,
+      "symbols": 44,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2023",
+      "domain": "delisted",
+      "rows": 46,
+      "symbols": 46,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2024",
+      "domain": "delisted",
+      "rows": 55,
+      "symbols": 55,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2025",
+      "domain": "delisted",
+      "rows": 32,
+      "symbols": 31,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "CN_A",
+      "year": "2026",
+      "domain": "delisted",
+      "rows": 26,
+      "symbols": 26,
+      "sources": [
+        "real:akshare"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "1999",
+      "domain": "macro_vintage",
+      "rows": 10937,
+      "symbols": 5,
+      "sources": [
+        "real:alfred"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2000",
+      "domain": "announcement",
+      "rows": 77,
+      "symbols": 11,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2000",
+      "domain": "fundamental",
+      "rows": 42,
+      "symbols": 11,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2000",
+      "domain": "info",
+      "rows": 16,
+      "symbols": 16,
+      "sources": [
+        "real:yahoo"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2000",
+      "domain": "macro_vintage",
+      "rows": 3250,
+      "symbols": 5,
+      "sources": [
+        "real:alfred"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2000",
+      "domain": "price",
+      "rows": 3780,
+      "symbols": 15,
+      "sources": [
+        "real:yahoo"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2001",
+      "domain": "announcement",
+      "rows": 69,
+      "symbols": 8,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2001",
+      "domain": "fundamental",
+      "rows": 39,
+      "symbols": 11,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2001",
+      "domain": "macro_vintage",
+      "rows": 278,
+      "symbols": 5,
+      "sources": [
+        "real:alfred"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2001",
+      "domain": "price",
+      "rows": 3720,
+      "symbols": 15,
+      "sources": [
+        "real:yahoo"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2002",
+      "domain": "announcement",
+      "rows": 96,
+      "symbols": 11,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2002",
+      "domain": "fundamental",
+      "rows": 41,
+      "symbols": 12,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2002",
+      "domain": "macro_vintage",
+      "rows": 486,
+      "symbols": 5,
+      "sources": [
+        "real:alfred"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2002",
+      "domain": "price",
+      "rows": 3780,
+      "symbols": 15,
+      "sources": [
+        "real:yahoo"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2003",
+      "domain": "announcement",
+      "rows": 111,
+      "symbols": 12,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2003",
+      "domain": "fundamental",
+      "rows": 49,
+      "symbols": 12,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2003",
+      "domain": "macro_vintage",
+      "rows": 694,
+      "symbols": 5,
+      "sources": [
+        "real:alfred"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2003",
+      "domain": "price",
+      "rows": 3780,
+      "symbols": 15,
+      "sources": [
+        "real:yahoo"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2004",
+      "domain": "announcement",
+      "rows": 144,
+      "symbols": 12,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2004",
+      "domain": "fundamental",
+      "rows": 48,
+      "symbols": 12,
+      "sources": [
+        "real:sec_edgar"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2004",
+      "domain": "macro_vintage",
+      "rows": 903,
+      "symbols": 5,
+      "sources": [
+        "real:alfred"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2004",
+      "domain": "price",
+      "rows": 3874,
+      "symbols": 16,
+      "sources": [
+        "real:yahoo"
+      ]
+    },
+    {
+      "market": "US",
+      "year": "2005",
+      "domain": "macro_vintage",
+      "rows": 6050,
+      "symbols": 7,
+      "sources": [
+        "real:alfred"
+      ]
+    }
+  ],
+  "missing_ranges": [
+    {
+      "source": "eastmoney_expand",
+      "symbol": "399001.SZ",
+      "reason": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    },
+    {
+      "source": "eastmoney_expand",
+      "symbol": "000001.SZ",
+      "reason": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    },
+    {
+      "source": "eastmoney_expand",
+      "domain": "industry",
+      "reason": "行业分类历史版本需专门接口，见 akshare 适配器"
+    },
+    {
+      "source": "yahoo_us",
+      "domain": "index_member",
+      "reason": "Yahoo 不提供历史指数成分股；记为缺口"
+    },
+    {
+      "source": "yahoo_us",
+      "domain": "delisted",
+      "reason": "退市股名单需专门数据源；记为缺口"
+    },
+    {
+      "source": "akshare_extended",
+      "domain": "industry_history",
+      "reason": "申万历史行业分类版本需专门接口；当前仅得当前版本"
+    },
+    {
+      "source": "sec_v3",
+      "cik": "0000729602",
+      "reason": "404 Client Error: Not Found for url: https://data.sec.gov/submissions/CIK0000729602.json"
+    },
+    {
+      "source": "sec_v3",
+      "cik": "0000013404",
+      "reason": "404 Client Error: Not Found for url: https://data.sec.gov/submissions/CIK0000013404.json"
+    },
+    {
+      "source": "sec_v3",
+      "cik": "0000791554",
+      "reason": "404 Client Error: Not Found for url: https://data.sec.gov/submissions/CIK0000791554.json"
+    },
+    {
+      "source": "sec_v3",
+      "cik": "00001409",
+      "reason": "404 Client Error: Not Found for url: https://data.sec.gov/submissions/CIK00001409.json"
+    },
+    {
+      "source": "sec_v3",
+      "cik": "0000106634",
+      "reason": "404 Client Error: Not Found for url: https://data.sec.gov/submissions/CIK0000106634.json"
+    },
+    {
+      "source": "sec_v3",
+      "domain": "news",
+      "reason": "SEC 提供 filing 而非新闻；新闻需专门数据源，记为缺口"
+    }
+  ],
+  "sources": [
+    "eastmoney_expand",
+    "yahoo_us",
+    "alfred_vintage",
+    "akshare_extended",
+    "sec_v3"
+  ],
+  "time_basis_note": "macro_vintage 使用 ALFRED 真实版本(real_published)；fred_v2 为 estimated 严格模式禁用"
+}

@@ -10,6 +10,10 @@ from .yahoo_us import YahooUSAdapter
 from .fred_v2 import FREDAdapterV2
 from .sec_v2 import SECAdapterV2
 from .news_v2 import NewsAdapterV2
+from .alfred_vintage import AlfredVintageAdapter
+from .eastmoney_expand import EastmoneyExpandAdapter
+from .akshare_extended import AkshareExtendedAdapter
+from .sec_v3 import SECAdapterV3
 
 __all__ = [
     "BaseAdapter", "FetchResult", "CANONICAL_SCHEMA",

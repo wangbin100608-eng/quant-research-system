@@ -41,6 +41,39 @@ def _load_key() -> bytes:
     return key_path.read_text(encoding="utf-8").strip().encode("utf-8")
 
 
+def load_all_keys() -> list[bytes]:
+    """v0.3.0 P1-4：密钥轮换后，历史预测需用旧密钥验签。"""
+    keys: list[bytes] = []
+    active = _load_key()
+    keys.append(active)
+    kdir = resolve("data/.seal_keys")
+    if kdir.exists():
+        for p in sorted(kdir.glob("key_*")):
+            k = p.read_text(encoding="utf-8").strip().encode("utf-8")
+            if k not in keys:
+                keys.append(k)
+    # 兼容：旧版本密钥文件（已轮换）
+    retired = resolve("data/.seal_key.retired")
+    if retired.exists():
+        k = retired.read_text(encoding="utf-8").strip().encode("utf-8")
+        if k not in keys:
+            keys.append(k)
+    return keys
+
+
+def rotate_key() -> str:
+    """生成新密钥，旧密钥归档到 .seal_key.retired（仅本地，不上传）。"""
+    import shutil
+    old = resolve("data/.seal_key")
+    if old.exists():
+        shutil.copy2(old, resolve("data/.seal_key.retired"))
+    new = os.urandom(32).hex()
+    old.parent.mkdir(parents=True, exist_ok=True)
+    old.write_text(new, encoding="utf-8")
+    os.chmod(old, 0o600)
+    return new
+
+
 def canonical_bytes(obj: dict[str, Any]) -> bytes:
     payload = {k: v for k, v in obj.items()
                if k not in ("hash", "hmac_sig", "chain_prev", "chain_index")}
@@ -67,6 +100,7 @@ class PredictionStoreV2:
         self.dir.mkdir(parents=True, exist_ok=True)
         self.meta = MetadataDB()
         self.key = _load_key()
+        self.keys = load_all_keys()  # 轮换兼容：验签尝试所有历史密钥
         install_append_only_triggers(self.meta)
         # v0.2 链元数据表（独立于 predictions，记录链头）
         self.meta.execute("""CREATE TABLE IF NOT EXISTS prediction_chain (
@@ -84,6 +118,14 @@ class PredictionStoreV2:
     def _sign(self, record: dict[str, Any], prev_sig: str) -> str:
         return hmac.new(self.key, prev_sig.encode() + canonical_bytes(record),
                         hashlib.sha256).hexdigest()
+
+    def _verify_sig(self, record: dict[str, Any], prev_sig: str, expected: str) -> bool:
+        """用所有已知密钥（含已轮换旧密钥）验证签名。"""
+        msg = prev_sig.encode() + canonical_bytes(record)
+        for k in self.keys:
+            if hmac.compare_digest(hmac.new(k, msg, hashlib.sha256).hexdigest(), expected):
+                return True
+        return False
 
     def _atomic_write(self, path: Path, text: str) -> None:
         fd, tmp = tempfile.mkstemp(dir=str(path.parent), prefix=".pred_", suffix=".tmp")
@@ -167,7 +209,7 @@ class PredictionStoreV2:
             if c:
                 prev = c[0]["prev_signature"]
                 if (d.get("hmac_sig") != c[0]["signature"]
-                        or self._sign(d, prev) != c[0]["signature"]
+                        or not self._verify_sig(d, prev, c[0]["signature"])
                         or self.simple_hash(d) != d.get("hash")):
                     raise RuntimeError(f"prediction tampered: {r['pred_id']}")
             out.append(d)
@@ -186,7 +228,7 @@ class PredictionStoreV2:
             d = json.loads(p.read_text(encoding="utf-8"))
             if (d.get("chain_prev") != prev or d.get("chain_index") != c["chain_index"]
                     or d.get("hmac_sig") != c["signature"]
-                    or self._sign(d, prev) != c["signature"]
+                    or not self._verify_sig(d, prev, c["signature"])
                     or self.simple_hash(d) != d.get("hash")):
                 bad.append(c["pred_id"])
             prev = c["signature"]

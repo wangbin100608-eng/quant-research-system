@@ -1,7 +1,7 @@
 # A股与美股量化研究系统 - 主配置
 project:
   name: quant-research
-  version: "0.2.0"
+  version: "0.3.0"
   timezone: Asia/Shanghai
   seed: 20000101
 

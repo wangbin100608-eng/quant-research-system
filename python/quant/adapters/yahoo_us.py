@@ -17,8 +17,19 @@ TARGETS = [
     ("^GSPC", "SPX", "US", "S&P 500"),
     ("^IXIC", "IXIC", "US", "NASDAQ Composite"),
     ("^DJI", "DJI", "US", "Dow Jones"),
+    ("^NYA", "NYA", "US", "NYSE Composite"),
     ("AAPL", "AAPL", "US", "Apple Inc."),
     ("MSFT", "MSFT", "US", "Microsoft Corp."),
+    ("GOOG", "GOOG", "US", "Alphabet"),
+    ("AMZN", "AMZN", "US", "Amazon"),
+    ("NVDA", "NVDA", "US", "NVIDIA"),
+    ("AMD", "AMD", "US", "AMD"),
+    ("INTC", "INTC", "US", "Intel"),
+    ("IBM", "IBM", "US", "IBM"),
+    ("JPM", "JPM", "US", "JPMorgan"),
+    ("KO", "KO", "US", "Coca-Cola"),
+    ("PG", "PG", "US", "Procter & Gamble"),
+    ("WMT", "WMT", "US", "Walmart"),
 ]
 P1 = 946684800   # 2000-01-01
 P2 = 1104537600  # 2005-01-01
