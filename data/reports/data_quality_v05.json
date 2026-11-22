@@ -1,0 +1,62 @@
+{
+  "universe": {
+    "2000": {
+      "symbols": 974,
+      "delisted_count": 1
+    },
+    "2001": {
+      "symbols": 980,
+      "delisted_count": 1
+    },
+    "2002": {
+      "symbols": 987,
+      "delisted_count": 5
+    },
+    "2003": {
+      "symbols": 991,
+      "delisted_count": 13
+    },
+    "2004": {
+      "symbols": 998,
+      "delisted_count": 17
+    }
+  },
+  "quality": {
+    "generated_at": "2026-11-22T06:45:09.099689+00:00",
+    "rows": 44021,
+    "checks": [
+      {
+        "name": "missing_time",
+        "count": 0,
+        "pass": true
+      },
+      {
+        "name": "duplicate_rows",
+        "count": 11072,
+        "pass": false
+      },
+      {
+        "name": "abnormal_price",
+        "count": 0,
+        "pass": true
+      },
+      {
+        "name": "abnormal_volume",
+        "count": 0,
+        "pass": true
+      },
+      {
+        "name": "missing_source",
+        "count": 0,
+        "pass": true
+      },
+      {
+        "name": "time_order",
+        "count": 880,
+        "pass": false
+      }
+    ],
+    "quality_score": 66.7,
+    "note": "评分不代替逐项检查结果；指数成分/行业当前版本不作为历史版本验证依据"
+  }
+}
