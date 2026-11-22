@@ -81,34 +81,67 @@ class EastmoneyExpandAdapter(RealAdapterBase):
         return None
 
     def fetch_prices(self, symbols: list[dict]) -> tuple[list[dict], list[dict]]:
-        rows, missing = [], []
+        """v0.4：分批 + 退避 + 原始响应 SHA-256 + 异常价格检查。"""
+        import hashlib
         import json as _json
-        for info in symbols:
-            secid = self._secid(_json.loads(info["payload"]))
-            if not secid:
-                continue
-            sym = info["symbol"]
-            try:
-                url = (f"{KLINE}?secid={secid}&fields1=f1,f2,f3"
-                       f"&fields2=f51,f52,f53,f54,f55,f56,f57"
-                       f"&klt=101&fqt=1&beg={self.start}&end={self.end}")
-                data = self.get(url).json().get("data") or {}
-                klines = data.get("klines") or []
-                for line in klines:
-                    p = line.split(",")
-                    if len(p) < 6:
-                        continue
-                    d = date.fromisoformat(p[0])
-                    rows.append(self.real_row(
-                        sym, "CN_A", "price", "eastmoney", d, d, d,
-                        {"close": float(p[2]), "volume": float(p[5] or 0),
-                         "name": data.get("name")},
-                    ))
-                if not klines:
-                    missing.append({"symbol": sym, "reason": "empty"})
-            except Exception as e:
-                missing.append({"symbol": sym, "reason": str(e)})
-        log.info("东财个股日线: %d 只, %d 行", len(symbols), len(rows))
+        import time as _time
+        rows, missing = [], []
+        audit: list[dict] = []
+        batch_size = 20
+        for bi in range(0, len(symbols), batch_size):
+            batch = symbols[bi:bi + batch_size]
+            for info in batch:
+                secid = self._secid(_json.loads(info["payload"]))
+                if not secid:
+                    continue
+                sym = info["symbol"]
+                ok = False
+                for attempt in range(self.retries + 1):
+                    try:
+                        url = (f"{KLINE}?secid={secid}&fields1=f1,f2,f3"
+                               f"&fields2=f51,f52,f53,f54,f55,f56,f57"
+                               f"&klt=101&fqt=1&beg={self.start}&end={self.end}")
+                        resp = self.get(url)
+                        raw_hash = hashlib.sha256(resp.content).hexdigest()
+                        data = resp.json().get("data") or {}
+                        klines = data.get("klines") or []
+                        if not klines:
+                            missing.append({"symbol": sym,
+                                            "reason": "empty_response (rate_limited or no history)",
+                                            "raw_sha256": raw_hash})
+                            break
+                        anomalies = 0
+                        for line in klines:
+                            p = line.split(",")
+                            if len(p) < 6:
+                                continue
+                            d = date.fromisoformat(p[0])
+                            close, vol = float(p[2]), float(p[5] or 0)
+                            if close <= 0 or vol < 0:
+                                anomalies += 1
+                                continue  # 异常价格/成交量剔除
+                            rows.append(self.real_row(
+                                sym, "CN_A", "price", "eastmoney", d, d, d,
+                                {"close": close, "volume": vol,
+                                 "name": data.get("name"),
+                                 "raw_sha256": raw_hash},
+                            ))
+                        audit.append({"symbol": sym, "rows": len(klines),
+                                      "anomalies": anomalies, "raw_sha256": raw_hash,
+                                      "fetched_at": _time.strftime("%Y-%m-%dT%H:%M:%SZ", _time.gmtime())})
+                        ok = True
+                        break
+                    except Exception as e:
+                        if attempt < self.retries:
+                            _time.sleep(2 ** attempt)  # 指数退避
+                        else:
+                            missing.append({"symbol": sym, "reason": str(e)})
+                if not ok and not any(m.get("symbol") == sym and "empty_response" in m.get("reason", "") for m in missing):
+                    missing.append({"symbol": sym, "reason": "fetch_failed_after_retries"})
+            _time.sleep(0.5)  # 批间限速
+        self._price_audit = audit
+        log.info("东财个股日线: %d 只, %d 行, 批次=%d, 缺口=%d",
+                 len(symbols), len(rows), (len(symbols) + batch_size - 1) // batch_size, len(missing))
         return rows, missing
 
     def fetch(self) -> FetchResult:

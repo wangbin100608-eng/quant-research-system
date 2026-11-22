@@ -31,3 +31,7 @@ data/backups/
 data/raw/
 data/knowledge/snapshots/
 data/features/samples_*.parquet
+
+# v0.4 可再生缓存/探针
+.coverage
+data/cache/

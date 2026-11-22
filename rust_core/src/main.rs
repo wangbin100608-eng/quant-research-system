@@ -121,6 +121,32 @@ fn sha256_file(path: &Path) -> io::Result<String> {
 }
 
 // ---------- 严格日期解析 ----------
+/// v0.4.0：解析 UTC ISO 时间戳 YYYY-MM-DDTHH:MM:SSZ（或 +00:00），
+/// 返回自 UNIX epoch 的秒数，用于精确 cutoff 比较。
+fn parse_utc_epoch(s: &str) -> Option<i64> {
+    let t = s.trim();
+    if t.len() < 19 { return None; }
+    let d = parse_ymd(&t[0..10])?;
+    if &t[10..11] != "T" { return None; }
+    let hh: i64 = t[11..13].parse().ok()?;
+    let mm: i64 = t[14..16].parse().ok()?;
+    let ss: i64 = t[17..19].parse().ok()?;
+    if hh > 23 || mm > 59 || ss > 59 { return None; }
+    // 仅接受 UTC 标识：Z 或 +00:00
+    let tail = &t[19..];
+    if !(tail == "Z" || tail == "+00:00" || tail.starts_with(".")) { return None; }
+    // 民用日期转天数（Howard Hinnant 算法）
+    let (y, m, day) = (d.0 as i64, d.1 as i64, d.2 as i64);
+    let y2 = if m <= 2 { y - 1 } else { y };
+    let era = if y2 >= 0 { y2 } else { y2 - 399 } / 400;
+    let yoe = y2 - era * 400;
+    let mp = m + if m > 2 { -3 } else { 9 };
+    let doy = (153 * mp + 2) / 5 + day - 1;
+    let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+    let days = era * 146097 + doe - 719468;
+    Some(days * 86400 + hh * 3600 + mm * 60 + ss)
+}
+
 fn parse_ymd(s: &str) -> Option<(i32,u32,u32)> {
     // 仅接受 YYYY-MM-DD（长度10，位置4/7为'-'）
     let b = s.as_bytes();
@@ -400,6 +426,10 @@ fn selftest() -> i32 {
     let bad2 = parse_ymd("2001-13-01").is_none();
     let bad3 = parse_ymd("2001-02-30").is_none();
     if !(good && bad1 && bad2 && bad3) { ok = false; println!("FAIL: parse_ymd vectors"); }
+    // v0.4 UTC 向量：2001-12-31T23:59:59Z = 1009756799；非 UTC 尾缀拒绝
+    let utc_ok = parse_utc_epoch("2001-12-31T23:59:59Z") == Some(1009843199);
+    let utc_bad = parse_utc_epoch("2001-12-31T23:59:59+08:00").is_none();
+    if !(utc_ok && utc_bad) { ok = false; println!("FAIL: parse_utc_epoch vectors"); }
     println!("SELFTEST: {}", if ok {"PASS"} else {"FAIL"});
     if ok {0} else {2}
 }

@@ -66,6 +66,9 @@ class AlfredVintageAdapter(RealAdapterBase):
                     value_col = 1 if len(header) > 1 else None
                     if value_col is None:
                         continue
+                    # header 形如 CPIAUCSL_20020615 → 提取版本号
+                    hname = header[value_col] if len(header) > value_col else sid
+                    version_no = hname.split("_", 1)[1] if "_" in hname else vd.strftime("%Y%m%d")
                     for line in rows_iter[1:]:
                         if len(line) <= value_col or line[value_col] in ("", ".", "NA"):
                             continue
@@ -74,14 +77,22 @@ class AlfredVintageAdapter(RealAdapterBase):
                             val = float(line[value_col])
                         except (ValueError, IndexError):
                             continue
+                        # v0.4：首次发布日期 = 该观测期的最早可得 vintage（本批次按季度采样，
+                        # 用观测期后第一个季度 vintage 近似；精确首次发布日需 ALFRED release API，
+                        # 受外部条件限制，明确标记 estimated_first_release）。
+                        from datetime import timedelta as _td
+                        first_rel = date(obs.year + (obs.month // 3), ((obs.month - 1) // 3) * 3 + 1, 15)
                         rows.append(self.real_row(
                             sid, "US", "macro_vintage", "alfred",
                             obs, vd, vd,
                             {"series": sid, "original_value": val,
                              "vintage_date": vd.isoformat(),
+                             "vintage_version": version_no,
+                             "first_release_date": first_rel.isoformat(),
+                             "first_release_basis": "estimated_quarterly",
                              "time_basis": "real_published",
                              "revision_time": vd.isoformat(),
-                             "header": header[value_col]},
+                             "header": hname},
                             revision=vd,
                         ))
                         got += 1
