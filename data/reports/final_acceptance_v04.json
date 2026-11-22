@@ -1,6 +1,6 @@
 {
   "version": "v0.4.0",
-  "generated_at": "2026-11-22T05:47:38.560310+00:00",
+  "generated_at": "2026-11-22T05:51:43.575799+00:00",
   "overall": "PASS",
   "p0_failed": [],
   "checks": [
@@ -9,7 +9,7 @@
       "description": "pytest 真实执行",
       "input": "python/tests",
       "execution": "subprocess 执行并解析 passed 数",
-      "executed_at": "2026-11-22T05:47:32.492973+00:00",
+      "executed_at": "2026-11-22T05:51:35.976466+00:00",
       "result": "PASS",
       "failure_reason": ""
     },
@@ -18,7 +18,7 @@
       "description": "核心模块可导入",
       "input": "8 个模块",
       "execution": "importlib.util.find_spec",
-      "executed_at": "2026-11-22T05:47:37.627621+00:00",
+      "executed_at": "2026-11-22T05:51:42.732046+00:00",
       "result": "PASS",
       "failure_reason": ""
     },
@@ -27,7 +27,7 @@
       "description": "模块缺失负向测试",
       "input": "validation.py",
       "execution": "临时副本构造+路径校验",
-      "executed_at": "2026-11-22T05:47:37.628658+00:00",
+      "executed_at": "2026-11-22T05:51:42.732844+00:00",
       "result": "PASS",
       "failure_reason": ""
     },
@@ -36,7 +36,7 @@
       "description": "篡改报告负向测试",
       "input": "test_report_v03.json 临时副本",
       "execution": "篡改 summary 后重解析",
-      "executed_at": "2026-11-22T05:47:37.629364+00:00",
+      "executed_at": "2026-11-22T05:51:42.733573+00:00",
       "result": "PASS",
       "failure_reason": ""
     },
@@ -45,7 +45,7 @@
       "description": "六库真实数据",
       "input": "kb_items + hypotheses",
       "execution": "SQL 分组+时间范围",
-      "executed_at": "2026-11-22T05:47:37.631857+00:00",
+      "executed_at": "2026-11-22T05:51:42.737214+00:00",
       "result": "PASS",
       "failure_reason": ""
     },
@@ -54,7 +54,7 @@
       "description": "时间隔离",
       "input": "asof_2001 快照 + 注入未来行",
       "execution": "TimeGuardReader + 负向注入",
-      "executed_at": "2026-11-22T05:47:38.050514+00:00",
+      "executed_at": "2026-11-22T05:51:43.067263+00:00",
       "result": "PASS",
       "failure_reason": ""
     },
@@ -63,7 +63,7 @@
       "description": "预测 HMAC 完整性",
       "input": "predictions + chain",
       "execution": "verify_all",
-      "executed_at": "2026-11-22T05:47:38.497212+00:00",
+      "executed_at": "2026-11-22T05:51:43.509878+00:00",
       "result": "PASS",
       "failure_reason": ""
     },
@@ -72,7 +72,7 @@
       "description": "coverage 可用",
       "input": "coverage 包",
       "execution": "import coverage",
-      "executed_at": "2026-11-22T05:47:38.512610+00:00",
+      "executed_at": "2026-11-22T05:51:43.525481+00:00",
       "result": "PASS",
       "failure_reason": ""
     }

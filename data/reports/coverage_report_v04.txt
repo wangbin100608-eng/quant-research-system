@@ -1,7 +1,7 @@
 Name                                        Stmts   Miss  Cover
 ---------------------------------------------------------------
 python/quant/__init__.py                        1      0   100%
-python/quant/adapters/__init__.py              17     17     0%
+python/quant/adapters/__init__.py              18     18     0%
 python/quant/adapters/akshare_cn.py            30     30     0%
 python/quant/adapters/akshare_extended.py      46     46     0%
 python/quant/adapters/alfred_vintage.py        60     60     0%
@@ -17,6 +17,7 @@ python/quant/adapters/real_base.py             38     38     0%
 python/quant/adapters/sec.py                   48     48     0%
 python/quant/adapters/sec_v2.py                55     55     0%
 python/quant/adapters/sec_v3.py                 8      8     0%
+python/quant/adapters/tencent_index.py         43     43     0%
 python/quant/adapters/yahoo_us.py              50     50     0%
 python/quant/agents.py                         48     48     0%
 python/quant/contracts.py                      74     14    81%
@@ -38,4 +39,4 @@ python/quant/timestamps_v04.py                 55      9    84%
 python/quant/utils.py                          46     23    50%
 python/quant/validation.py                    137     11    92%
 ---------------------------------------------------------------
-TOTAL                                        2612   1754    33%
+TOTAL                                        2656   1798    32%

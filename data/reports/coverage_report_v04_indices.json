@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-11-22T05:51:23.024408+00:00",
+  "version": "v0.4.0-improvement",
+  "source": "tencent_fqkline",
+  "synthetic": false,
+  "data_origin": "real",
+  "rows": 2400,
+  "symbols": {
+    "SH000001": 1200,
+    "SZ399001": 1200
+  },
+  "years": {
+    "2000": 478,
+    "2001": 480,
+    "2002": 474,
+    "2003": 482,
+    "2004": 486
+  },
+  "source_prefixes": [
+    "real:tencent"
+  ],
+  "raw_sha256_count": 2,
+  "missing_ranges": [
+    {
+      "symbol": "SH000300",
+      "reason": "no data in 2000-2004 (index published later or interface gap)"
+    },
+    {
+      "symbol": "SH000905",
+      "reason": "no data in 2000-2004 (index published later or interface gap)"
+    },
+    {
+      "symbol": "SH000852",
+      "reason": "no data in 2000-2004 (index published later or interface gap)"
+    }
+  ],
+  "file": "data/raw/raw_v04_indices.parquet",
+  "file_sha256": "445ed5d9e01914dcff71e92d779c969420a9fb642d230b44ed1155739c5d234a"
+}
