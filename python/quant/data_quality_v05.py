@@ -41,37 +41,69 @@ class HistoricalUniverse:
                                   "available_time": av, "source": src, "payload": payload})
 
     def build_snapshots(self, start_year: int = 2000, end_year: int = 2004) -> dict[int, dict]:
+        """P0 point-in-time 股票池：每年 cutoff=Y-1-12-31，仅用此前真实可得记录。
+
+        * 退市记录：同时检查记录 available_time（信息发布时间）与真实上市/退市日期；
+          未来才公布的退市信息不得反向修正早期快照。
+        * 指数成分/行业：当前名单只作参考并标 BLOCKED，不冒充历史版本。
+        """
+        from quant.timestamps_v04 import cutoff_for_year
         snapshots = {}
         for y in range(start_year, end_year + 1):
+            cutoff = cutoff_for_year(y)  # Y 年初股票池截止 = Y-1 年末 23:59:59Z
             members: dict[str, dict] = {}
+            source_stats: dict[str, int] = {}
             for r in self.rows:
+                av = r.get("available_time")
+                if not av:
+                    continue  # unknown 不进严格快照
+                try:
+                    av_dt = datetime.fromisoformat(str(av).replace("Z", "+00:00"))
+                    if av_dt.tzinfo is None:
+                        av_dt = av_dt.replace(tzinfo=timezone.utc)
+                except Exception:
+                    continue
+                if av_dt > cutoff:
+                    continue  # 未来才可获得的信息，禁止进入早期快照
                 pl = r["payload"]
-                # 退市股：按真实上市/退市日期判断当年是否在池
                 if r["domain"] == "delisted":
                     ld = str(pl.get("list_date", ""))[:4]
                     dd = str(pl.get("delist_date", ""))[:4]
                     if ld.isdigit() and int(ld) <= y and (not dd.isdigit() or int(dd) >= y):
-                        members[r["symbol"]] = {"status": "listed", "basis": "real_delisting_record",
+                        members[r["symbol"]] = {"status": "listed",
+                                                "basis": "real_delisting_record",
+                                                "available_time": av,
                                                 "delist_date": pl.get("delist_date")}
                     elif dd.isdigit() and int(dd) < y:
-                        members.setdefault(r["symbol"], {"status": "delisted",
-                                                         "basis": "real_delisting_record",
-                                                         "delist_date": pl.get("delist_date")})
-                # 指数成分（当前名单，标注 current_members；仅作参考，不冒充历史）
+                        members.setdefault(r["symbol"], {
+                            "status": "delisted", "basis": "real_delisting_record",
+                            "available_time": av, "delist_date": pl.get("delist_date")})
+                    source_stats["delisted"] = source_stats.get("delisted", 0) + 1
                 elif r["domain"] == "index_member":
-                    members.setdefault(r["symbol"], {"status": "member_reference",
-                                                     "basis": "current_members"})
-                # 行业（当前分类）
+                    # 当前名单仅作参考，历史成分不可验证 → BLOCKED
+                    members.setdefault(r["symbol"], {
+                        "status": "member_reference", "basis": "current_members",
+                        "available_time": av, "status_note": "BLOCKED: no historical member version"})
+                    source_stats["index_member_reference"] = source_stats.get(
+                        "index_member_reference", 0) + 1
                 elif r["domain"] == "industry":
-                    members.setdefault(r["symbol"], {"status": "industry_reference",
-                                                     "basis": "current_classification"})
+                    members.setdefault(r["symbol"], {
+                        "status": "industry_reference", "basis": "current_classification",
+                        "available_time": av, "status_note": "BLOCKED: no historical industry version"})
+                    source_stats["industry_reference"] = source_stats.get("industry_reference", 0) + 1
             snapshots[y] = {
-                "year": y, "symbols": len(members),
+                "year": y, "cutoff": cutoff.isoformat(), "symbols": len(members),
                 "delisted_count": sum(1 for v in members.values() if v["status"] == "delisted"),
-                "current_member_references": sum(1 for v in members.values()
-                                                 if v["basis"] == "current_members"),
+                "current_member_references": sum(
+                    1 for v in members.values() if v["basis"] == "current_members"),
+                "source_stats": source_stats,
                 "members": members,
-                "note": "退市股使用真实上市/退市日期；指数成分与行业仅为当前版本参考，不替代历史版本",
+                "time_audit": {"cutoff": cutoff.isoformat(),
+                               "records_considered": len(self.rows),
+                               "records_admitted": sum(source_stats.values())},
+                "status": "BLOCKED" if source_stats.get("index_member_reference") else "PARTIAL",
+                "note": ("PIT cutoff applied; 退市股双时间校验; 指数成分/行业仅为当前版本参考"
+                         "（BLOCKED，不冒充历史版本）"),
             }
         return snapshots
 

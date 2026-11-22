@@ -37,6 +37,16 @@ class ReadAudit:
     rows_out: int = 0
     dropped_future: int = 0
     dropped_unknown: int = 0
+    batch_index: int = -1          # -1=全量读取；>=0=流式批次号
+    batch_size: int = 0
+    cumulative_rows_in: int = 0    # 文件级累计（区别于单批）
+    cumulative_rows_out: int = 0
+    cumulative_dropped_future: int = 0
+    cumulative_dropped_unknown: int = 0
+    file_size_bytes: int = 0
+    file_sha256: str = ""
+    elapsed_seconds: float = 0.0
+    interrupted: bool = False
     strategy: str = "strict_point_in_time_v04"
     created_at: str = field(default_factory=lambda: iso_utc(datetime.now(__import__("datetime").timezone.utc)))
 
@@ -77,20 +87,20 @@ class TimeGuardReader:
         p = Path(path)
         if not p.exists():
             raise TimeGuardReadError(f"file not found: {p}")
-        table = pq.read_table(str(p), columns=columns)
         cutoff = self._spec_cutoff(spec)
+        # v0.6 P0：无论用户指定哪些列，内部必须读取可用时间列；过滤后再投影回用户列
+        schema_names = set(pq.ParquetFile(str(p)).schema_arrow.names)
+        av_col = next((c for c in (FIELD_AVAILABLE, "available_time") if c in schema_names), None)
+        if av_col is None and self.strict:
+            raise TimeGuardReadError(f"no available time column in {p}")
+        user_cols = (list(columns) if columns else
+                     [c for c in schema_names if c != av_col])
+        read_cols = list(dict.fromkeys(user_cols + ([av_col] if av_col else [])))
+        table = pq.read_table(str(p), columns=read_cols)
         audit = ReadAudit(path=str(p), cutoff=iso_utc(cutoff),
-                          columns=columns or table.column_names,
-                          rows_in=table.num_rows)
-        av_col = None
-        for cand in (FIELD_AVAILABLE, "available_time"):
-            if cand in table.column_names:
-                av_col = cand
-                break
+                          columns=user_cols, rows_in=table.num_rows)
         if av_col is None:
-            if self.strict:
-                raise TimeGuardReadError(f"no available time column in {p}")
-            return table, audit
+            return table.select(user_cols), audit
         av = table.column(av_col).to_pylist()
         keep = []
         for i, v in enumerate(av):
@@ -105,6 +115,7 @@ class TimeGuardReader:
             else:
                 audit.dropped_future += 1
         out = table.take(pa.array(keep, type=pa.int64()))
+        out = out.select(user_cols)  # 内部时间字段不强迫出现在结果中
         audit.rows_out = out.num_rows
         log.info("TimeGuardReader %s: %d -> %d (future=%d, unknown=%d)",
                  p.name, audit.rows_in, audit.rows_out,
@@ -128,35 +139,63 @@ class TimeGuardReader:
         av_col = next((c for c in (FIELD_AVAILABLE, "available_time") if c in available_cols), None)
         if av_col is None and self.strict:
             raise TimeGuardReadError(f"no available time column in {p}")
-        select_cols = columns or (list(available_cols) if av_col is None else None)
-        rows_in = rows_out = dropped_future = dropped_unknown = 0
-        for batch in pf.iter_batches(batch_size=batch_size, columns=select_cols):
-            rows_in += batch.num_rows
-            if av_col is None:
-                yield batch, ReadAudit(path=str(p), cutoff=iso_utc(cutoff),
-                                       columns=batch.schema.names, rows_in=batch.num_rows,
-                                       rows_out=batch.num_rows)
-                continue
-            av_values = batch.column(av_col).to_pylist()  # 仅当前批次，非整列
-            keep = []
-            for i, v in enumerate(av_values):
-                dt = to_utc(v, market_tz)
-                if dt is None:
-                    dropped_unknown += 1
-                    if self.strict:
-                        raise TimeGuardReadError(f"unknown_availability batch row {i} in {p}")
-                    continue
-                if dt <= cutoff:
-                    keep.append(i)
+        user_cols = (list(columns) if columns
+                     else [c for c in available_cols if c != av_col])
+        read_cols = list(dict.fromkeys(user_cols + ([av_col] if av_col else [])))
+        import hashlib, time as _time
+        file_size = p.stat().st_size
+        # 文件 SHA-256（流式，不整体读入内存）
+        fh = hashlib.sha256()
+        with open(p, "rb") as fp:
+            for chunk in iter(lambda: fp.read(1 << 16), b""):
+                fh.update(chunk)
+        file_sha = fh.hexdigest()
+        t_start = _time.perf_counter()
+        cum_in = cum_out = cum_future = cum_unknown = 0
+        batch_index = 0
+        try:
+            for batch in pf.iter_batches(batch_size=batch_size, columns=read_cols):
+                b_in = batch.num_rows
+                b_future = b_unknown = 0
+                if av_col is None:
+                    filtered = batch.select(user_cols)
+                    b_out = b_in
                 else:
-                    dropped_future += 1
-            filtered = batch.take(pa.array(keep, type=pa.int64())) if keep else batch.slice(0, 0)
-            rows_out += filtered.num_rows
-            yield filtered, ReadAudit(path=str(p), cutoff=iso_utc(cutoff),
-                                      columns=batch.schema.names, rows_in=batch.num_rows,
-                                      rows_out=filtered.num_rows,
-                                      dropped_future=dropped_future,
-                                      dropped_unknown=dropped_unknown)
+                    av_values = batch.column(av_col).to_pylist()  # 仅当前批次
+                    keep = []
+                    for i, v in enumerate(av_values):
+                        dt = to_utc(v, market_tz)
+                        if dt is None:
+                            b_unknown += 1
+                            if self.strict:
+                                raise TimeGuardReadError(
+                                    f"unknown_availability batch={batch_index} row={i} in {p}")
+                            continue
+                        if dt <= cutoff:
+                            keep.append(i)
+                        else:
+                            b_future += 1
+                    filtered = (batch.take(pa.array(keep, type=pa.int64()))
+                                if keep else batch.slice(0, 0)).select(user_cols)
+                    b_out = filtered.num_rows
+                cum_in += b_in; cum_out += b_out
+                cum_future += b_future; cum_unknown += b_unknown
+                yield filtered, ReadAudit(
+                    path=str(p), cutoff=iso_utc(cutoff), columns=user_cols,
+                    rows_in=b_in, rows_out=b_out,
+                    dropped_future=b_future, dropped_unknown=b_unknown,  # 单批独立
+                    batch_index=batch_index, batch_size=batch_size,
+                    cumulative_rows_in=cum_in, cumulative_rows_out=cum_out,
+                    cumulative_dropped_future=cum_future,
+                    cumulative_dropped_unknown=cum_unknown,
+                    file_size_bytes=file_size, file_sha256=file_sha,
+                    elapsed_seconds=round(_time.perf_counter() - t_start, 4))
+                batch_index += 1
+        except Exception:
+            # 中途失败：保存状态（通过异常携带审计上下文，不吞异常）
+            raise TimeGuardReadError(
+                f"stream interrupted at batch={batch_index}, "
+                f"processed_in={cum_in}, processed_out={cum_out}")
 
     def filter_rows(self, rows: Iterable[dict[str, Any]],
                     spec: PredictionSpec | datetime,
