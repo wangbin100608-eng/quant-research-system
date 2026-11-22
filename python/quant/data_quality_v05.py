@@ -113,43 +113,60 @@ class DataQuality:
         self.raw = resolve(str(raw_path))
         self.checks: list[dict[str, Any]] = []
 
-    def run(self) -> dict[str, Any]:
-        t = pq.read_table(str(self.raw))
-        rows = t.num_rows
-        syms = t.column("symbol").to_pylist()
-        doms = t.column("domain").to_pylist()
-        times = t.column("available_time").to_pylist()
-        pays = t.column("payload").to_pylist()
-        srcs = t.column("source").to_pylist()
-        # 缺失时间
-        miss_time = sum(1 for v in times if not v)
-        # 重复（symbol+domain+available_time+payload）
-        keys = list(zip(syms, doms, times, pays))
-        dup = rows - len(set(keys))
-        # 异常价格/成交量
-        bad_price = bad_volume = 0
-        for p in pays:
-            try:
-                d = json.loads(p or "{}")
-            except Exception:
-                continue
-            c = d.get("close")
-            v = d.get("volume")
-            if c is not None and (not isinstance(c, (int, float)) or c <= 0):
-                bad_price += 1
-            if v is not None and (not isinstance(v, (int, float)) or v < 0):
-                bad_volume += 1
-        # 来源完整性
-        miss_source = sum(1 for s in srcs if not s)
-        # 时间顺序（同 domain 的时间是否单调，按出现顺序简单检查）
-        out_of_order = 0
-        last = {}
-        for d, tm in zip(doms, times):
-            if not tm:
-                continue
-            if d in last and tm < last[d]:
-                out_of_order += 1
-            last[d] = tm
+    def run(self, batch_size: int = 65536) -> dict[str, Any]:
+        """v0.6 P3/P4：Arrow RecordBatch 分批处理（不全表读取/不构建完整 keys 列表）。"""
+        import math
+        pf = pq.ParquetFile(str(self.raw))
+        cols = [c for c in ("symbol", "domain", "available_time", "payload", "source")
+                if c in pf.schema_arrow.names]
+        miss_time = miss_source = dup = bad_price = bad_volume = 0
+        nan_count = inf_count = ohlc_bad = out_of_order = 0
+        seen: set[tuple] = set()
+        last_time: dict[str, str] = {}
+        rows = 0
+        for batch in pf.iter_batches(batch_size=batch_size, columns=cols):
+            d = {c: batch.column(c).to_pylist() for c in cols}
+            n = batch.num_rows
+            rows += n
+            for i in range(n):
+                av = d.get("available_time", [None] * n)[i]
+                sym = d.get("symbol", [""] * n)[i]
+                dom = d.get("domain", [""] * n)[i]
+                src = d.get("source", [""] * n)[i]
+                pay = d.get("payload", [""] * n)[i]
+                if not av:
+                    miss_time += 1
+                if not src:
+                    miss_source += 1
+                key = (sym, dom, av, pay)
+                if key in seen:
+                    dup += 1
+                else:
+                    seen.add(key)
+                if av and dom:
+                    grp = f"{dom}|{sym}"
+                    if grp in last_time and av < last_time[grp]:
+                        out_of_order += 1
+                    last_time[grp] = av
+                try:
+                    obj = json.loads(pay or "{}")
+                except Exception:
+                    continue
+                c = obj.get("close")
+                v = obj.get("volume")
+                for x in (c, v, obj.get("open"), obj.get("high"), obj.get("low")):
+                    if isinstance(x, float) and math.isnan(x):
+                        nan_count += 1
+                    elif isinstance(x, float) and math.isinf(x):
+                        inf_count += 1
+                if c is not None and (not isinstance(c, (int, float)) or c <= 0):
+                    bad_price += 1
+                if v is not None and (not isinstance(v, (int, float)) or v < 0):
+                    bad_volume += 1
+                hi, lo, op, cl = (obj.get("high"), obj.get("low"),
+                                  obj.get("open"), obj.get("close"))
+                if None not in (hi, lo, op, cl) and (hi < lo or not (lo <= op <= hi) or not (lo <= cl <= hi)):
+                    ohlc_bad += 1
         checks = [
             {"name": "missing_time", "count": miss_time, "pass": miss_time == 0},
             {"name": "duplicate_rows", "count": dup, "pass": dup == 0},
@@ -157,8 +174,17 @@ class DataQuality:
             {"name": "abnormal_volume", "count": bad_volume, "pass": bad_volume == 0},
             {"name": "missing_source", "count": miss_source, "pass": miss_source == 0},
             {"name": "time_order", "count": out_of_order, "pass": out_of_order == 0},
+            {"name": "nan_values", "count": nan_count, "pass": nan_count == 0},
+            {"name": "infinity_values", "count": inf_count, "pass": inf_count == 0},
+            {"name": "ohlc_consistency", "count": ohlc_bad, "pass": ohlc_bad == 0},
         ]
+        dims = {
+            "completeness": sum(1 for c in checks if c["name"] in ("missing_time", "missing_source") and c["pass"]) / 2 * 100,
+            "accuracy": sum(1 for c in checks if c["name"] in ("abnormal_price", "abnormal_volume", "nan_values", "infinity_values") and c["pass"]) / 4 * 100,
+            "consistency": sum(1 for c in checks if c["name"] in ("duplicate_rows", "time_order", "ohlc_consistency") and c["pass"]) / 3 * 100,
+        }
         score = round(sum(1 for c in checks if c["pass"]) / len(checks) * 100, 1)
         return {"generated_at": datetime.now(timezone.utc).isoformat(),
                 "rows": rows, "checks": checks, "quality_score": score,
-                "note": "评分不代替逐项检查结果；指数成分/行业当前版本不作为历史版本验证依据"}
+                "dimensions": dims, "batch_size": batch_size,
+                "note": "P3/P4: Arrow分批; 维度评分不掩盖关键字段缺失; 评分不代替逐项检查"}
