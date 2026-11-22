@@ -37,7 +37,8 @@ def test_module_delete_cycle_real():
     a = fa.Acceptance05()
     ok, reason = a.module_delete_cycle()
     assert ok, reason
-    assert "删除后导入失败=True" in reason and "恢复后导入成功=True" in reason
+    # 真正实现：多模块独立进程 del=1/rest=0（非 find_spec/文件路径）
+    assert "del=1/rest=0" in reason
 
 
 def test_report_tamper_four_kinds():
@@ -45,7 +46,8 @@ def test_report_tamper_four_kinds():
     a.actual_passed = 73
     ok, reason = a.report_tamper_matrix()
     assert ok, reason
-    for kind in ("passed", "total", "timestamp", "commit"):
+    # 真正实现：四类篡改交给 ReportVerifier（passed/result/commit/hash）
+    for kind in ("passed", "result", "commit", "hash"):
         assert kind in reason
 
 
