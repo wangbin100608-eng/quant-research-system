@@ -53,3 +53,27 @@ PYTHONPATH=python python3 -m pytest python/tests -q
 rust_core/target/release/timeguard selftest
 PYTHONPATH=python python3 python/scripts/final_acceptance_v05.py
 ```
+
+---
+
+## 收尾轮更新（同 v0.7.0）
+
+本轮对上一轮标记的未完成项做了可实施部分的补齐；外部权限/数据条件仍保持 BLOCKED。
+
+| 阶段 | 原状态 | 本轮推进 | 更新后状态 | 验证 |
+|---|---|---|---|---|
+| P11 | 部分 PASS | 新增 `src/statistics/advanced.py`：HAC/Newey-West、Moving Block Bootstrap、BH FDR、Holm、CSCV、DSR | 部分 PASS → **可验收完成（统计函数层）** | test_hac_newey_west / block_bootstrap_and_multiple_testing / cscv_dsr PASS；PBO 未实现仍保留 |
+| P13 | 部分 PASS | 新增 `src/research_memory/store.py`：9 张表 + data_lineage 血缘表 | 部分 PASS → **可验收完成（表结构/血缘层）** | test_research_memory_9_tables_and_lineage PASS；结论不可覆盖机制仍待业务层 |
+| P16 | 部分 PASS | 新增 `model_baselines_v07.py`：六组 × 3 基准模型；US 三组 PASS，CN_A 三组因样本不足 BLOCKED | 部分 PASS（如实） | test_model_baseline_report PASS；输出 data/reports/model_baselines_v07.json |
+| P20 | 部分 PASS | 新增 `scripts/security_scan_v07.sh` 只读扫描：当前索引 CLEAN、工作区无 token、日志无泄露；Git 历史旧密钥为事实记录 | 部分 PASS（扫描能力完成，Docker 层/CI 仍 NOT_TESTED） | data/reports/security_scan_v07.txt |
+| P21 | 部分 PASS | 本轮补强 5 项测试；总览区分可验收完成/部分 PASS/BLOCKED/NOT_TESTED | 部分 PASS（整体仍未正式完成 v0.7.0） | pytest 全量 + 验收 + Rust |
+
+### 仍未完成的真实边界
+
+- P2/P3：Tushare/Alpaca/交易所 Provider 与外部权限仍 BLOCKED；分钟/微观结构数据 BLOCKED；断点续传/不可变分区只到接口契约层。
+- P5：分钟/横截面/财务/宏观完整特征未实现（数据缺口）。
+- P11：PBO 与完整过拟合诊断未实现。
+- P16：Ridge/ElasticNet/Ranker 基线中 Ridge/Linear 已跑，Ranker 与树模型六组训练未完成；CN_A 样本 BLOCKED。
+- P17：Shadow Mode 代码/测试完成；真实未来数据预测仍 NOT_TESTED。
+- P20：Docker 镜像层扫描、CI 日志扫描、日志脱敏实现仍 NOT_TESTED；Git 历史旧密钥需人工授权才可改写。
+- P21：**整体未达到正式完成标准**，因为上述 BLOCKED/NOT_TESTED 项仍存在；本轮只把可实施部分推进到可验证状态。

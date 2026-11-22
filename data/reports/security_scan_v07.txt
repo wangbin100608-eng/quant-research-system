@@ -1,0 +1,26 @@
+=== 1) 当前索引敏感项 ===
+CLEAN
+=== 2) Git 历史中出现过密钥的提交 ===
+d551292 v0.3.0: 真实数据扩展、ALFRED历史版本、多期限验证、六库知识与AI智能体、密钥安全轮换
+c698538 v0.2.0: 严格时间隔离量化研究系统完整交付
+=== 3) 工作区文件内容扫描（API key/token 模式） ===
+NO_MATCH
+=== 4) Docker / CI 配置 ===
+deploy/:
+total 28
+drwxr-xr-x  2 root root 4096 Nov 22 03:28 .
+drwxr-xr-x 16 root root 4096 Nov 22 10:31 ..
+-rw-------  1 root root  369 Nov 22 03:28 cloudflared-quant.service
+-rw-------  1 root root  221 Nov 22 03:13 logrotate.conf
+-rw-------  1 root root  600 Nov 22 03:13 quant-loop.service
+-rw-------  1 root root  189 Nov 22 03:13 quant-loop.timer
+-rw-------  1 root root  770 Nov 22 03:13 quant-web.service
+
+docker/:
+total 16
+drwxr-xr-x  2 root root 4096 Nov 22 04:48 .
+drwxr-xr-x 16 root root 4096 Nov 22 10:31 ..
+-rw-------  1 root root 1389 Nov 22 04:48 Dockerfile
+-rw-------  1 root root 2094 Nov 22 04:48 docker-compose.yml
+=== 5) 日志脱敏检查 ===
+NO_LOG_LEAK

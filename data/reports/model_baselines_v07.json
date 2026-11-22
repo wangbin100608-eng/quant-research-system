@@ -1,0 +1,142 @@
+{
+  "generated_at": "2026-11-22T11:19:36.929394+00:00",
+  "version": "v0.7.0",
+  "data_source": "real raw_v03",
+  "note": "样本量小的结果仅作基线记录，不宣称稳定预测能力",
+  "groups": {
+    "CN_A_1d": {
+      "status": "BLOCKED",
+      "reason": "insufficient samples n=0",
+      "n": 0
+    },
+    "CN_A_5d": {
+      "status": "BLOCKED",
+      "reason": "insufficient samples n=0",
+      "n": 0
+    },
+    "CN_A_20d": {
+      "status": "BLOCKED",
+      "reason": "insufficient samples n=0",
+      "n": 0
+    },
+    "US_1d": {
+      "status": "PASS",
+      "n": 1804,
+      "train_n": 1262,
+      "test_n": 542,
+      "models": {
+        "naive_mean": {
+          "n": 542,
+          "mae": 0.01329769230154153,
+          "rmse": 0.01838554125873623,
+          "direction_accuracy": 0.5313653136531366,
+          "rank_ic": 0.03550565330716368,
+          "spearman": 0.03550565330716368,
+          "insufficient_evidence": true,
+          "evidence_note": "样本不足或 Rank IC 无信号，不得宣称模型具有稳定预测能力",
+          "evidence": "preliminary_evidence"
+        },
+        "linear": {
+          "n": 542,
+          "mae": 0.01325867346517458,
+          "rmse": 0.01838267591454529,
+          "direction_accuracy": 0.540590405904059,
+          "rank_ic": 0.05340953553529162,
+          "spearman": 0.05340953553529162,
+          "insufficient_evidence": false,
+          "evidence": "preliminary_evidence"
+        },
+        "ridge": {
+          "n": 542,
+          "mae": 0.013257559620692472,
+          "rmse": 0.018377656111375377,
+          "direction_accuracy": 0.540590405904059,
+          "rank_ic": 0.0535464785209223,
+          "spearman": 0.0535464785209223,
+          "insufficient_evidence": false,
+          "evidence": "preliminary_evidence"
+        }
+      }
+    },
+    "US_5d": {
+      "status": "PASS",
+      "n": 1803,
+      "train_n": 1262,
+      "test_n": 541,
+      "models": {
+        "naive_mean": {
+          "n": 541,
+          "mae": 0.028869701972515267,
+          "rmse": 0.04036702261743344,
+          "direction_accuracy": 0.5286506469500925,
+          "rank_ic": -0.014433508475565347,
+          "spearman": -0.014433508475565347,
+          "insufficient_evidence": true,
+          "evidence_note": "样本不足或 Rank IC 无信号，不得宣称模型具有稳定预测能力",
+          "evidence": "preliminary_evidence"
+        },
+        "linear": {
+          "n": 541,
+          "mae": 0.028884999636048948,
+          "rmse": 0.04037963464113778,
+          "direction_accuracy": 0.5027726432532348,
+          "rank_ic": -0.013017971214832294,
+          "spearman": -0.013017971214832294,
+          "insufficient_evidence": true,
+          "evidence_note": "样本不足或 Rank IC 无信号，不得宣称模型具有稳定预测能力",
+          "evidence": "preliminary_evidence"
+        },
+        "ridge": {
+          "n": 541,
+          "mae": 0.028876768661193472,
+          "rmse": 0.04036707070777574,
+          "direction_accuracy": 0.5064695009242144,
+          "rank_ic": -0.009559158438164787,
+          "spearman": -0.009559158438164787,
+          "insufficient_evidence": true,
+          "evidence_note": "样本不足或 Rank IC 无信号，不得宣称模型具有稳定预测能力",
+          "evidence": "preliminary_evidence"
+        }
+      }
+    },
+    "US_20d": {
+      "status": "PASS",
+      "n": 1772,
+      "train_n": 1240,
+      "test_n": 532,
+      "models": {
+        "naive_mean": {
+          "n": 532,
+          "mae": 0.056131072634916214,
+          "rmse": 0.07666738344853463,
+          "direction_accuracy": 0.5545112781954887,
+          "rank_ic": -0.019863950587825183,
+          "spearman": -0.019863950587825183,
+          "insufficient_evidence": true,
+          "evidence_note": "样本不足或 Rank IC 无信号，不得宣称模型具有稳定预测能力",
+          "evidence": "preliminary_evidence"
+        },
+        "linear": {
+          "n": 532,
+          "mae": 0.05734563013145196,
+          "rmse": 0.07770508038180199,
+          "direction_accuracy": 0.43609022556390975,
+          "rank_ic": -0.11493085434035373,
+          "spearman": -0.11493085434035373,
+          "insufficient_evidence": false,
+          "evidence": "preliminary_evidence"
+        },
+        "ridge": {
+          "n": 532,
+          "mae": 0.05720233285967371,
+          "rmse": 0.07748868630955194,
+          "direction_accuracy": 0.4398496240601504,
+          "rank_ic": -0.08472791034093008,
+          "spearman": -0.08472791034093008,
+          "insufficient_evidence": false,
+          "evidence": "preliminary_evidence"
+        }
+      }
+    }
+  }
+}

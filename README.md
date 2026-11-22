@@ -1,7 +1,7 @@
 # A股与美股量化研究系统 v0.7.0
 
 > 当前交付：v0.7.0 Autonomous Quantitative Research Lab（P0-P21 执行闭环，含受限项）｜ 远端分支：`main`
-> 测试结果：**134 passed** ｜ 验收：**6/6 PASS** ｜ Rust selftest：**PASS**
+> 测试结果：**139 passed** ｜ 验收：**6/6 PASS** ｜ Rust selftest：**PASS**
 
 一套**严格点位时间隔离**、可持续进行历史模拟预测、误差分析与知识迭代的量化研究系统。**不连接真实证券账户，不执行真实交易。**
 
@@ -12,7 +12,7 @@
 - 每次预测前，Rust `TimeGuard` 对整个快照做全量流式扫描，未来数据或时点未知数据立即中止预测。
 - 知识库按 `asof_YYYY` 物理分目录，快照冻结（含文件 SHA-256）后不可被后续数据改变。
 - 预测记录使用 HMAC-SHA256 + 链哈希 + append-only 触发器保护；包含 prediction_id、数据快照、模型版本、特征版本、代码 Commit、训练数据最大 available_at、预测 cutoff、frozen_at、输入/输出 SHA-256、密钥版本与修正链。
-- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 **134 项测试全部通过**。
+- 自动化防泄漏测试覆盖未来数据、未来文档、知识图谱、财报、归一化、模型权重、缓存、历史预测等要求；当前 **139 项测试全部通过**。
 - 严格模式下，宏观数据 `time_basis` 为 `estimated` / `unknown` / `imputed` 的记录禁止使用。
 - 统一 `TimeGuardReader` 强制所有历史数据读取经过时间门禁；无论列投影如何选择，内部自动读取 available_at 过滤后再投影；`query_sql` 强制显式 cutoff、无时间字段严格拒绝、防子查询绕过；`stream_parquet` 分批流式读取并逐批审计，结果与全量一致。
 - 历史股票池按年度 cutoff 构建：退市记录双时间校验（信息发布时间 + 真实退市日期），未来才公布的退市信息不能反向进入早期快照；指数成分/行业当前名单标 BLOCKED，不冒充历史版本。
@@ -97,8 +97,9 @@ python3 python/scripts/build_dashboard.py
 - P5：Bootstrap 置信区间、Bonferroni 多重检验校正、统计证据等级。
 - P6：交付报告与文档一致性。
 - P0-P21 逐阶段执行结果总览：[reports/v0.7.0/P21_EXECUTION_SUMMARY.md](reports/v0.7.0/P21_EXECUTION_SUMMARY.md)
-- 验证：**134 项测试通过**，验收 **6/6 PASS**，Rust selftest **PASS**。
-- 受限：P2/P3/P5/P10-P13/P16/P20/P21 含部分项，Tushare/Alpaca 等外部数据源 BLOCKED，高级统计与完整模型基线未全部完成——详见总览，未写成完成。
+- 验证：**139 项测试通过**，验收 **6/6 PASS**，Rust selftest **PASS**。
+- 收尾：P11 高级统计（HAC/Block Bootstrap/BH/Holm/CSCV/DSR）、P13 Research Memory 9表+血缘、P16 六组基线（US PASS/CN_A BLOCKED）、P20 密钥扫描已补齐
+- 受限：P2/P3/P5/P16/P20/P21 仍含部分项，Tushare/Alpaca 等外部数据源 BLOCKED，高级统计与完整模型基线未全部完成——详见总览，未写成完成。
 
 v0.6.0 交付报告：[docs/V0.6.0_DELIVERY_REPORT.md](docs/V0.6.0_DELIVERY_REPORT.md)
 

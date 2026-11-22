@@ -5,8 +5,8 @@
   "environment": {
     "python": "3.12.3",
     "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
-    "commit": "998521737ccb0daa33a5ddbbde639d2fe520a56e",
-    "started_at": "2026-11-22T10:30:37.853313+00:00"
+    "commit": "8ffc3c26ea700f082f6d20878dbc9055528afe44",
+    "started_at": "2026-11-22T11:20:53.032443+00:00"
   },
   "checks": [
     {
@@ -15,11 +15,11 @@
       "description": "pytest 真实执行",
       "input": "python/tests",
       "execution": "subprocess",
-      "started_at": "2026-11-22T10:30:37.853502+00:00",
+      "started_at": "2026-11-22T11:20:53.032616+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T10:31:01.047379+00:00",
-      "duration_seconds": 23.194
+      "finished_at": "2026-11-22T11:21:19.467221+00:00",
+      "duration_seconds": 26.446
     },
     {
       "id": "02",
@@ -27,11 +27,11 @@
       "description": "模块删除→FAIL→恢复→PASS",
       "input": "quant/timeguard_reader.py",
       "execution": "隔离目录真实删除/恢复",
-      "started_at": "2026-11-22T10:31:01.047419+00:00",
+      "started_at": "2026-11-22T11:21:19.495374+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T10:31:04.301477+00:00",
-      "duration_seconds": 3.254
+      "finished_at": "2026-11-22T11:21:25.258122+00:00",
+      "duration_seconds": 5.763
     },
     {
       "id": "03",
@@ -39,11 +39,11 @@
       "description": "报告四类篡改检测",
       "input": "test_report_v03.json",
       "execution": "生成篡改副本并验证",
-      "started_at": "2026-11-22T10:31:04.301509+00:00",
+      "started_at": "2026-11-22T11:21:25.258156+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T10:31:04.312916+00:00",
-      "duration_seconds": 0.011
+      "finished_at": "2026-11-22T11:21:25.281830+00:00",
+      "duration_seconds": 0.024
     },
     {
       "id": "04",
@@ -51,11 +51,11 @@
       "description": "三接口未来数据注入",
       "input": "Parquet/DuckDB/KB",
       "execution": "注入未来行并查询",
-      "started_at": "2026-11-22T10:31:04.312961+00:00",
+      "started_at": "2026-11-22T11:21:25.281849+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T10:31:04.951281+00:00",
-      "duration_seconds": 0.638
+      "finished_at": "2026-11-22T11:21:26.087002+00:00",
+      "duration_seconds": 0.805
     },
     {
       "id": "05",
@@ -63,11 +63,11 @@
       "description": "六库严格实名检查",
       "input": "kb_items + hypotheses",
       "execution": "strict_kb_v041 真实记录与时间范围",
-      "started_at": "2026-11-22T10:31:04.951299+00:00",
+      "started_at": "2026-11-22T11:21:26.087021+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T10:31:04.976848+00:00",
-      "duration_seconds": 0.026
+      "finished_at": "2026-11-22T11:21:26.111245+00:00",
+      "duration_seconds": 0.024
     },
     {
       "id": "06",
@@ -75,14 +75,14 @@
       "description": "coverage 真实执行与门槛",
       "input": "python/quant",
       "execution": "coverage run + report",
-      "started_at": "2026-11-22T10:31:04.976865+00:00",
+      "started_at": "2026-11-22T11:21:26.111265+00:00",
       "result": "PASS",
       "failure_reason": "",
-      "finished_at": "2026-11-22T10:31:42.962956+00:00",
-      "duration_seconds": 37.986
+      "finished_at": "2026-11-22T11:21:59.303024+00:00",
+      "duration_seconds": 33.192
     }
   ],
-  "actual_passed": 134,
+  "actual_passed": 139,
   "summary": {
     "total": 6,
     "passed": 6
