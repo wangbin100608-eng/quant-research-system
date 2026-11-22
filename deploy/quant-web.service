@@ -1,0 +1,19 @@
+[Unit]
+Description=Quant Research Web Dashboard
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/工作区/股票
+Environment=QUANT_ROOT=/root/工作区/股票
+Environment=TZ=Asia/Shanghai
+ExecStartPre=/bin/bash -c 'cd /root/工作区/股票 && PYTHONPATH=python python3 scripts/build_dashboard.py'
+ExecStart=/usr/bin/python3 -m streamlit run /root/工作区/股票/python/dashboard/app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/root/工作区/股票/data/logs/systemd-web.log
+StandardError=append:/root/工作区/股票/data/logs/systemd-web.log
+
+[Install]
+WantedBy=multi-user.target

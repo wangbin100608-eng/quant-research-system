@@ -1,0 +1,214 @@
+{
+  "artifacts": {
+    "actual_path": "/root/工作区/股票/data/knowledge/raw_documents/actuals/actual_2002.parquet",
+    "actual_rows": 2538,
+    "analysis": {
+      "finding": "基准模型给出全局均值，横截面区分度不足",
+      "method": "sign_error_decomposition",
+      "metrics": {
+        "direction_accuracy": 0.0,
+        "mae": 0.2605509408900661,
+        "n": 7,
+        "rmse": 0.27313684622030876
+      },
+      "year": 2002
+    },
+    "audit": {
+      "cutoff": "2001-12-31",
+      "engine": "rust",
+      "hashes": [
+        [
+          "audit/create.json",
+          "27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b"
+        ],
+        [
+          "clean_data.parquet",
+          "04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5"
+        ],
+        [
+          "clean_data.timeindex",
+          "ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da"
+        ],
+        [
+          "knowledge.parquet",
+          "b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6"
+        ],
+        [
+          "knowledge.timeindex",
+          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ],
+        [
+          "model_registry.json",
+          "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        ]
+      ],
+      "manifest": "unsealed",
+      "ok": true,
+      "scanned": 5056,
+      "violations": []
+    },
+    "benchmark": {
+      "mean": 0.023183950689168294,
+      "n": 7,
+      "std": 0.3106686229133494,
+      "type": "historical_mean"
+    },
+    "feature_rows": 14,
+    "final_audit": {
+      "cutoff": "2001-12-31",
+      "engine": "rust",
+      "hashes": [
+        [
+          "audit/create.json",
+          "27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b"
+        ],
+        [
+          "clean_data.parquet",
+          "04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5"
+        ],
+        [
+          "clean_data.timeindex",
+          "ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da"
+        ],
+        [
+          "features.parquet",
+          "63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58"
+        ],
+        [
+          "knowledge.parquet",
+          "b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6"
+        ],
+        [
+          "knowledge.timeindex",
+          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ],
+        [
+          "model_registry.json",
+          "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        ],
+        [
+          "models/benchmark.meta.json",
+          "278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b"
+        ],
+        [
+          "models/benchmark.pkl",
+          "c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a"
+        ],
+        [
+          "models/lightgbm.meta.json",
+          "ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703"
+        ],
+        [
+          "models/lightgbm.pkl",
+          "93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff"
+        ]
+      ],
+      "manifest": "sealed",
+      "ok": true,
+      "scanned": 5056,
+      "violations": []
+    },
+    "hypothesis": {
+      "content": "过去一年正收益的标的在下一年继续跑赢的概率高于基准",
+      "hypothesis_id": "h_2002",
+      "year": 2002
+    },
+    "lgbm": {
+      "n": 7,
+      "params": {
+        "enabled": true,
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_child_samples": 20,
+        "n_estimators": 120,
+        "num_leaves": 15
+      }
+    },
+    "metrics": {
+      "direction_accuracy": 0.0,
+      "mae": 0.2605509408900661,
+      "n": 7,
+      "rmse": 0.27313684622030876
+    },
+    "pred_id": "2dc479061ec7",
+    "pred_result": {
+      "cutoff_date": "2001-12-31",
+      "model_version": "benchmark_mean_v1",
+      "prediction_interval": {
+        "lower": -0.585727,
+        "upper": 0.632094
+      },
+      "prediction_year": 2002,
+      "predictions": [
+        {
+          "predicted_return": 0.023184,
+          "symbol": "SH000001"
+        },
+        {
+          "predicted_return": 0.023184,
+          "symbol": "SZ399001"
+        },
+        {
+          "predicted_return": 0.023184,
+          "symbol": "SPX"
+        },
+        {
+          "predicted_return": 0.023184,
+          "symbol": "IXIC"
+        },
+        {
+          "predicted_return": 0.023184,
+          "symbol": "DJI"
+        },
+        {
+          "predicted_return": 0.023184,
+          "symbol": "AAPL"
+        },
+        {
+          "predicted_return": 0.023184,
+          "symbol": "MSFT"
+        }
+      ],
+      "target": "index_annual_return"
+    },
+    "validation": {
+      "hypothesis_id": "h_2002",
+      "method": "oos_split",
+      "oos_sample": 7,
+      "result": "pending_review"
+    },
+    "verification": {
+      "checks": {
+        "future_rows": 0,
+        "hashes_match": true,
+        "mismatched_files": [],
+        "sealed": false,
+        "time_boundary_ok": true
+      },
+      "ok": true,
+      "snapshot": "/root/工作区/股票/data/knowledge/snapshots/asof_2001",
+      "year": 2001
+    }
+  },
+  "completed": [
+    "lock_cutoff",
+    "load_snapshot",
+    "check_ranges",
+    "build_features",
+    "train_or_load_model",
+    "predict_next_year",
+    "freeze_prediction",
+    "import_actual",
+    "evaluate_error",
+    "analyze_errors",
+    "update_knowledge",
+    "generate_hypotheses",
+    "validate_hypotheses",
+    "update_rules",
+    "compare_incremental_vs_full",
+    "create_next_snapshot",
+    "loop"
+  ],
+  "updated_at": "2026-11-22T04:45:55.787674",
+  "year": 2002
+}

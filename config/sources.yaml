@@ -1,0 +1,34 @@
+# 公开数据源适配器配置
+defaults:
+  timeout_seconds: 20
+  retries: 3
+  user_agent: quant-research/0.1 (research-only)
+  cache_dir: data/raw
+
+sources:
+  fred:
+    enabled: true
+    mode: auto
+    base_url: https://fred.stlouisfed.org/graph/fredgraph.csv
+    series:
+      - {id: DGS10, name: 美国10年期国债收益率}
+      - {id: CPIAUCSL, name: 美国CPI}
+      - {id: GDP, name: 美国GDP}
+      - {id: UNRATE, name: 美国失业率}
+  sec_edgar:
+    enabled: true
+    mode: auto
+    base_url: https://data.sec.gov/submissions
+    user_agent: research quant-research contact@example.com
+  akshare_cn:
+    enabled: true
+    mode: auto
+    note: 国内网络环境下可选；离线时使用 fixture
+  fixture:
+    enabled: true
+    start_year: 2000
+    end_year: 2004
+    markets: [CN_A, US]
+    symbols:
+      CN_A: [SH000001, SZ399001, 600000.SH, 600519.SH, 000001.SZ]
+      US: [SPX, IXIC, AAPL, MSFT, GOOG]

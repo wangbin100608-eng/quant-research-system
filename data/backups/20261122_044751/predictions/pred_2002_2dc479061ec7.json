@@ -1,0 +1,61 @@
+{
+  "chain_index": 1,
+  "chain_prev": "0000000000000000000000000000000000000000000000000000000000000000",
+  "created_at": "2026-11-22T04:45:54.555311",
+  "hash": "2dc479061ec723a188de16d18e03a94df040d03beb3322756f5767a9eab2d3b5",
+  "hmac_sig": "f03d8150d97787fdd7661aa0da1f80b4aa09cbc04fff211d45d6c685078ce987",
+  "note": "sealed prediction; append-only, HMAC chain signed",
+  "prediction_year": 2002,
+  "result": {
+    "cutoff_date": "2001-12-31",
+    "model_version": "benchmark_mean_v1",
+    "prediction_interval": {
+      "lower": -0.585727,
+      "upper": 0.632094
+    },
+    "prediction_year": 2002,
+    "predictions": [
+      {
+        "predicted_return": 0.023184,
+        "symbol": "SH000001"
+      },
+      {
+        "predicted_return": 0.023184,
+        "symbol": "SZ399001"
+      },
+      {
+        "predicted_return": 0.023184,
+        "symbol": "SPX"
+      },
+      {
+        "predicted_return": 0.023184,
+        "symbol": "IXIC"
+      },
+      {
+        "predicted_return": 0.023184,
+        "symbol": "DJI"
+      },
+      {
+        "predicted_return": 0.023184,
+        "symbol": "AAPL"
+      },
+      {
+        "predicted_return": 0.023184,
+        "symbol": "MSFT"
+      }
+    ],
+    "target": "index_annual_return"
+  },
+  "schema": "v0.2.0-hmac-chain",
+  "spec": {
+    "allow_future_data": false,
+    "created_at": "2026-11-22T04:45:45.502307",
+    "cutoff_date": "2001-12-31",
+    "feature_version": "feature_v1",
+    "knowledge_snapshot_id": "asof_2001",
+    "model_version": "model_benchmark_mean_v1_y2002",
+    "prediction_year": 2002,
+    "strict_point_in_time": true,
+    "training_start_date": "2000-01-01"
+  }
+}

@@ -1,0 +1,11 @@
+[Unit]
+Description=Quant Research Annual Loop Timer
+Requires=quant-loop.service
+
+[Timer]
+OnCalendar=*-*-* 03:30:00
+Persistent=true
+Unit=quant-loop.service
+
+[Install]
+WantedBy=timers.target

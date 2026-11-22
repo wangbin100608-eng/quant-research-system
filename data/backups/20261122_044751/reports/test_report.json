@@ -1,0 +1,1109 @@
+{
+  "generated_at": "2026-11-22T04:47:05.492590",
+  "version": "0.2.0",
+  "pytest": {
+    "exit_code": 0,
+    "summary": "37 passed, 15 warnings in 1.74s"
+  },
+  "coverage_real": {
+    "data_origin": "real",
+    "synthetic": false,
+    "generated_at": "2026-11-22T03:43:26.705946",
+    "total_rows": 12716,
+    "by_market_year_domain": [
+      {
+        "market": "CN_A",
+        "year": "2000",
+        "domain": "info",
+        "rows": 3,
+        "symbols": 3
+      },
+      {
+        "market": "CN_A",
+        "year": "2000",
+        "domain": "price",
+        "rows": 478,
+        "symbols": 2
+      },
+      {
+        "market": "CN_A",
+        "year": "2001",
+        "domain": "price",
+        "rows": 480,
+        "symbols": 2
+      },
+      {
+        "market": "CN_A",
+        "year": "2002",
+        "domain": "price",
+        "rows": 474,
+        "symbols": 2
+      },
+      {
+        "market": "CN_A",
+        "year": "2003",
+        "domain": "price",
+        "rows": 482,
+        "symbols": 2
+      },
+      {
+        "market": "CN_A",
+        "year": "2004",
+        "domain": "price",
+        "rows": 486,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2000",
+        "domain": "announcement",
+        "rows": 2,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2000",
+        "domain": "fundamental",
+        "rows": 8,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2000",
+        "domain": "info",
+        "rows": 5,
+        "symbols": 5
+      },
+      {
+        "market": "US",
+        "year": "2000",
+        "domain": "macro",
+        "rows": 787,
+        "symbols": 6
+      },
+      {
+        "market": "US",
+        "year": "2000",
+        "domain": "price",
+        "rows": 1260,
+        "symbols": 5
+      },
+      {
+        "market": "US",
+        "year": "2001",
+        "domain": "fundamental",
+        "rows": 7,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2001",
+        "domain": "macro",
+        "rows": 786,
+        "symbols": 7
+      },
+      {
+        "market": "US",
+        "year": "2001",
+        "domain": "price",
+        "rows": 1240,
+        "symbols": 5
+      },
+      {
+        "market": "US",
+        "year": "2002",
+        "domain": "announcement",
+        "rows": 5,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2002",
+        "domain": "fundamental",
+        "rows": 8,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2002",
+        "domain": "macro",
+        "rows": 791,
+        "symbols": 7
+      },
+      {
+        "market": "US",
+        "year": "2002",
+        "domain": "price",
+        "rows": 1260,
+        "symbols": 5
+      },
+      {
+        "market": "US",
+        "year": "2003",
+        "domain": "announcement",
+        "rows": 12,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2003",
+        "domain": "fundamental",
+        "rows": 8,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2003",
+        "domain": "macro",
+        "rows": 791,
+        "symbols": 7
+      },
+      {
+        "market": "US",
+        "year": "2003",
+        "domain": "price",
+        "rows": 1260,
+        "symbols": 5
+      },
+      {
+        "market": "US",
+        "year": "2004",
+        "domain": "announcement",
+        "rows": 15,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2004",
+        "domain": "fundamental",
+        "rows": 8,
+        "symbols": 2
+      },
+      {
+        "market": "US",
+        "year": "2004",
+        "domain": "macro",
+        "rows": 793,
+        "symbols": 7
+      },
+      {
+        "market": "US",
+        "year": "2004",
+        "domain": "price",
+        "rows": 1260,
+        "symbols": 5
+      },
+      {
+        "market": "US",
+        "year": "2005",
+        "domain": "macro",
+        "rows": 7,
+        "symbols": 4
+      }
+    ],
+    "missing_ranges": [
+      {
+        "source": "eastmoney_cn",
+        "symbol": "SH000300",
+        "reason": "empty_response"
+      },
+      {
+        "source": "eastmoney_cn",
+        "domain": "index_member",
+        "reason": "东方财富历史指数成分股接口不稳定；本适配器未获取，记为缺口"
+      },
+      {
+        "source": "eastmoney_cn",
+        "domain": "delisted",
+        "reason": "退市股名单需专门接口；本适配器未获取，记为缺口"
+      },
+      {
+        "source": "eastmoney_cn",
+        "domain": "fundamental",
+        "reason": "A股财报真实披露日需专门接口；本适配器未获取，记为缺口"
+      },
+      {
+        "source": "yahoo_us",
+        "domain": "index_member",
+        "reason": "Yahoo 不提供历史指数成分股；记为缺口"
+      },
+      {
+        "source": "yahoo_us",
+        "domain": "delisted",
+        "reason": "退市股名单需专门数据源；记为缺口"
+      },
+      {
+        "source": "sec_v2",
+        "domain": "news",
+        "reason": "SEC 提供 filing 而非新闻；新闻需专门数据源，记为缺口"
+      },
+      {
+        "source": "news_v2",
+        "year": 2000,
+        "reason": "429 Client Error: Too Many Requests for url: https://api.gdeltproject.org/api/v2/doc/doc?query=(stock%20market%20OR%20earnings)%20sourcelang:english&mode=artlist&maxrecords=50&format=json&startdatetime=20000101000000&enddatetime=20001231235959"
+      },
+      {
+        "source": "news_v2",
+        "year": 2001,
+        "reason": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      },
+      {
+        "source": "news_v2",
+        "year": 2002,
+        "reason": "429 Client Error: Too Many Requests for url: https://api.gdeltproject.org/api/v2/doc/doc?query=(stock%20market%20OR%20earnings)%20sourcelang:english&mode=artlist&maxrecords=50&format=json&startdatetime=20020101000000&enddatetime=20021231235959"
+      },
+      {
+        "source": "news_v2",
+        "year": 2003,
+        "reason": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      },
+      {
+        "source": "news_v2",
+        "year": 2004,
+        "reason": "Expecting value: line 1 column 1 (char 0)"
+      },
+      {
+        "source": "news_v2",
+        "domain": "news",
+        "reason": "公开新闻源对 2000-2004 历史覆盖不完整；缺口如上逐年列出"
+      }
+    ],
+    "sources": [
+      "eastmoney_cn",
+      "yahoo_us",
+      "fred_v2",
+      "sec_v2",
+      "news_v2"
+    ],
+    "note": "真实公开数据源覆盖率；缺失范围明确列出，未用合成数据补齐。"
+  },
+  "coverage_fixture": {
+    "ok": true,
+    "generated_at": "2026-11-22T03:07:02.568433",
+    "file": "data/raw/raw_all.parquet",
+    "total_rows": 13640,
+    "symbols": [
+      "000001.SZ",
+      "600000.SH",
+      "600519.SH",
+      "AAPL",
+      "GOOG",
+      "IXIC",
+      "MACRO",
+      "MSFT",
+      "SH000001",
+      "SPX",
+      "SZ399001"
+    ],
+    "markets": [
+      "CN_A",
+      "GLOBAL",
+      "MIXED",
+      "US"
+    ],
+    "domains": {
+      "price": {
+        "rows": 13050,
+        "min": "2000-01-03",
+        "max": "2004-12-31"
+      },
+      "fundamental": {
+        "rows": 200,
+        "min": "2000-04-15",
+        "max": "2005-03-15"
+      },
+      "macro": {
+        "rows": 120,
+        "min": "2000-02-12",
+        "max": "2005-01-12"
+      },
+      "news": {
+        "rows": 180,
+        "min": "2000-01-07",
+        "max": "2004-12-19"
+      },
+      "index_member": {
+        "rows": 40,
+        "min": "2000-01-05",
+        "max": "2004-01-05"
+      },
+      "corporate_action": {
+        "rows": 50,
+        "min": "2000-06-15",
+        "max": "2004-06-15"
+      }
+    },
+    "years_covered": [
+      "2000",
+      "2001",
+      "2002",
+      "2003",
+      "2004",
+      "2005"
+    ],
+    "sources": [
+      "fixture"
+    ],
+    "synthetic": true,
+    "missing_ranges": [
+      {
+        "scope": "all",
+        "reason": "synthetic fixture used; real source coverage not proven"
+      },
+      {
+        "scope": "real_sources",
+        "reason": "no live source rows available"
+      }
+    ],
+    "training_ready": true,
+    "note": "fixture 数据仅用于端到端验收；真实数据覆盖率需按数据源报告单独验证。"
+  },
+  "time_audits": {
+    "asof_2001": {
+      "rust": {
+        "ok": true,
+        "scanned": 5056,
+        "violations": [],
+        "manifest": "sealed",
+        "cutoff": "2001-12-31",
+        "hashes": [
+          [
+            "audit/create.json",
+            "27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b"
+          ],
+          [
+            "clean_data.parquet",
+            "04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5"
+          ],
+          [
+            "clean_data.timeindex",
+            "ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da"
+          ],
+          [
+            "features.parquet",
+            "63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58"
+          ],
+          [
+            "knowledge.parquet",
+            "b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6"
+          ],
+          [
+            "knowledge.timeindex",
+            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          ],
+          [
+            "model_registry.json",
+            "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+          ],
+          [
+            "models/benchmark.meta.json",
+            "278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b"
+          ],
+          [
+            "models/benchmark.pkl",
+            "c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a"
+          ],
+          [
+            "models/lightgbm.meta.json",
+            "ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703"
+          ],
+          [
+            "models/lightgbm.pkl",
+            "93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff"
+          ]
+        ],
+        "engine": "rust"
+      },
+      "kb_verify": {
+        "year": 2001,
+        "snapshot": "/root/工作区/股票/data/knowledge/snapshots/asof_2001",
+        "checks": {
+          "sealed": true,
+          "hashes_match": true,
+          "mismatched_files": [],
+          "future_rows": 0,
+          "time_boundary_ok": true
+        },
+        "ok": true
+      }
+    },
+    "asof_2002": {
+      "rust": {
+        "ok": true,
+        "scanned": 7597,
+        "violations": [],
+        "manifest": "sealed",
+        "cutoff": "2002-12-31",
+        "hashes": [
+          [
+            "audit/create.json",
+            "0541069585552f9da707bc50c968b048bcb698be2ca44a4f8c4f0824bb1d4097"
+          ],
+          [
+            "clean_data.parquet",
+            "9f7c07443e3efbe8433cdbf7ba3c3fc5a45881e08b5533084aa82ede40efee0f"
+          ],
+          [
+            "clean_data.timeindex",
+            "dd0a8e31199c50ab05e791b64b4e4701683d499130649653ea4dbec4fc3c8c6a"
+          ],
+          [
+            "features.parquet",
+            "b1ec72d5976b0d52cf54799591e2c7151686042c2279f3fa870d7f9b771f49e3"
+          ],
+          [
+            "knowledge.parquet",
+            "1a9f57cf066de09ac01d745e8178454c378e86ed7e4c7dc17ca8f82e886dc9cc"
+          ],
+          [
+            "knowledge.timeindex",
+            "dcd5d9a1bcc28ac4417803b198b1fd8f97688270f64456c5267f145c79768566"
+          ],
+          [
+            "model_registry.json",
+            "c83421d74af95e21f508e6d3dc76357f8fd2215d95b9e87912fd13f6dbecf53f"
+          ],
+          [
+            "models/benchmark.meta.json",
+            "471fcd15857ea47737f5df48c7b91ddba12c86a5a855010ac5a8e47f1840f1c2"
+          ],
+          [
+            "models/benchmark.pkl",
+            "1ec3ab28f3f7e4ed58bc7535fefeddb808ece028e44a708fa8a97d4d049ee617"
+          ],
+          [
+            "models/lightgbm.meta.json",
+            "c03a4331106c54e2caf58104839f39d94a117b00f6e6c7aea40110c6fdc2a170"
+          ],
+          [
+            "models/lightgbm.pkl",
+            "a5ea935c3c723f607ca75d2b97ffe10a8a274e34638b8b8fbc095a69cc29a6cd"
+          ]
+        ],
+        "engine": "rust"
+      },
+      "kb_verify": {
+        "year": 2002,
+        "snapshot": "/root/工作区/股票/data/knowledge/snapshots/asof_2002",
+        "checks": {
+          "sealed": true,
+          "hashes_match": true,
+          "mismatched_files": [],
+          "future_rows": 0,
+          "time_boundary_ok": true
+        },
+        "ok": true
+      }
+    },
+    "asof_2003": {
+      "rust": {
+        "ok": true,
+        "scanned": 10152,
+        "violations": [],
+        "manifest": "sealed",
+        "cutoff": "2003-12-31",
+        "hashes": [
+          [
+            "audit/create.json",
+            "d2d6f30b3929de4c2554974e6f2b542c3a804e296f30a077b60ae4cb5fae146c"
+          ],
+          [
+            "clean_data.parquet",
+            "c8b4fe3a8f353bb7ab114089e0e2595ee750296292fac953b73340a1f9404978"
+          ],
+          [
+            "clean_data.timeindex",
+            "79f5114f8dd7cef2b3378deb67be772fd40b730fa5836a023b5e0543ad1fbb66"
+          ],
+          [
+            "features.parquet",
+            "a58898f26911ef038005097c969e96142ebb11fc102617b7c5e756934164b1d4"
+          ],
+          [
+            "knowledge.parquet",
+            "ccffdae4a47dd509f678615e8e5a4f752d95986a8ce949e38542dcbf4d8e40f1"
+          ],
+          [
+            "knowledge.timeindex",
+            "c374bd9605853106b95227203333e32efcbe5ade7d54410c319134a9bb498ef7"
+          ],
+          [
+            "model_registry.json",
+            "d53ddda604ac79275a2e64ca4df056be66c6c0171cb26eea666cbf97cd6a1fb3"
+          ],
+          [
+            "models/benchmark.meta.json",
+            "900e1c2c9828710ebe8ec0d3ca3cd7207cf05ce33d7541a9755434235aa82823"
+          ],
+          [
+            "models/benchmark.pkl",
+            "b5adb64a4f74ba2bd3f476ac54824542b899b73f5349469b7de5410c0a692fae"
+          ],
+          [
+            "models/lightgbm.meta.json",
+            "ea4eb592279e97b651a12107d5e63e9070c7a4c6412549db0fb453d5637d9457"
+          ],
+          [
+            "models/lightgbm.pkl",
+            "622df0b4a2d85cce0f0a58d03935d2637a58223df8d8d2f89839c41121cfc06f"
+          ]
+        ],
+        "engine": "rust"
+      },
+      "kb_verify": {
+        "year": 2003,
+        "snapshot": "/root/工作区/股票/data/knowledge/snapshots/asof_2003",
+        "checks": {
+          "sealed": true,
+          "hashes_match": true,
+          "mismatched_files": [],
+          "future_rows": 0,
+          "time_boundary_ok": true
+        },
+        "ok": true
+      }
+    },
+    "asof_2004": {
+      "rust": {
+        "ok": true,
+        "scanned": 12716,
+        "violations": [],
+        "manifest": "sealed",
+        "cutoff": "2004-12-31",
+        "hashes": [
+          [
+            "audit/create.json",
+            "75ba412c3d19a0b6e71230b858737b5ac4f83d28011312949e6b128e03a5cdd8"
+          ],
+          [
+            "clean_data.parquet",
+            "fca2c851bdd2f0ed48b554ff8320aef11bff52f11e2eb67b162f233710790e1f"
+          ],
+          [
+            "clean_data.timeindex",
+            "dfc1d61cedd6d89b9f1690bc5038b8a5b095be26b90d166b7079b712deab4718"
+          ],
+          [
+            "knowledge.parquet",
+            "956a863f59f5d6765197685714d9b8d3ebf79e054a3d402df34693662cf73fbc"
+          ],
+          [
+            "knowledge.timeindex",
+            "52ab5821a9fbb3fb9eb44bf2bbd3dba3ef27c874b7d315646c225bfce5263b51"
+          ],
+          [
+            "model_registry.json",
+            "56a54ffc3afcbc2bcbf6cadf7c6b9a0d160f75b5f478f6ecc08b03a241536b06"
+          ]
+        ],
+        "engine": "rust"
+      },
+      "kb_verify": {
+        "year": 2004,
+        "snapshot": "/root/工作区/股票/data/knowledge/snapshots/asof_2004",
+        "checks": {
+          "sealed": true,
+          "hashes_match": true,
+          "mismatched_files": [],
+          "future_rows": 0,
+          "time_boundary_ok": true
+        },
+        "ok": true
+      }
+    }
+  },
+  "prediction_integrity": {
+    "records": 3,
+    "chain_length": 3,
+    "tampered": [],
+    "ok": true,
+    "mechanism": "HMAC-SHA256 + hash-chain + append-only-triggers"
+  },
+  "performance": [
+    {
+      "task": "features_2002",
+      "elapsed_seconds": 0.3137,
+      "mem_peak_mb": 29.62,
+      "rss_mb": 174.55,
+      "rss_delta_mb": 7.75,
+      "disk_bytes": 0
+    },
+    {
+      "task": "train_2002",
+      "elapsed_seconds": 7.1106,
+      "mem_peak_mb": 74.37,
+      "rss_mb": 241.08,
+      "rss_delta_mb": 66.53,
+      "disk_bytes": 0
+    },
+    {
+      "task": "year_2002",
+      "elapsed_seconds": 10.2887,
+      "mem_peak_mb": 74.93,
+      "rss_mb": 251.74,
+      "rss_delta_mb": 163.04,
+      "disk_bytes": 0
+    },
+    {
+      "task": "features_2003",
+      "elapsed_seconds": 0.513,
+      "mem_peak_mb": 9.82,
+      "rss_mb": 261.3,
+      "rss_delta_mb": 9.56,
+      "disk_bytes": 0
+    },
+    {
+      "task": "train_2003",
+      "elapsed_seconds": 0.0419,
+      "mem_peak_mb": 9.82,
+      "rss_mb": 261.3,
+      "rss_delta_mb": 0.0,
+      "disk_bytes": 0
+    },
+    {
+      "task": "year_2003",
+      "elapsed_seconds": 1.9367,
+      "mem_peak_mb": 9.82,
+      "rss_mb": 261.63,
+      "rss_delta_mb": 9.89,
+      "disk_bytes": 0
+    },
+    {
+      "task": "features_2004",
+      "elapsed_seconds": 0.8086,
+      "mem_peak_mb": 13.13,
+      "rss_mb": 263.13,
+      "rss_delta_mb": 1.5,
+      "disk_bytes": 0
+    },
+    {
+      "task": "train_2004",
+      "elapsed_seconds": 0.0436,
+      "mem_peak_mb": 13.13,
+      "rss_mb": 263.13,
+      "rss_delta_mb": 0.0,
+      "disk_bytes": 0
+    },
+    {
+      "task": "year_2004",
+      "elapsed_seconds": 2.2816,
+      "mem_peak_mb": 13.13,
+      "rss_mb": 274.58,
+      "rss_delta_mb": 12.95,
+      "disk_bytes": 0
+    }
+  ],
+  "model_comparison": {
+    "generated_at": "2026-11-22T04:20:08.878411",
+    "data_source": "real (raw_real.parquet)",
+    "synthetic": false,
+    "train_range": "<=2002-12-31",
+    "test_range": "2003-01-01..2004-12-31",
+    "feature_version": "feature_v1",
+    "features": 6,
+    "trained_to": "2002-12-31",
+    "strict_point_in_time": true,
+    "results": {
+      "benchmark": {
+        "status": "ok",
+        "version": "benchmark_mean_v1",
+        "train_n": 21,
+        "test_n": 7,
+        "mae": 0.363187,
+        "rmse": 0.76692,
+        "direction_accuracy": 0.5714,
+        "elapsed_seconds": 0.0
+      },
+      "timeseries": {
+        "status": "ok",
+        "version": "timeseries_naive_v1",
+        "train_n": 21,
+        "test_n": 7,
+        "mae": 0.485218,
+        "rmse": 0.7212,
+        "direction_accuracy": 0.5714,
+        "elapsed_seconds": 0.0
+      },
+      "lightgbm": {
+        "status": "ok",
+        "version": "lightgbm_v1",
+        "train_n": 21,
+        "test_n": 7,
+        "mae": 0.363187,
+        "rmse": 0.76692,
+        "direction_accuracy": 0.5714,
+        "elapsed_seconds": 3.109
+      },
+      "xgboost": {
+        "status": "ok",
+        "version": "xgboost_v1",
+        "train_n": 21,
+        "test_n": 7,
+        "mae": 0.384295,
+        "rmse": 0.801754,
+        "direction_accuracy": 0.7143,
+        "elapsed_seconds": 0.308
+      },
+      "catboost": {
+        "status": "ok",
+        "version": "catboost_v1",
+        "train_n": 21,
+        "test_n": 7,
+        "mae": 0.372027,
+        "rmse": 0.760639,
+        "direction_accuracy": 0.5714,
+        "elapsed_seconds": 0.95
+      },
+      "torch_mlp": {
+        "status": "ok",
+        "version": "torch_mlp_v1",
+        "train_n": 21,
+        "test_n": 7,
+        "mae": 0.433818,
+        "rmse": 0.85328,
+        "direction_accuracy": 0.4286,
+        "elapsed_seconds": 8.461
+      }
+    }
+  },
+  "performance_report": {
+    "generated_at": "2026-11-22T04:40:52.048740",
+    "data_source": "real (raw_real.parquet)",
+    "rows": 12716,
+    "memory_metric_fix": "tracemalloc 嵌套引用计数 + ru_maxrss 进程 RSS 峰值",
+    "optimized": {
+      "column_projection": true,
+      "parquet_partition": "data/clean/raw_real_partitioned (market/year, 77 files)",
+      "polars_lazy_scan": true,
+      "duckdb_columnar_aggregation": true,
+      "deduplicated_loading": true
+    },
+    "results": {
+      "baseline_read_all_cols": {
+        "task": "baseline_read_all_cols",
+        "elapsed_seconds": 0.0115,
+        "mem_peak_mb": 0.0,
+        "rss_mb": 150.92,
+        "rss_delta_mb": 2.67,
+        "result": 12716,
+        "repeats": 5,
+        "elapsed_all_runs": [
+          3.0599,
+          0.0254,
+          0.0115,
+          0.0096,
+          0.0096
+        ]
+      },
+      "optimized_column_projection": {
+        "task": "optimized_column_projection",
+        "elapsed_seconds": 0.0028,
+        "mem_peak_mb": 0.0,
+        "rss_mb": 151.67,
+        "rss_delta_mb": 0.0,
+        "result": 12716,
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.0035,
+          0.0028,
+          0.0027,
+          0.0028,
+          0.0031
+        ]
+      },
+      "optimized_parquet_partition_write": {
+        "task": "optimized_parquet_partition_write",
+        "elapsed_seconds": 0.0256,
+        "mem_peak_mb": 0.01,
+        "rss_mb": 171.5,
+        "rss_delta_mb": 1.75,
+        "result": 77,
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.045,
+          0.0256,
+          0.0353,
+          0.0238,
+          0.0239
+        ]
+      },
+      "baseline_python_aggregation": {
+        "task": "baseline_python_aggregation",
+        "elapsed_seconds": 0.0606,
+        "mem_peak_mb": 1.44,
+        "rss_mb": 174.37,
+        "rss_delta_mb": 0.0,
+        "result": {
+          "CN_A|2000": 481,
+          "CN_A|2001": 480,
+          "CN_A|2002": 474,
+          "CN_A|2003": 482,
+          "CN_A|2004": 486,
+          "US|2000": 2062,
+          "US|2001": 2033,
+          "US|2002": 2064,
+          "US|2003": 2071,
+          "US|2004": 2076,
+          "US|2005": 7
+        },
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.0606,
+          0.0598,
+          0.0612,
+          0.0706,
+          0.0606
+        ]
+      },
+      "optimized_duckdb_aggregation": {
+        "task": "optimized_duckdb_aggregation",
+        "elapsed_seconds": 0.0351,
+        "mem_peak_mb": 0.0,
+        "rss_mb": 210.61,
+        "rss_delta_mb": 0.0,
+        "result": {
+          "CN_A|2000": 481,
+          "CN_A|2001": 480,
+          "CN_A|2002": 474,
+          "CN_A|2003": 482,
+          "CN_A|2004": 486,
+          "US|2000": 2062,
+          "US|2001": 2033,
+          "US|2002": 2064,
+          "US|2003": 2071,
+          "US|2004": 2076,
+          "US|2005": 7
+        },
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.4927,
+          0.0387,
+          0.0351,
+          0.0323,
+          0.0344
+        ]
+      },
+      "optimized_polars_aggregation": {
+        "task": "optimized_polars_aggregation",
+        "elapsed_seconds": 0.0041,
+        "mem_peak_mb": 0.0,
+        "rss_mb": 249.32,
+        "rss_delta_mb": 0.13,
+        "result": {
+          "CN_A|2000": 481,
+          "CN_A|2001": 480,
+          "CN_A|2002": 474,
+          "CN_A|2003": 482,
+          "CN_A|2004": 486,
+          "US|2000": 2062,
+          "US|2001": 2033,
+          "US|2002": 2064,
+          "US|2003": 2071,
+          "US|2004": 2076,
+          "US|2005": 7
+        },
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.8184,
+          0.0041,
+          0.0095,
+          0.0037,
+          0.0019
+        ]
+      },
+      "baseline_python_dedup": {
+        "task": "baseline_python_dedup",
+        "elapsed_seconds": 0.0999,
+        "mem_peak_mb": 3.82,
+        "rss_mb": 249.32,
+        "rss_delta_mb": 0.0,
+        "result": 12700,
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.1249,
+          0.0999,
+          0.096,
+          0.0811,
+          0.1152
+        ]
+      },
+      "optimized_polars_dedup": {
+        "task": "optimized_polars_dedup",
+        "elapsed_seconds": 0.0057,
+        "mem_peak_mb": 0.0,
+        "rss_mb": 249.32,
+        "rss_delta_mb": 0.0,
+        "result": 12700,
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.0093,
+          0.0057,
+          0.0063,
+          0.0048,
+          0.0032
+        ]
+      },
+      "optimized_duckdb_dedup": {
+        "task": "optimized_duckdb_dedup",
+        "elapsed_seconds": 0.0362,
+        "mem_peak_mb": 0.0,
+        "rss_mb": 249.34,
+        "rss_delta_mb": 0.0,
+        "result": 12700,
+        "repeats": 5,
+        "elapsed_all_runs": [
+          0.041,
+          0.0379,
+          0.0353,
+          0.0362,
+          0.0345
+        ]
+      }
+    },
+    "consistency": {
+      "aggregation_python_equals_duckdb": true,
+      "aggregation_python_equals_polars": true,
+      "dedup_python_equals_polars": true,
+      "dedup_python_equals_duckdb": true,
+      "aggregation_cells": 11,
+      "dedup_rows": 12700,
+      "all_consistent": true
+    },
+    "aggregation_result": {
+      "CN_A|2000": 481,
+      "CN_A|2001": 480,
+      "CN_A|2002": 474,
+      "CN_A|2003": 482,
+      "CN_A|2004": 486,
+      "US|2000": 2062,
+      "US|2001": 2033,
+      "US|2002": 2064,
+      "US|2003": 2071,
+      "US|2004": 2076,
+      "US|2005": 7
+    },
+    "summary": {
+      "column_projection_load_speedup": 4.11,
+      "duckdb_vs_python_agg_speedup": 1.73,
+      "polars_vs_python_agg_speedup": 14.78,
+      "polars_dedup_vs_python_speedup": 17.53,
+      "duckdb_dedup_vs_python_speedup": 2.76,
+      "partition_files": 77,
+      "all_consistent": true
+    }
+  },
+  "final_acceptance": {
+    "generated_at": "2026-11-22",
+    "data_origin": "real",
+    "years": {
+      "2002": {
+        "steps_completed": 17,
+        "freeze_before_import": true,
+        "prediction_records": 1,
+        "prediction_hash": "2dc479061ec723a1",
+        "snapshot_sealed": true,
+        "actual_imported": true,
+        "metrics": {
+          "direction_accuracy": 0.0,
+          "mae": 0.2605509408900661,
+          "n": 7,
+          "rmse": 0.27313684622030876
+        },
+        "knowledge_updated": true
+      },
+      "2003": {
+        "steps_completed": 17,
+        "freeze_before_import": true,
+        "prediction_records": 1,
+        "prediction_hash": "573558bc86416392",
+        "snapshot_sealed": true,
+        "actual_imported": true,
+        "metrics": {
+          "direction_accuracy": 0.0,
+          "mae": 0.36061569709840663,
+          "n": 7,
+          "rmse": 0.38864390138046717
+        },
+        "knowledge_updated": true
+      },
+      "2004": {
+        "steps_completed": 17,
+        "freeze_before_import": true,
+        "prediction_records": 1,
+        "prediction_hash": "33439da08cb4582d",
+        "snapshot_sealed": true,
+        "actual_imported": true,
+        "metrics": {
+          "direction_accuracy": 0.5714285714285714,
+          "mae": 0.3631872986189014,
+          "n": 7,
+          "rmse": 0.7669195818789322
+        },
+        "knowledge_updated": true
+      }
+    },
+    "time_isolation_proof": {
+      "predict_2002": {
+        "cutoff": "2001-12-31",
+        "future_rows_in_accessible_space": 0,
+        "hash_consistent": true,
+        "sealed": true,
+        "PASS": true
+      },
+      "predict_2003": {
+        "cutoff": "2002-12-31",
+        "future_rows_in_accessible_space": 0,
+        "hash_consistent": true,
+        "sealed": true,
+        "PASS": true
+      },
+      "predict_2004": {
+        "cutoff": "2003-12-31",
+        "future_rows_in_accessible_space": 0,
+        "hash_consistent": true,
+        "sealed": true,
+        "PASS": true
+      }
+    },
+    "prediction_integrity": {
+      "records": 3,
+      "chain_length": 3,
+      "tampered": [],
+      "ok": true,
+      "mechanism": "HMAC-SHA256 + hash-chain + append-only-triggers"
+    },
+    "all_snapshots_sealed": true,
+    "PASS": true
+  },
+  "seals": {
+    "2001": true,
+    "2002": true,
+    "2003": true,
+    "2004": true
+  },
+  "all_snapshots_sealed": true,
+  "acceptance": {
+    "1_真实数据源获取": true,
+    "2_真实覆盖率报告": true,
+    "3_历史数据清洗": true,
+    "4_知识库建立": true,
+    "5_时间隔离快照": true,
+    "6_自动阻止未来数据": true,
+    "7_多模型基准对比": true,
+    "8_2002历史预测": true,
+    "9_预测不可修改HMAC链": true,
+    "10_导入2002真实数据": true,
+    "11_误差分析": true,
+    "12_更新知识库与决策库": true,
+    "13_2003预测": true,
+    "14_年度循环完整": true,
+    "15_内存限制稳定": true,
+    "16_完整日志与文档": true,
+    "17_内存统计非0": true,
+    "18_性能优化一致性": true,
+    "19_末位快照已冻结": true,
+    "20_最终验收PASS": true
+  },
+  "acceptance_passed": 20,
+  "acceptance_total": 20
+}

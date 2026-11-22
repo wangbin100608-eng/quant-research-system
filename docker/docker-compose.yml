@@ -1,0 +1,71 @@
+services:
+  # 一次性初始化：抓取数据 + 运行 2002-2004 年度循环 + 生成仪表盘
+  quant-init:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: quant-research:latest
+    container_name: quant-init
+    volumes:
+      - quant_data:/app/data
+      - ../web:/app/web_out
+    environment:
+      - QUANT_ROOT=/app
+      - PYTHONPATH=/app/python
+      - TZ=Asia/Shanghai
+    command: >
+      sh -c "
+        python /app/python/scripts/fetch_real.py &&
+        python /app/python/scripts/run.py run --start 2002 --end 2004 --raw data/raw/raw_real.parquet &&
+        PYTHONPATH=/app/python python -m pytest /app/python/tests -q &&
+        python /app/python/scripts/model_benchmark.py &&
+        python /app/python/scripts/perf_benchmark.py &&
+        python /app/python/scripts/final_acceptance.py &&
+        python /app/python/scripts/test_report.py &&
+        python /app/python/scripts/build_dashboard.py &&
+        cp /app/web/dashboard.html /app/web_out/dashboard.html &&
+        cp /app/web/index.html /app/web_out/index.html
+      "
+    restart: "no"
+
+  # Streamlit 可视化服务
+  quant-web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: quant-research:latest
+    container_name: quant-web
+    volumes:
+      - quant_data:/app/data
+    ports:
+      - "8501:8501"
+    environment:
+      - QUANT_ROOT=/app
+      - PYTHONPATH=/app/python
+      - TZ=Asia/Shanghai
+    command: >
+      streamlit run /app/python/dashboard/app.py
+      --server.port 8501 --server.address 0.0.0.0
+      --server.headless true
+      --browser.gatherUsageStats false
+    depends_on:
+      quant-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  # 静态仪表盘（Nginx），可选
+  quant-static:
+    image: nginx:alpine
+    container_name: quant-static
+    volumes:
+      - quant_data:/app/data:ro
+      - ../web:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      quant-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+volumes:
+  quant_data:

@@ -1,0 +1,75 @@
+# A股与美股量化研究系统 - 主配置
+project:
+  name: quant-research
+  version: "0.2.0"
+  timezone: Asia/Shanghai
+  seed: 20000101
+
+# 研究时间轴
+research:
+  first_prediction_year: 2002
+  last_prediction_year: 2004
+  train_start_year: 2000
+  strict_point_in_time: true
+  allow_future_data: false
+  unknown_availability_policy: reject
+
+# 时间隔离引擎
+timeguard:
+  admission_field: available_time
+  rust_cli_path: /app/rust_core/target/release/timeguard
+  prefer_rust: true
+  snapshots_root: data/knowledge/snapshots
+
+# 存储
+storage:
+  raw_dir: data/raw
+  clean_dir: data/clean
+  features_dir: data/features
+  models_dir: data/models
+  predictions_dir: data/predictions
+  reports_dir: data/reports
+  cache_dir: data/cache
+  metadata_db: data/meta.db
+  analytics_db: data/analytics.duckdb
+
+# 知识库
+knowledge:
+  root: data/knowledge
+  snapshots_dir: data/knowledge/snapshots
+  raw_documents_dir: data/knowledge/raw_documents
+  metadata_dir: data/knowledge/metadata
+  audit_logs_dir: data/knowledge/audit_logs
+  vector_enabled: false
+  vector_collection: research_notes
+
+# 模型
+models:
+  benchmark:
+    enabled: true
+    type: historical_mean
+  lightgbm:
+    enabled: true
+    num_leaves: 15
+    learning_rate: 0.05
+    n_estimators: 120
+    max_depth: 5
+    min_child_samples: 20
+  batch_size: 4096
+  memory_limit_mb: 512
+
+evaluation:
+  metrics: [mae, rmse, direction_accuracy, rank_ic, spearman]
+  targets: [index_annual_return, industry_relative, cross_section_rank, volatility]
+
+web:
+  host: 0.0.0.0
+  port: 8501
+
+runtime:
+  checkpoint_dir: data/checkpoints
+  log_dir: data/logs
+  log_level: INFO
+  log_rotation_mb: 10
+  log_backup_count: 5
+  fail_fast_on_leak: true

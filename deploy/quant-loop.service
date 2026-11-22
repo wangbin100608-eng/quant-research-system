@@ -1,0 +1,12 @@
+[Unit]
+Description=Quant Research Annual Loop (one-shot daily check)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/root/工作区/股票
+Environment=QUANT_ROOT=/root/工作区/股票
+Environment=PYTHONPATH=/root/工作区/股票/python
+ExecStart=/bin/bash -c 'cd /root/工作区/股票 && PYTHONPATH=python python3 scripts/run.py run --start 2002 --end 2004 && PYTHONPATH=python python3 -m pytest python/tests -q && bash scripts/backup.sh'
+ExecStartPost=/bin/bash -c 'cd /root/工作区/股票 && bash scripts/alert.sh annual_loop SUCCESS || true'

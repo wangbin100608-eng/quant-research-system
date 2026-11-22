@@ -1,0 +1,22 @@
+# 可再生缓存 / 测试残留
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+data/cache/_kb_test/
+
+# 临时探针 / 编辑器
+*.tmp
+*.bak
+*.swp
+.DS_Store
+
+# 过期备份（最新备份保留在 data/backups/ 内，仅排除 pre_v02 风格旧目录）
+data/backups/pre_v02_*/
+
+# 编译产物（可重建）
+rust_core/target/
+
+# CatBoost 训练缓存
+catboost_info/

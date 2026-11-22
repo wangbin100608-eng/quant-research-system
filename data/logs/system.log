@@ -1,0 +1,289 @@
+2026-11-22 03:06:56,218 [INFO] quant: 适配器 fixture 模式=fixture 行数=13640
+2026-11-22 03:06:56,486 [INFO] quant: 覆盖率报告写入 /root/工作区/股票/data/reports/coverage_report.json (rows=13640, synthetic=True)
+2026-11-22 03:07:02,355 [INFO] quant: 适配器 fixture 模式=fixture 行数=13640
+2026-11-22 03:07:02,572 [INFO] quant: 覆盖率报告写入 /root/工作区/股票/data/reports/coverage_report.json (rows=13640, synthetic=True)
+2026-11-22 03:09:11,359 [INFO] quant: [2002] 步骤 lock_cutoff 完成
+2026-11-22 03:09:12,791 [INFO] quant: 快照 asof_2001 创建: 保留 5434 行, 剔除未来 8206 行, 知识 0 条
+2026-11-22 03:09:12,834 [INFO] quant: [2002] 步骤 load_snapshot 完成
+2026-11-22 03:09:12,869 [INFO] quant: [2002] 步骤 check_ranges 完成
+2026-11-22 03:09:13,177 [INFO] quant: 特征 asof_2001 生成 20 行 (feature_version=feature_v1)
+2026-11-22 03:09:13,266 [INFO] quant: [2002] 步骤 build_features 完成
+2026-11-22 03:09:22,382 [INFO] quant: [2002] 步骤 train_or_load_model 完成
+2026-11-22 03:09:22,390 [INFO] quant: [2002] 步骤 predict_next_year 完成
+2026-11-22 03:09:22,395 [INFO] quant: 快照 asof_2001 已冻结
+2026-11-22 03:09:42,062 [INFO] quant: [2002] 步骤 lock_cutoff 完成
+2026-11-22 03:09:42,097 [INFO] quant: [2002] 步骤 load_snapshot 完成
+2026-11-22 03:09:43,391 [INFO] quant: [2002] 步骤 check_ranges 完成
+2026-11-22 03:09:43,657 [INFO] quant: 特征 asof_2001 生成 20 行 (feature_version=feature_v1)
+2026-11-22 03:09:43,736 [INFO] quant: [2002] 步骤 build_features 完成
+2026-11-22 03:09:50,958 [INFO] quant: [2002] 步骤 train_or_load_model 完成
+2026-11-22 03:09:50,965 [INFO] quant: [2002] 步骤 predict_next_year 完成
+2026-11-22 03:09:50,968 [INFO] quant: 快照 asof_2001 已冻结（幂等返回）
+2026-11-22 03:09:50,971 [INFO] quant: 预测记录冻结: pred_2002_3ee1d3b14d80 hash=3ee1d3b14d807ef9
+2026-11-22 03:09:50,976 [INFO] quant: [2002] 步骤 freeze_prediction 完成
+2026-11-22 03:09:51,019 [INFO] quant: [2002] 步骤 import_actual 完成
+2026-11-22 03:09:51,062 [INFO] quant: [2002] 步骤 evaluate_error 完成
+2026-11-22 03:09:51,064 [INFO] quant: [2002] 步骤 analyze_errors 完成
+2026-11-22 03:09:51,075 [INFO] quant: [2002] 步骤 update_knowledge 完成
+2026-11-22 03:09:51,077 [INFO] quant: [2002] 步骤 generate_hypotheses 完成
+2026-11-22 03:09:51,079 [INFO] quant: [2002] 步骤 validate_hypotheses 完成
+2026-11-22 03:10:02,258 [INFO] quant: [2002] 步骤 lock_cutoff 完成
+2026-11-22 03:10:03,657 [INFO] quant: 快照 asof_2001 创建: 保留 5434 行, 剔除未来 8206 行, 知识 0 条
+2026-11-22 03:10:03,696 [INFO] quant: [2002] 步骤 load_snapshot 完成
+2026-11-22 03:10:03,728 [INFO] quant: [2002] 步骤 check_ranges 完成
+2026-11-22 03:10:04,042 [INFO] quant: 特征 asof_2001 生成 20 行 (feature_version=feature_v1)
+2026-11-22 03:10:04,176 [INFO] quant: [2002] 步骤 build_features 完成
+2026-11-22 03:10:11,577 [INFO] quant: [2002] 步骤 train_or_load_model 完成
+2026-11-22 03:10:11,582 [INFO] quant: [2002] 步骤 predict_next_year 完成
+2026-11-22 03:10:11,587 [INFO] quant: 快照 asof_2001 已冻结
+2026-11-22 03:10:11,590 [INFO] quant: 预测记录冻结: pred_2002_169899beb46b hash=169899beb46bb3e0
+2026-11-22 03:10:11,594 [INFO] quant: [2002] 步骤 freeze_prediction 完成
+2026-11-22 03:10:11,646 [INFO] quant: [2002] 步骤 import_actual 完成
+2026-11-22 03:10:11,672 [INFO] quant: [2002] 步骤 evaluate_error 完成
+2026-11-22 03:10:11,674 [INFO] quant: [2002] 步骤 analyze_errors 完成
+2026-11-22 03:10:11,686 [INFO] quant: [2002] 步骤 update_knowledge 完成
+2026-11-22 03:10:11,688 [INFO] quant: [2002] 步骤 generate_hypotheses 完成
+2026-11-22 03:10:11,690 [INFO] quant: [2002] 步骤 validate_hypotheses 完成
+2026-11-22 03:10:11,695 [INFO] quant: [2002] 步骤 update_rules 完成
+2026-11-22 03:10:11,697 [INFO] quant: [2002] 步骤 compare_incremental_vs_full 完成
+2026-11-22 03:10:11,767 [INFO] quant: 快照 asof_2002 创建: 保留 8162 行, 剔除未来 5478 行, 知识 2 条
+2026-11-22 03:10:11,770 [INFO] quant: [2002] 步骤 create_next_snapshot 完成
+2026-11-22 03:10:11,773 [INFO] quant: [2002] 步骤 loop 完成
+2026-11-22 03:10:11,775 [INFO] quant: 年度 2002 完成: elapsed=9.52s mem=0.0MB
+2026-11-22 03:10:11,778 [INFO] quant: [2003] 步骤 lock_cutoff 完成
+2026-11-22 03:10:11,846 [INFO] quant: [2003] 步骤 load_snapshot 完成
+2026-11-22 03:10:11,904 [INFO] quant: [2003] 步骤 check_ranges 完成
+2026-11-22 03:10:12,381 [INFO] quant: 特征 asof_2002 生成 30 行 (feature_version=feature_v1)
+2026-11-22 03:10:12,444 [INFO] quant: [2003] 步骤 build_features 完成
+2026-11-22 03:10:12,493 [INFO] quant: [2003] 步骤 train_or_load_model 完成
+2026-11-22 03:10:12,495 [INFO] quant: [2003] 步骤 predict_next_year 完成
+2026-11-22 03:10:12,498 [INFO] quant: 快照 asof_2002 已冻结
+2026-11-22 03:10:12,501 [INFO] quant: 预测记录冻结: pred_2003_7edcd2397e0d hash=7edcd2397e0d62c3
+2026-11-22 03:10:12,506 [INFO] quant: [2003] 步骤 freeze_prediction 完成
+2026-11-22 03:10:12,531 [INFO] quant: [2003] 步骤 import_actual 完成
+2026-11-22 03:10:12,556 [INFO] quant: [2003] 步骤 evaluate_error 完成
+2026-11-22 03:10:12,558 [INFO] quant: [2003] 步骤 analyze_errors 完成
+2026-11-22 03:10:12,571 [INFO] quant: [2003] 步骤 update_knowledge 完成
+2026-11-22 03:10:12,574 [INFO] quant: [2003] 步骤 generate_hypotheses 完成
+2026-11-22 03:10:12,576 [INFO] quant: [2003] 步骤 validate_hypotheses 完成
+2026-11-22 03:10:12,579 [INFO] quant: [2003] 步骤 update_rules 完成
+2026-11-22 03:10:12,582 [INFO] quant: [2003] 步骤 compare_incremental_vs_full 完成
+2026-11-22 03:10:12,643 [INFO] quant: 快照 asof_2003 创建: 保留 10890 行, 剔除未来 2750 行, 知识 3 条
+2026-11-22 03:10:12,646 [INFO] quant: [2003] 步骤 create_next_snapshot 完成
+2026-11-22 03:10:12,648 [INFO] quant: [2003] 步骤 loop 完成
+2026-11-22 03:10:12,650 [INFO] quant: 年度 2003 完成: elapsed=0.87s mem=0.0MB
+2026-11-22 03:10:12,652 [INFO] quant: [2004] 步骤 lock_cutoff 完成
+2026-11-22 03:10:12,725 [INFO] quant: [2004] 步骤 load_snapshot 完成
+2026-11-22 03:10:12,796 [INFO] quant: [2004] 步骤 check_ranges 完成
+2026-11-22 03:10:13,738 [INFO] quant: 特征 asof_2003 生成 40 行 (feature_version=feature_v1)
+2026-11-22 03:10:13,812 [INFO] quant: [2004] 步骤 build_features 完成
+2026-11-22 03:10:13,865 [INFO] quant: [2004] 步骤 train_or_load_model 完成
+2026-11-22 03:10:13,868 [INFO] quant: [2004] 步骤 predict_next_year 完成
+2026-11-22 03:10:13,871 [INFO] quant: 快照 asof_2003 已冻结
+2026-11-22 03:10:13,873 [INFO] quant: 预测记录冻结: pred_2004_ca2d7760d328 hash=ca2d7760d3281c8b
+2026-11-22 03:10:13,878 [INFO] quant: [2004] 步骤 freeze_prediction 完成
+2026-11-22 03:10:13,901 [INFO] quant: [2004] 步骤 import_actual 完成
+2026-11-22 03:10:13,929 [INFO] quant: [2004] 步骤 evaluate_error 完成
+2026-11-22 03:10:13,931 [INFO] quant: [2004] 步骤 analyze_errors 完成
+2026-11-22 03:10:13,942 [INFO] quant: [2004] 步骤 update_knowledge 完成
+2026-11-22 03:10:13,943 [INFO] quant: [2004] 步骤 generate_hypotheses 完成
+2026-11-22 03:10:13,945 [INFO] quant: [2004] 步骤 validate_hypotheses 完成
+2026-11-22 03:10:13,948 [INFO] quant: [2004] 步骤 update_rules 完成
+2026-11-22 03:10:13,950 [INFO] quant: [2004] 步骤 compare_incremental_vs_full 完成
+2026-11-22 03:10:14,038 [INFO] quant: 快照 asof_2004 创建: 保留 13628 行, 剔除未来 12 行, 知识 4 条
+2026-11-22 03:10:14,041 [INFO] quant: [2004] 步骤 create_next_snapshot 完成
+2026-11-22 03:10:14,043 [INFO] quant: [2004] 步骤 loop 完成
+2026-11-22 03:10:14,044 [INFO] quant: 年度 2004 完成: elapsed=1.39s mem=0.0MB
+2026-11-22 03:11:34,413 [ERROR] quant: TimeGuard Rust 审计失败: {'raw': '{"ok":true, "scanned":5434, "violations":[], "manifest":"sealed", "hashes":[("knowledge.parquet", "b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6"), ("features.parquet", "105af6565d214f9c9a21507fce273656665fa8a58bb838246954e219e2fdbe1f"), ("clean_data.parquet", "654323aa3649307a2b5ad08a8f6bf35bfe8260920fb19a967b689c09a2e3a33d")]}\n'}
+2026-11-22 03:12:02,109 [ERROR] quant: TimeGuard Rust 审计失败: {'raw': '{"ok":true, "scanned":5434, "violations":[], "manifest":"sealed", "hashes":[[\\"knowledge.parquet\\",\\"b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6\\"],[\\"features.parquet\\",\\"105af6565d214f9c9a21507fce273656665fa8a58bb838246954e219e2fdbe1f\\"],[\\"clean_data.parquet\\",\\"654323aa3649307a2b5ad08a8f6bf35bfe8260920fb19a967b689c09a2e3a33d\\"]]}\n'}
+2026-11-22 03:39:01,392 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5435, 'violations': [{'file': 'clean_data.timeindex', 'line': 5435, 'value': '2002-06-15', 'reason': 'future_data_leak'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['clean_data.parquet', '654323aa3649307a2b5ad08a8f6bf35bfe8260920fb19a967b689c09a2e3a33d'], ['features.parquet', '105af6565d214f9c9a21507fce273656665fa8a58bb838246954e219e2fdbe1f'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['models/benchmark.pkl', 'caee3918dce5a6270d3abf50024eb32ca205c1f08555f318ebb2ff0f17a55db6'], ['models/lightgbm.pkl', '4e2ab6fd3a4e05bbe7e49acfc7c085a4b51eeaa82c36be5fe72da23d4af3004f']]}
+2026-11-22 03:39:01,443 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 8165, 'violations': [{'file': 'clean_data.timeindex', 'line': 8163, 'value': '2003-06-15', 'reason': 'future_data_leak'}], 'manifest': 'sealed', 'cutoff': '2002-12-31', 'hashes': [['clean_data.parquet', '0bd52e2ffe0e9e25f4812fb3c9c7e58ca7bc0578cb97a107f9dae510bdd45105'], ['features.parquet', '7a1a97ba7b00fe8a8e3fe5073bdbf3f55543934b1580bf335e12401f54a9cac8'], ['knowledge.parquet', 'b8609ee214bad86bb79fd0a98997c16fcfad72be4cc63437e55699372eb88b38'], ['models/benchmark.pkl', '971d198a00d75493e0b270cc59a449d07614c958cf72331f2ff662cf75c57ae4'], ['models/lightgbm.pkl', 'a9c281940320881bf007dc2e35fb47496fb09bd5c613c62b3b3b831133cda999']]}
+2026-11-22 03:39:01,549 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 10894, 'violations': [{'file': 'clean_data.timeindex', 'line': 10891, 'value': '2004-06-15', 'reason': 'future_data_leak'}], 'manifest': 'sealed', 'cutoff': '2003-12-31', 'hashes': [['clean_data.parquet', 'addacd38cbeb7a5921e075485dc2dbb0a773d98c05b6eb54b1caf89ce5bec932'], ['features.parquet', '6996e86c0774ad8cbf891c9850e983ce887fe0e56343d6cd828c9c11a31e45f1'], ['knowledge.parquet', 'e5af153b41b78b2fdcaa8db8ec56338456392f2848b5132109197f67517a10c2'], ['models/benchmark.pkl', '0b47b71be6e58829515b03df43dc960b7d31925f463672ccef9148b3cb1518e7'], ['models/lightgbm.pkl', '222febd9036c13be8054643f621ce1efef096f4f1ea6683971b2a938be1d6513']]}
+2026-11-22 03:39:01,669 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5435, 'violations': [{'file': 'clean_data.timeindex', 'line': 5435, 'value': 'unknown', 'reason': 'unknown_availability'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['clean_data.parquet', '654323aa3649307a2b5ad08a8f6bf35bfe8260920fb19a967b689c09a2e3a33d'], ['features.parquet', '105af6565d214f9c9a21507fce273656665fa8a58bb838246954e219e2fdbe1f'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['models/benchmark.pkl', 'caee3918dce5a6270d3abf50024eb32ca205c1f08555f318ebb2ff0f17a55db6'], ['models/lightgbm.pkl', '4e2ab6fd3a4e05bbe7e49acfc7c085a4b51eeaa82c36be5fe72da23d4af3004f']]}
+2026-11-22 03:39:01,786 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5434, 'violations': [{'file': 'clean_data.timeindex', 'line': 1, 'value': '20011231', 'reason': 'invalid_date_format'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['clean_data.parquet', '654323aa3649307a2b5ad08a8f6bf35bfe8260920fb19a967b689c09a2e3a33d'], ['features.parquet', '105af6565d214f9c9a21507fce273656665fa8a58bb838246954e219e2fdbe1f'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['models/benchmark.pkl', 'caee3918dce5a6270d3abf50024eb32ca205c1f08555f318ebb2ff0f17a55db6'], ['models/lightgbm.pkl', '4e2ab6fd3a4e05bbe7e49acfc7c085a4b51eeaa82c36be5fe72da23d4af3004f']]}
+2026-11-22 03:39:01,860 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5434, 'violations': [{'file': 'clean_data.parquet', 'line': 0, 'value': '2d90578e6b7a67a28f07e2b964865fe4151c368cd12473e8239e3c9a14b5cdab', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['clean_data.parquet', '2d90578e6b7a67a28f07e2b964865fe4151c368cd12473e8239e3c9a14b5cdab'], ['features.parquet', '105af6565d214f9c9a21507fce273656665fa8a58bb838246954e219e2fdbe1f'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['models/benchmark.pkl', 'caee3918dce5a6270d3abf50024eb32ca205c1f08555f318ebb2ff0f17a55db6'], ['models/lightgbm.pkl', '4e2ab6fd3a4e05bbe7e49acfc7c085a4b51eeaa82c36be5fe72da23d4af3004f']]}
+2026-11-22 03:39:01,888 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5434, 'violations': [{'file': 'argv', 'line': 0, 'value': 'missing', 'reason': 'manifest_required'}], 'manifest': 'absent', 'cutoff': '2001-12-31', 'hashes': []}
+2026-11-22 03:39:01,922 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5434, 'violations': [{'file': '/tmp/pytest-of-root/pytest-0/test_sealed_zero_blocked_by_ru0/asof_2001/manifest.json', 'line': 0, 'value': 'sealed field invalid/missing', 'reason': 'manifest_invalid_sealed'}], 'manifest': 'invalid', 'cutoff': '2001-12-31', 'hashes': [['clean_data.parquet', '654323aa3649307a2b5ad08a8f6bf35bfe8260920fb19a967b689c09a2e3a33d'], ['features.parquet', '105af6565d214f9c9a21507fce273656665fa8a58bb838246954e219e2fdbe1f'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['models/benchmark.pkl', 'caee3918dce5a6270d3abf50024eb32ca205c1f08555f318ebb2ff0f17a55db6'], ['models/lightgbm.pkl', '4e2ab6fd3a4e05bbe7e49acfc7c085a4b51eeaa82c36be5fe72da23d4af3004f']]}
+2026-11-22 03:40:55,182 [INFO] quant: Eastmoney SH000001: 1200 根日线
+2026-11-22 03:40:55,520 [INFO] quant: Eastmoney SZ399001: 1200 根日线
+2026-11-22 03:40:55,667 [INFO] quant: Eastmoney SH000300: 0 根日线
+2026-11-22 03:40:57,734 [INFO] quant: 真实源 eastmoney_cn: 2403 行
+2026-11-22 03:40:58,202 [INFO] quant: Yahoo SPX: 1256 根日线
+2026-11-22 03:40:58,523 [INFO] quant: Yahoo IXIC: 1256 根日线
+2026-11-22 03:40:58,829 [INFO] quant: Yahoo DJI: 1256 根日线
+2026-11-22 03:40:59,265 [INFO] quant: Yahoo AAPL: 1256 根日线
+2026-11-22 03:40:59,645 [INFO] quant: Yahoo MSFT: 1256 根日线
+2026-11-22 03:40:59,741 [INFO] quant: 真实源 yahoo_us: 6285 行
+2026-11-22 03:41:01,526 [INFO] quant: FRED DGS10: 1249 条 (2000-2004)
+2026-11-22 03:41:02,676 [INFO] quant: FRED DGS2: 1249 条 (2000-2004)
+2026-11-22 03:41:02,810 [INFO] quant: FRED CPIAUCSL: 60 条 (2000-2004)
+2026-11-22 03:41:02,870 [INFO] quant: FRED GDP: 20 条 (2000-2004)
+2026-11-22 03:41:02,997 [INFO] quant: FRED UNRATE: 60 条 (2000-2004)
+2026-11-22 03:41:03,100 [INFO] quant: FRED FEDFUNDS: 60 条 (2000-2004)
+2026-11-22 03:41:04,584 [INFO] quant: FRED DEXCHUS: 1257 条 (2000-2004)
+2026-11-22 03:41:04,635 [INFO] quant: 真实源 fred_v2: 3955 行
+2026-11-22 03:41:04,859 [INFO] quant: SEC AAPL: 累计 30 条披露
+2026-11-22 03:41:05,351 [INFO] quant: SEC MSFT: 累计 73 条披露
+2026-11-22 03:41:05,478 [INFO] quant: SEC GOOGL: 累计 73 条披露
+2026-11-22 03:41:05,493 [INFO] quant: 真实源 sec_v2: 73 行
+2026-11-22 03:41:28,753 [INFO] quant: Eastmoney SH000001: 1200 根日线
+2026-11-22 03:41:29,122 [INFO] quant: Eastmoney SZ399001: 1200 根日线
+2026-11-22 03:41:29,267 [INFO] quant: Eastmoney SH000300: 0 根日线
+2026-11-22 03:41:31,091 [INFO] quant: 真实源 eastmoney_cn: 2403 行
+2026-11-22 03:41:31,504 [INFO] quant: Yahoo SPX: 1256 根日线
+2026-11-22 03:41:31,863 [INFO] quant: Yahoo IXIC: 1256 根日线
+2026-11-22 03:41:32,221 [INFO] quant: Yahoo DJI: 1256 根日线
+2026-11-22 03:41:32,568 [INFO] quant: Yahoo AAPL: 1256 根日线
+2026-11-22 03:41:32,908 [INFO] quant: Yahoo MSFT: 1256 根日线
+2026-11-22 03:41:32,978 [INFO] quant: 真实源 yahoo_us: 6285 行
+2026-11-22 03:41:34,597 [INFO] quant: FRED DGS10: 1249 条 (2000-2004)
+2026-11-22 03:41:35,826 [INFO] quant: FRED DGS2: 1249 条 (2000-2004)
+2026-11-22 03:41:35,946 [INFO] quant: FRED CPIAUCSL: 60 条 (2000-2004)
+2026-11-22 03:41:36,000 [INFO] quant: FRED GDP: 20 条 (2000-2004)
+2026-11-22 03:41:36,097 [INFO] quant: FRED UNRATE: 60 条 (2000-2004)
+2026-11-22 03:41:36,199 [INFO] quant: FRED FEDFUNDS: 60 条 (2000-2004)
+2026-11-22 03:41:37,581 [INFO] quant: FRED DEXCHUS: 1257 条 (2000-2004)
+2026-11-22 03:41:37,628 [INFO] quant: 真实源 fred_v2: 3955 行
+2026-11-22 03:41:37,961 [INFO] quant: SEC AAPL: 累计 30 条披露
+2026-11-22 03:41:38,137 [INFO] quant: SEC MSFT: 累计 73 条披露
+2026-11-22 03:41:38,361 [INFO] quant: SEC GOOGL: 累计 73 条披露
+2026-11-22 03:41:38,374 [INFO] quant: 真实源 sec_v2: 73 行
+2026-11-22 03:41:38,374 [WARNING] quant: GDELT 2000 失败: RealAdapterBase.get() got an unexpected keyword argument 'timeout'
+2026-11-22 03:41:38,375 [WARNING] quant: GDELT 2001 失败: RealAdapterBase.get() got an unexpected keyword argument 'timeout'
+2026-11-22 03:41:38,375 [WARNING] quant: GDELT 2002 失败: RealAdapterBase.get() got an unexpected keyword argument 'timeout'
+2026-11-22 03:41:38,375 [WARNING] quant: GDELT 2003 失败: RealAdapterBase.get() got an unexpected keyword argument 'timeout'
+2026-11-22 03:41:38,377 [WARNING] quant: GDELT 2004 失败: RealAdapterBase.get() got an unexpected keyword argument 'timeout'
+2026-11-22 03:41:38,381 [INFO] quant: 真实源 news_v2: 0 行
+2026-11-22 03:42:05,572 [INFO] quant: Eastmoney SH000001: 1200 根日线
+2026-11-22 03:42:05,968 [INFO] quant: Eastmoney SZ399001: 1200 根日线
+2026-11-22 03:42:06,118 [INFO] quant: Eastmoney SH000300: 0 根日线
+2026-11-22 03:42:08,323 [INFO] quant: 真实源 eastmoney_cn: 2403 行
+2026-11-22 03:42:08,726 [INFO] quant: Yahoo SPX: 1256 根日线
+2026-11-22 03:42:09,147 [INFO] quant: Yahoo IXIC: 1256 根日线
+2026-11-22 03:42:09,533 [INFO] quant: Yahoo DJI: 1256 根日线
+2026-11-22 03:42:09,912 [INFO] quant: Yahoo AAPL: 1256 根日线
+2026-11-22 03:42:10,240 [INFO] quant: Yahoo MSFT: 1256 根日线
+2026-11-22 03:42:10,327 [INFO] quant: 真实源 yahoo_us: 6285 行
+2026-11-22 03:42:12,364 [INFO] quant: FRED DGS10: 1249 条 (2000-2004)
+2026-11-22 03:42:13,563 [INFO] quant: FRED DGS2: 1249 条 (2000-2004)
+2026-11-22 03:42:13,684 [INFO] quant: FRED CPIAUCSL: 60 条 (2000-2004)
+2026-11-22 03:42:13,761 [INFO] quant: FRED GDP: 20 条 (2000-2004)
+2026-11-22 03:42:13,887 [INFO] quant: FRED UNRATE: 60 条 (2000-2004)
+2026-11-22 03:42:13,989 [INFO] quant: FRED FEDFUNDS: 60 条 (2000-2004)
+2026-11-22 03:42:15,369 [INFO] quant: FRED DEXCHUS: 1257 条 (2000-2004)
+2026-11-22 03:42:15,477 [INFO] quant: 真实源 fred_v2: 3955 行
+2026-11-22 03:42:15,757 [INFO] quant: SEC AAPL: 累计 30 条披露
+2026-11-22 03:42:16,176 [INFO] quant: SEC MSFT: 累计 73 条披露
+2026-11-22 03:42:16,286 [INFO] quant: SEC GOOGL: 累计 73 条披露
+2026-11-22 03:42:16,338 [INFO] quant: 真实源 sec_v2: 73 行
+2026-11-22 03:42:36,132 [WARNING] quant: GDELT 2000 失败: 429 Client Error: Too Many Requests for url: https://api.gdeltproject.org/api/v2/doc/doc?query=(stock%20market%20OR%20earnings)%20sourcelang:english&mode=artlist&maxrecords=50&format=json&startdatetime=20000101000000&enddatetime=20001231235959
+2026-11-22 03:42:46,142 [WARNING] quant: GDELT 2001 失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-11-22 03:43:04,464 [WARNING] quant: GDELT 2002 失败: 429 Client Error: Too Many Requests for url: https://api.gdeltproject.org/api/v2/doc/doc?query=(stock%20market%20OR%20earnings)%20sourcelang:english&mode=artlist&maxrecords=50&format=json&startdatetime=20020101000000&enddatetime=20021231235959
+2026-11-22 03:43:13,398 [WARNING] quant: GDELT 2003 失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-11-22 03:43:26,433 [WARNING] quant: GDELT 2004 失败: Expecting value: line 1 column 1 (char 0)
+2026-11-22 03:43:26,441 [INFO] quant: 真实源 news_v2: 0 行
+2026-11-22 03:44:49,493 [WARNING] quant: PyTorch 不可用，跳过: No module named 'torch'
+2026-11-22 03:45:25,420 [WARNING] quant: PyTorch 不可用，跳过: No module named 'torch'
+2026-11-22 03:45:39,288 [WARNING] quant: PyTorch 不可用，跳过: No module named 'torch'
+2026-11-22 04:43:39,445 [INFO] quant: [2002] 步骤 lock_cutoff 完成
+2026-11-22 04:43:41,105 [INFO] quant: 快照 asof_2001 创建: 保留 5056 行, 剔除未来 7660 行, 知识 0 条
+2026-11-22 04:44:15,222 [INFO] quant: [2002] 步骤 lock_cutoff 完成
+2026-11-22 04:44:16,762 [INFO] quant: 快照 asof_2001 创建: 保留 5056 行, 剔除未来 7660 行, 知识 0 条
+2026-11-22 04:44:40,554 [INFO] quant: [2002] 步骤 lock_cutoff 完成
+2026-11-22 04:44:42,257 [INFO] quant: 快照 asof_2001 创建: 保留 5056 行, 剔除未来 7660 行, 知识 0 条
+2026-11-22 04:44:42,314 [INFO] quant: [2002] 步骤 load_snapshot 完成
+2026-11-22 04:44:42,345 [INFO] quant: [2002] 步骤 check_ranges 完成
+2026-11-22 04:44:42,586 [INFO] quant: 特征 asof_2001 生成 14 行 (feature_version=feature_v1)
+2026-11-22 04:45:45,504 [INFO] quant: [2002] 步骤 lock_cutoff 完成
+2026-11-22 04:45:46,894 [INFO] quant: 快照 asof_2001 创建: 保留 5056 行, 剔除未来 7660 行, 知识 0 条
+2026-11-22 04:45:46,946 [INFO] quant: [2002] 步骤 load_snapshot 完成
+2026-11-22 04:45:46,978 [INFO] quant: [2002] 步骤 check_ranges 完成
+2026-11-22 04:45:47,263 [INFO] quant: 特征 asof_2001 生成 14 行 (feature_version=feature_v1)
+2026-11-22 04:45:47,312 [INFO] quant: [2002] 步骤 build_features 完成
+2026-11-22 04:45:54,510 [INFO] quant: [2002] 步骤 train_or_load_model 完成
+2026-11-22 04:45:54,540 [INFO] quant: [2002] 步骤 predict_next_year 完成
+2026-11-22 04:45:54,554 [INFO] quant: 快照 asof_2001 已冻结（11 文件哈希）
+2026-11-22 04:45:54,562 [INFO] quant: 预测记录冻结(HMAC链): pred_2002_2dc479061ec7 idx=1 sig=f03d8150d977
+2026-11-22 04:45:54,572 [INFO] quant: [2002] 步骤 freeze_prediction 完成
+2026-11-22 04:45:54,952 [INFO] quant: [2002] 步骤 import_actual 完成
+2026-11-22 04:45:55,406 [INFO] quant: [2002] 步骤 evaluate_error 完成
+2026-11-22 04:45:55,411 [INFO] quant: [2002] 步骤 analyze_errors 完成
+2026-11-22 04:45:55,451 [INFO] quant: [2002] 步骤 update_knowledge 完成
+2026-11-22 04:45:55,454 [INFO] quant: [2002] 步骤 generate_hypotheses 完成
+2026-11-22 04:45:55,458 [INFO] quant: [2002] 步骤 validate_hypotheses 完成
+2026-11-22 04:45:55,463 [INFO] quant: [2002] 步骤 update_rules 完成
+2026-11-22 04:45:55,466 [INFO] quant: [2002] 步骤 compare_incremental_vs_full 完成
+2026-11-22 04:45:55,777 [INFO] quant: 快照 asof_2002 创建: 保留 7594 行, 剔除未来 5122 行, 知识 3 条
+2026-11-22 04:45:55,785 [INFO] quant: [2002] 步骤 create_next_snapshot 完成
+2026-11-22 04:45:55,789 [INFO] quant: [2002] 步骤 loop 完成
+2026-11-22 04:45:55,974 [INFO] quant: 年度 2002 完成: elapsed=10.29s mem=74.9MB
+2026-11-22 04:45:55,985 [INFO] quant: [2003] 步骤 lock_cutoff 完成
+2026-11-22 04:45:56,088 [INFO] quant: [2003] 步骤 load_snapshot 完成
+2026-11-22 04:45:56,136 [INFO] quant: [2003] 步骤 check_ranges 完成
+2026-11-22 04:45:56,594 [INFO] quant: 特征 asof_2002 生成 21 行 (feature_version=feature_v1)
+2026-11-22 04:45:56,655 [INFO] quant: [2003] 步骤 build_features 完成
+2026-11-22 04:45:56,705 [INFO] quant: [2003] 步骤 train_or_load_model 完成
+2026-11-22 04:45:56,710 [INFO] quant: [2003] 步骤 predict_next_year 完成
+2026-11-22 04:45:56,723 [INFO] quant: 快照 asof_2002 已冻结（11 文件哈希）
+2026-11-22 04:45:56,730 [INFO] quant: 预测记录冻结(HMAC链): pred_2003_573558bc8641 idx=2 sig=2a71de8d5836
+2026-11-22 04:45:56,741 [INFO] quant: [2003] 步骤 freeze_prediction 完成
+2026-11-22 04:45:57,084 [INFO] quant: [2003] 步骤 import_actual 完成
+2026-11-22 04:45:57,482 [INFO] quant: [2003] 步骤 evaluate_error 完成
+2026-11-22 04:45:57,486 [INFO] quant: [2003] 步骤 analyze_errors 完成
+2026-11-22 04:45:57,522 [INFO] quant: [2003] 步骤 update_knowledge 完成
+2026-11-22 04:45:57,527 [INFO] quant: [2003] 步骤 generate_hypotheses 完成
+2026-11-22 04:45:57,531 [INFO] quant: [2003] 步骤 validate_hypotheses 完成
+2026-11-22 04:45:57,541 [INFO] quant: [2003] 步骤 update_rules 完成
+2026-11-22 04:45:57,549 [INFO] quant: [2003] 步骤 compare_incremental_vs_full 完成
+2026-11-22 04:45:57,896 [INFO] quant: 快照 asof_2003 创建: 保留 10147 行, 剔除未来 2569 行, 知识 5 条
+2026-11-22 04:45:57,909 [INFO] quant: [2003] 步骤 create_next_snapshot 完成
+2026-11-22 04:45:57,913 [INFO] quant: [2003] 步骤 loop 完成
+2026-11-22 04:45:57,917 [INFO] quant: 年度 2003 完成: elapsed=1.94s mem=9.8MB
+2026-11-22 04:45:57,920 [INFO] quant: [2004] 步骤 lock_cutoff 完成
+2026-11-22 04:45:57,994 [INFO] quant: [2004] 步骤 load_snapshot 完成
+2026-11-22 04:45:58,056 [INFO] quant: [2004] 步骤 check_ranges 完成
+2026-11-22 04:45:58,790 [INFO] quant: 特征 asof_2003 生成 28 行 (feature_version=feature_v1)
+2026-11-22 04:45:58,871 [INFO] quant: [2004] 步骤 build_features 完成
+2026-11-22 04:45:58,923 [INFO] quant: [2004] 步骤 train_or_load_model 完成
+2026-11-22 04:45:58,929 [INFO] quant: [2004] 步骤 predict_next_year 完成
+2026-11-22 04:45:58,942 [INFO] quant: 快照 asof_2003 已冻结（11 文件哈希）
+2026-11-22 04:45:58,950 [INFO] quant: 预测记录冻结(HMAC链): pred_2004_33439da08cb4 idx=3 sig=f8eae867d1c6
+2026-11-22 04:45:58,962 [INFO] quant: [2004] 步骤 freeze_prediction 完成
+2026-11-22 04:45:59,341 [INFO] quant: [2004] 步骤 import_actual 完成
+2026-11-22 04:45:59,733 [INFO] quant: [2004] 步骤 evaluate_error 完成
+2026-11-22 04:45:59,738 [INFO] quant: [2004] 步骤 analyze_errors 完成
+2026-11-22 04:45:59,773 [INFO] quant: [2004] 步骤 update_knowledge 完成
+2026-11-22 04:45:59,776 [INFO] quant: [2004] 步骤 generate_hypotheses 完成
+2026-11-22 04:45:59,780 [INFO] quant: [2004] 步骤 validate_hypotheses 完成
+2026-11-22 04:45:59,786 [INFO] quant: [2004] 步骤 update_rules 完成
+2026-11-22 04:45:59,789 [INFO] quant: [2004] 步骤 compare_incremental_vs_full 完成
+2026-11-22 04:46:00,175 [INFO] quant: 快照 asof_2004 创建: 保留 12709 行, 剔除未来 7 行, 知识 7 条
+2026-11-22 04:46:00,193 [INFO] quant: [2004] 步骤 create_next_snapshot 完成
+2026-11-22 04:46:00,197 [INFO] quant: [2004] 步骤 loop 完成
+2026-11-22 04:46:00,202 [INFO] quant: 年度 2004 完成: elapsed=2.28s mem=13.1MB
+2026-11-22 04:46:00,206 [INFO] quant: 快照 asof_2004 已冻结（6 文件哈希）
+2026-11-22 04:46:00,207 [INFO] quant: 末位快照 asof_2004 已补冻结
+2026-11-22 04:46:07,223 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5057, 'violations': [{'file': 'clean_data.timeindex', 'line': 5057, 'value': '2002-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '8a765d30ce1ad9c57ce312fb7540f932cc53a16206c5962e1c7a3906aa854f12', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', '8a765d30ce1ad9c57ce312fb7540f932cc53a16206c5962e1c7a3906aa854f12'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:46:07,246 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 7598, 'violations': [{'file': 'clean_data.timeindex', 'line': 7595, 'value': '2003-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': 'd117f39bc4da9e06345155111faf333670cf031774e14278a0bf72e5af5b3061', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2002-12-31', 'hashes': [['audit/create.json', '0541069585552f9da707bc50c968b048bcb698be2ca44a4f8c4f0824bb1d4097'], ['clean_data.parquet', '9f7c07443e3efbe8433cdbf7ba3c3fc5a45881e08b5533084aa82ede40efee0f'], ['clean_data.timeindex', 'd117f39bc4da9e06345155111faf333670cf031774e14278a0bf72e5af5b3061'], ['features.parquet', 'b1ec72d5976b0d52cf54799591e2c7151686042c2279f3fa870d7f9b771f49e3'], ['knowledge.parquet', '1a9f57cf066de09ac01d745e8178454c378e86ed7e4c7dc17ca8f82e886dc9cc'], ['knowledge.timeindex', 'dcd5d9a1bcc28ac4417803b198b1fd8f97688270f64456c5267f145c79768566'], ['model_registry.json', 'c83421d74af95e21f508e6d3dc76357f8fd2215d95b9e87912fd13f6dbecf53f'], ['models/benchmark.meta.json', '471fcd15857ea47737f5df48c7b91ddba12c86a5a855010ac5a8e47f1840f1c2'], ['models/benchmark.pkl', '1ec3ab28f3f7e4ed58bc7535fefeddb808ece028e44a708fa8a97d4d049ee617'], ['models/lightgbm.meta.json', 'c03a4331106c54e2caf58104839f39d94a117b00f6e6c7aea40110c6fdc2a170'], ['models/lightgbm.pkl', 'a5ea935c3c723f607ca75d2b97ffe10a8a274e34638b8b8fbc095a69cc29a6cd']]}
+2026-11-22 04:46:07,267 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 10153, 'violations': [{'file': 'clean_data.timeindex', 'line': 10148, 'value': '2004-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '2ed7d849d5d627ed1ac3d4494bc8aa187155b4e0e5d1d869ca7fe46aefd6776b', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2003-12-31', 'hashes': [['audit/create.json', 'd2d6f30b3929de4c2554974e6f2b542c3a804e296f30a077b60ae4cb5fae146c'], ['clean_data.parquet', 'c8b4fe3a8f353bb7ab114089e0e2595ee750296292fac953b73340a1f9404978'], ['clean_data.timeindex', '2ed7d849d5d627ed1ac3d4494bc8aa187155b4e0e5d1d869ca7fe46aefd6776b'], ['features.parquet', 'a58898f26911ef038005097c969e96142ebb11fc102617b7c5e756934164b1d4'], ['knowledge.parquet', 'ccffdae4a47dd509f678615e8e5a4f752d95986a8ce949e38542dcbf4d8e40f1'], ['knowledge.timeindex', 'c374bd9605853106b95227203333e32efcbe5ade7d54410c319134a9bb498ef7'], ['model_registry.json', 'd53ddda604ac79275a2e64ca4df056be66c6c0171cb26eea666cbf97cd6a1fb3'], ['models/benchmark.meta.json', '900e1c2c9828710ebe8ec0d3ca3cd7207cf05ce33d7541a9755434235aa82823'], ['models/benchmark.pkl', 'b5adb64a4f74ba2bd3f476ac54824542b899b73f5349469b7de5410c0a692fae'], ['models/lightgbm.meta.json', 'ea4eb592279e97b651a12107d5e63e9070c7a4c6412549db0fb453d5637d9457'], ['models/lightgbm.pkl', '622df0b4a2d85cce0f0a58d03935d2637a58223df8d8d2f89839c41121cfc06f']]}
+2026-11-22 04:46:07,287 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5057, 'violations': [{'file': 'clean_data.timeindex', 'line': 5057, 'value': 'unknown', 'reason': 'unknown_availability'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': 'fd08d71afb6d13264b6e002678e03f281f0139a13a22a81937336def156c696f', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', 'fd08d71afb6d13264b6e002678e03f281f0139a13a22a81937336def156c696f'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:46:07,309 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'clean_data.timeindex', 'line': 1, 'value': '20011231', 'reason': 'invalid_date_format'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '83ae930fe57b7233dc35503b700dafc7b1d46ec51245cf43441a623da1fcc57c', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', '83ae930fe57b7233dc35503b700dafc7b1d46ec51245cf43441a623da1fcc57c'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:46:07,329 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'clean_data.parquet', 'line': 0, 'value': '810ed668cc3d3781a2d17db3cfb971f6fa8422c7adcedb8ed10e7a3eaa311f03', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '810ed668cc3d3781a2d17db3cfb971f6fa8422c7adcedb8ed10e7a3eaa311f03'], ['clean_data.timeindex', 'ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:46:07,346 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'argv', 'line': 0, 'value': 'missing', 'reason': 'manifest_required'}], 'manifest': 'absent', 'cutoff': '2001-12-31', 'hashes': []}
+2026-11-22 04:46:07,366 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': '/tmp/pytest-of-root/pytest-2/test_sealed_zero_blocked_by_ru0/asof_2001/manifest.json', 'line': 0, 'value': 'sealed field invalid/missing', 'reason': 'manifest_invalid_sealed'}], 'manifest': 'invalid', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', 'ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:06,426 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5057, 'violations': [{'file': 'clean_data.timeindex', 'line': 5057, 'value': '2002-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '8a765d30ce1ad9c57ce312fb7540f932cc53a16206c5962e1c7a3906aa854f12', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', '8a765d30ce1ad9c57ce312fb7540f932cc53a16206c5962e1c7a3906aa854f12'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:06,448 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 7598, 'violations': [{'file': 'clean_data.timeindex', 'line': 7595, 'value': '2003-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': 'd117f39bc4da9e06345155111faf333670cf031774e14278a0bf72e5af5b3061', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2002-12-31', 'hashes': [['audit/create.json', '0541069585552f9da707bc50c968b048bcb698be2ca44a4f8c4f0824bb1d4097'], ['clean_data.parquet', '9f7c07443e3efbe8433cdbf7ba3c3fc5a45881e08b5533084aa82ede40efee0f'], ['clean_data.timeindex', 'd117f39bc4da9e06345155111faf333670cf031774e14278a0bf72e5af5b3061'], ['features.parquet', 'b1ec72d5976b0d52cf54799591e2c7151686042c2279f3fa870d7f9b771f49e3'], ['knowledge.parquet', '1a9f57cf066de09ac01d745e8178454c378e86ed7e4c7dc17ca8f82e886dc9cc'], ['knowledge.timeindex', 'dcd5d9a1bcc28ac4417803b198b1fd8f97688270f64456c5267f145c79768566'], ['model_registry.json', 'c83421d74af95e21f508e6d3dc76357f8fd2215d95b9e87912fd13f6dbecf53f'], ['models/benchmark.meta.json', '471fcd15857ea47737f5df48c7b91ddba12c86a5a855010ac5a8e47f1840f1c2'], ['models/benchmark.pkl', '1ec3ab28f3f7e4ed58bc7535fefeddb808ece028e44a708fa8a97d4d049ee617'], ['models/lightgbm.meta.json', 'c03a4331106c54e2caf58104839f39d94a117b00f6e6c7aea40110c6fdc2a170'], ['models/lightgbm.pkl', 'a5ea935c3c723f607ca75d2b97ffe10a8a274e34638b8b8fbc095a69cc29a6cd']]}
+2026-11-22 04:47:06,473 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 10153, 'violations': [{'file': 'clean_data.timeindex', 'line': 10148, 'value': '2004-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '2ed7d849d5d627ed1ac3d4494bc8aa187155b4e0e5d1d869ca7fe46aefd6776b', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2003-12-31', 'hashes': [['audit/create.json', 'd2d6f30b3929de4c2554974e6f2b542c3a804e296f30a077b60ae4cb5fae146c'], ['clean_data.parquet', 'c8b4fe3a8f353bb7ab114089e0e2595ee750296292fac953b73340a1f9404978'], ['clean_data.timeindex', '2ed7d849d5d627ed1ac3d4494bc8aa187155b4e0e5d1d869ca7fe46aefd6776b'], ['features.parquet', 'a58898f26911ef038005097c969e96142ebb11fc102617b7c5e756934164b1d4'], ['knowledge.parquet', 'ccffdae4a47dd509f678615e8e5a4f752d95986a8ce949e38542dcbf4d8e40f1'], ['knowledge.timeindex', 'c374bd9605853106b95227203333e32efcbe5ade7d54410c319134a9bb498ef7'], ['model_registry.json', 'd53ddda604ac79275a2e64ca4df056be66c6c0171cb26eea666cbf97cd6a1fb3'], ['models/benchmark.meta.json', '900e1c2c9828710ebe8ec0d3ca3cd7207cf05ce33d7541a9755434235aa82823'], ['models/benchmark.pkl', 'b5adb64a4f74ba2bd3f476ac54824542b899b73f5349469b7de5410c0a692fae'], ['models/lightgbm.meta.json', 'ea4eb592279e97b651a12107d5e63e9070c7a4c6412549db0fb453d5637d9457'], ['models/lightgbm.pkl', '622df0b4a2d85cce0f0a58d03935d2637a58223df8d8d2f89839c41121cfc06f']]}
+2026-11-22 04:47:06,492 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5057, 'violations': [{'file': 'clean_data.timeindex', 'line': 5057, 'value': 'unknown', 'reason': 'unknown_availability'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': 'fd08d71afb6d13264b6e002678e03f281f0139a13a22a81937336def156c696f', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', 'fd08d71afb6d13264b6e002678e03f281f0139a13a22a81937336def156c696f'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:06,512 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'clean_data.timeindex', 'line': 1, 'value': '20011231', 'reason': 'invalid_date_format'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '83ae930fe57b7233dc35503b700dafc7b1d46ec51245cf43441a623da1fcc57c', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', '83ae930fe57b7233dc35503b700dafc7b1d46ec51245cf43441a623da1fcc57c'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:06,532 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'clean_data.parquet', 'line': 0, 'value': '810ed668cc3d3781a2d17db3cfb971f6fa8422c7adcedb8ed10e7a3eaa311f03', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '810ed668cc3d3781a2d17db3cfb971f6fa8422c7adcedb8ed10e7a3eaa311f03'], ['clean_data.timeindex', 'ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:06,551 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'argv', 'line': 0, 'value': 'missing', 'reason': 'manifest_required'}], 'manifest': 'absent', 'cutoff': '2001-12-31', 'hashes': []}
+2026-11-22 04:47:06,571 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': '/tmp/pytest-of-root/pytest-3/test_sealed_zero_blocked_by_ru0/asof_2001/manifest.json', 'line': 0, 'value': 'sealed field invalid/missing', 'reason': 'manifest_invalid_sealed'}], 'manifest': 'invalid', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', 'ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:59,494 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5057, 'violations': [{'file': 'clean_data.timeindex', 'line': 5057, 'value': '2002-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '8a765d30ce1ad9c57ce312fb7540f932cc53a16206c5962e1c7a3906aa854f12', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', '8a765d30ce1ad9c57ce312fb7540f932cc53a16206c5962e1c7a3906aa854f12'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:59,517 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 7598, 'violations': [{'file': 'clean_data.timeindex', 'line': 7595, 'value': '2003-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': 'd117f39bc4da9e06345155111faf333670cf031774e14278a0bf72e5af5b3061', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2002-12-31', 'hashes': [['audit/create.json', '0541069585552f9da707bc50c968b048bcb698be2ca44a4f8c4f0824bb1d4097'], ['clean_data.parquet', '9f7c07443e3efbe8433cdbf7ba3c3fc5a45881e08b5533084aa82ede40efee0f'], ['clean_data.timeindex', 'd117f39bc4da9e06345155111faf333670cf031774e14278a0bf72e5af5b3061'], ['features.parquet', 'b1ec72d5976b0d52cf54799591e2c7151686042c2279f3fa870d7f9b771f49e3'], ['knowledge.parquet', '1a9f57cf066de09ac01d745e8178454c378e86ed7e4c7dc17ca8f82e886dc9cc'], ['knowledge.timeindex', 'dcd5d9a1bcc28ac4417803b198b1fd8f97688270f64456c5267f145c79768566'], ['model_registry.json', 'c83421d74af95e21f508e6d3dc76357f8fd2215d95b9e87912fd13f6dbecf53f'], ['models/benchmark.meta.json', '471fcd15857ea47737f5df48c7b91ddba12c86a5a855010ac5a8e47f1840f1c2'], ['models/benchmark.pkl', '1ec3ab28f3f7e4ed58bc7535fefeddb808ece028e44a708fa8a97d4d049ee617'], ['models/lightgbm.meta.json', 'c03a4331106c54e2caf58104839f39d94a117b00f6e6c7aea40110c6fdc2a170'], ['models/lightgbm.pkl', 'a5ea935c3c723f607ca75d2b97ffe10a8a274e34638b8b8fbc095a69cc29a6cd']]}
+2026-11-22 04:47:59,541 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 10153, 'violations': [{'file': 'clean_data.timeindex', 'line': 10148, 'value': '2004-06-15', 'reason': 'future_data_leak'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '2ed7d849d5d627ed1ac3d4494bc8aa187155b4e0e5d1d869ca7fe46aefd6776b', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2003-12-31', 'hashes': [['audit/create.json', 'd2d6f30b3929de4c2554974e6f2b542c3a804e296f30a077b60ae4cb5fae146c'], ['clean_data.parquet', 'c8b4fe3a8f353bb7ab114089e0e2595ee750296292fac953b73340a1f9404978'], ['clean_data.timeindex', '2ed7d849d5d627ed1ac3d4494bc8aa187155b4e0e5d1d869ca7fe46aefd6776b'], ['features.parquet', 'a58898f26911ef038005097c969e96142ebb11fc102617b7c5e756934164b1d4'], ['knowledge.parquet', 'ccffdae4a47dd509f678615e8e5a4f752d95986a8ce949e38542dcbf4d8e40f1'], ['knowledge.timeindex', 'c374bd9605853106b95227203333e32efcbe5ade7d54410c319134a9bb498ef7'], ['model_registry.json', 'd53ddda604ac79275a2e64ca4df056be66c6c0171cb26eea666cbf97cd6a1fb3'], ['models/benchmark.meta.json', '900e1c2c9828710ebe8ec0d3ca3cd7207cf05ce33d7541a9755434235aa82823'], ['models/benchmark.pkl', 'b5adb64a4f74ba2bd3f476ac54824542b899b73f5349469b7de5410c0a692fae'], ['models/lightgbm.meta.json', 'ea4eb592279e97b651a12107d5e63e9070c7a4c6412549db0fb453d5637d9457'], ['models/lightgbm.pkl', '622df0b4a2d85cce0f0a58d03935d2637a58223df8d8d2f89839c41121cfc06f']]}
+2026-11-22 04:47:59,562 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5057, 'violations': [{'file': 'clean_data.timeindex', 'line': 5057, 'value': 'unknown', 'reason': 'unknown_availability'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': 'fd08d71afb6d13264b6e002678e03f281f0139a13a22a81937336def156c696f', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', 'fd08d71afb6d13264b6e002678e03f281f0139a13a22a81937336def156c696f'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:59,583 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'clean_data.timeindex', 'line': 1, 'value': '20011231', 'reason': 'invalid_date_format'}, {'file': 'clean_data.timeindex', 'line': 0, 'value': '83ae930fe57b7233dc35503b700dafc7b1d46ec51245cf43441a623da1fcc57c', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', '83ae930fe57b7233dc35503b700dafc7b1d46ec51245cf43441a623da1fcc57c'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:59,604 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'clean_data.parquet', 'line': 0, 'value': '810ed668cc3d3781a2d17db3cfb971f6fa8422c7adcedb8ed10e7a3eaa311f03', 'reason': 'manifest_hash_mismatch'}], 'manifest': 'sealed', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '810ed668cc3d3781a2d17db3cfb971f6fa8422c7adcedb8ed10e7a3eaa311f03'], ['clean_data.timeindex', 'ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}
+2026-11-22 04:47:59,622 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': 'argv', 'line': 0, 'value': 'missing', 'reason': 'manifest_required'}], 'manifest': 'absent', 'cutoff': '2001-12-31', 'hashes': []}
+2026-11-22 04:47:59,643 [ERROR] quant: TimeGuard Rust 审计失败: {'ok': False, 'scanned': 5056, 'violations': [{'file': '/tmp/pytest-of-root/pytest-4/test_sealed_zero_blocked_by_ru0/asof_2001/manifest.json', 'line': 0, 'value': 'sealed field invalid/missing', 'reason': 'manifest_invalid_sealed'}], 'manifest': 'invalid', 'cutoff': '2001-12-31', 'hashes': [['audit/create.json', '27baaec3d062616b6f754aa1a8db1527a0656ea53b174e71bcaab73d8516125b'], ['clean_data.parquet', '04fa43836793114400078c5c01c2d9628f727d7790cbcc31dddfd17492a03da5'], ['clean_data.timeindex', 'ef73129bc79cc824c264dc31ef119e78800142d95ba0805cf89291342817f0da'], ['features.parquet', '63bc5314b4e3d0f01eeb1cd2d67bba731d2cbbbf625ebae267c513effc353e58'], ['knowledge.parquet', 'b4c213ebb32eeafe558c03740345ec0a245deffca81ea60ce510303813083ec6'], ['knowledge.timeindex', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], ['model_registry.json', '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'], ['models/benchmark.meta.json', '278caf0335c9ecdb2c3b37ed68637c6206e92cf9e38d36551d249f692b01062b'], ['models/benchmark.pkl', 'c6ec70512106106b4d3a146f748e6e2604ec44f8978fb73a4d68ab67cd73337a'], ['models/lightgbm.meta.json', 'ffdeae563c2bff94c0934eb72c91f9df1d61784cdb27a57ea067727e72676703'], ['models/lightgbm.pkl', '93b587bcd65c0c206898c2c85f3f5152363376e582815bd6d41e4c04814282ff']]}

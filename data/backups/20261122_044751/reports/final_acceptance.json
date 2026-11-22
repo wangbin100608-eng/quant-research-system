@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-11-22",
+  "data_origin": "real",
+  "years": {
+    "2002": {
+      "steps_completed": 17,
+      "freeze_before_import": true,
+      "prediction_records": 1,
+      "prediction_hash": "2dc479061ec723a1",
+      "snapshot_sealed": true,
+      "actual_imported": true,
+      "metrics": {
+        "direction_accuracy": 0.0,
+        "mae": 0.2605509408900661,
+        "n": 7,
+        "rmse": 0.27313684622030876
+      },
+      "knowledge_updated": true
+    },
+    "2003": {
+      "steps_completed": 17,
+      "freeze_before_import": true,
+      "prediction_records": 1,
+      "prediction_hash": "573558bc86416392",
+      "snapshot_sealed": true,
+      "actual_imported": true,
+      "metrics": {
+        "direction_accuracy": 0.0,
+        "mae": 0.36061569709840663,
+        "n": 7,
+        "rmse": 0.38864390138046717
+      },
+      "knowledge_updated": true
+    },
+    "2004": {
+      "steps_completed": 17,
+      "freeze_before_import": true,
+      "prediction_records": 1,
+      "prediction_hash": "33439da08cb4582d",
+      "snapshot_sealed": true,
+      "actual_imported": true,
+      "metrics": {
+        "direction_accuracy": 0.5714285714285714,
+        "mae": 0.3631872986189014,
+        "n": 7,
+        "rmse": 0.7669195818789322
+      },
+      "knowledge_updated": true
+    }
+  },
+  "time_isolation_proof": {
+    "predict_2002": {
+      "cutoff": "2001-12-31",
+      "future_rows_in_accessible_space": 0,
+      "hash_consistent": true,
+      "sealed": true,
+      "PASS": true
+    },
+    "predict_2003": {
+      "cutoff": "2002-12-31",
+      "future_rows_in_accessible_space": 0,
+      "hash_consistent": true,
+      "sealed": true,
+      "PASS": true
+    },
+    "predict_2004": {
+      "cutoff": "2003-12-31",
+      "future_rows_in_accessible_space": 0,
+      "hash_consistent": true,
+      "sealed": true,
+      "PASS": true
+    }
+  },
+  "prediction_integrity": {
+    "records": 3,
+    "chain_length": 3,
+    "tampered": [],
+    "ok": true,
+    "mechanism": "HMAC-SHA256 + hash-chain + append-only-triggers"
+  },
+  "all_snapshots_sealed": true,
+  "PASS": true
+}

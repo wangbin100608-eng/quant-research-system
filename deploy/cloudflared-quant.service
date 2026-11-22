@@ -1,0 +1,14 @@
+[Unit]
+Description=Cloudflare Tunnel for a.czyz.eu.cc (Quant Research Dashboard)
+After=network-online.target docker.service
+Wants=network-online.target docker.service
+
+[Service]
+Type=simple
+ExecStart=/opt/cloudflared/cloudflared tunnel --config /root/.cloudflared-quant/config.yml run
+Restart=always
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
